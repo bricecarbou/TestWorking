@@ -11,8 +11,8 @@
         <div class="container">
             @yield('contain')
         </div>
-        <div class="links">
-          Great Escape FR
+        <div class="created" >
+           <center>Great Escape FR</center>
         </div>
     </body>
 </html>

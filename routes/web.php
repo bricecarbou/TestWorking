@@ -13,9 +13,16 @@
 
 Route::view('/','welcome');
 
+// traders route
+Route::get('/traders', 'TradersController@liste');
 
+// Subcription route
 Route::get('/subscribe', 'SubscribeController@form');
-
 Route::post('/subscribe', 'SubscribeController@processing');
 
-Route::get('/traders', 'TradersController@liste');
+//Connexion Route
+Route::get('/connexion', 'ConnexionController@form');
+Route::post('/connexion', 'ConnexionController@processing');
+
+
+Route::view('/my-account', 'my-account');
