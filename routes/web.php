@@ -28,6 +28,7 @@ Route::post('/subscribe', function () {
       'nick'=>'unique:traders'
     ]);
 
+    
     $trader = new App\Trader;
     $trader->nick = request('nick');
     $trader->clan = request('clan');
