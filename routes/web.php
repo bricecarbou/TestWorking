@@ -14,7 +14,7 @@
 Route::view('/','welcome');
 
 // traders route
-Route::get('/traders', 'TradersController@liste');
+Route::get('/traders', 'TradersController@liste')->middleware('App\Http\Middleware\Auth');
 
 // Subcription route
 Route::get('/subscribe', 'SubscribeController@form');
@@ -25,8 +25,13 @@ Route::get('/connexion', 'ConnexionController@form');
 Route::post('/connexion', 'ConnexionController@processing');
 
 // account
-Route::get('/my-account', 'AccountController@home');
-Route::get('/disconnect', 'AccountController@disconnect');
-Route::post('/modify-password', 'AccountController@modifypassword');
+Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middleware\Auth');
+Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
+
+// admin
+Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
 
 Route::get('/{nick}', 'AccountController@look');
+

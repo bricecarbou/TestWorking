@@ -8,9 +8,9 @@ class AccountController extends Controller
 {
     public function home()
     {
-        if (! auth()->check()) {
-                flash("You must be connected to access to this page.")->error();
-                return redirect('/connexion');
+  
+        if (auth()->user()->nick === 'admin'){
+            return view('/admin_card_enter');
         }
         
         return view('my-account');
@@ -27,12 +27,6 @@ class AccountController extends Controller
 
     public function modifypassword()
     {
-        if (auth()->guest()) {
-            flash("You must be connected to access to this page.")->error();
-
-            return redirect('/connexion');
-        }
-
         request()->validate([
             'password' => ['required', 'confirmed', 'min:8'],
             'password_confirmation' => ['required'],
@@ -59,4 +53,24 @@ class AccountController extends Controller
             'trader' => $user,
         ]);
     }
+
+    public function admin_card_enter()
+    {
+
+        // Validation des données
+        request()->validate([
+            'message' => ['required'],
+        ]);
+
+        // Création d'un message dans la base de données avec Eloquent
+        Message::create([
+            'utilisateur_id' => auth()->id(),
+            'contenu' => request('message'),
+        ]);
+
+        // Redirection vers la page de profil avec un message flash.
+        flash("Votre message a bien été publié.")->success();
+        return back();
+    }
+
 }

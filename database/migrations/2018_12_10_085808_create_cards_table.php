@@ -18,6 +18,7 @@ class CreateCardsTable extends Migration
 
             $table->string('CardName')->unique();
             $table->string('TypeId');
+            $table->string('CardImagePath');
 
             $table->timestamps();
         });

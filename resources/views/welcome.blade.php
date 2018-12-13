@@ -2,6 +2,9 @@
 
 @section('contain')
     <div class="title m-b-md">
-        Bonjour
+        <br />
+        <center>Welcome to the Trading Application for Clash Royale</center>
+        <br />
+        <br />
     </div>
 @endsection
