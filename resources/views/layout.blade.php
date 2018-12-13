@@ -14,11 +14,11 @@
             </div>
             <div class="navbar-end">
                 @if(auth()->check())
-                    <a href="/my-account" class="navbar-item">My account</a>
-                    <a href="/disconnect" class="navbar-item">Disconnect</a>
+                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
+                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
                 @else
-                    <a href="/connexion" class="navbar-item">Connexion</a>
-                    <a href="/subscribe" class="navbar-item">Subscribe</a>
+                    <a href="/connexion" class="navbar-item {{ request()->is('connexion') ? 'is-active' : ''}}">Connexion</a>
+                    <a href="/subscribe" class="navbar-item {{ request()->is('subscribe') ? 'is-active' : ''}}">Subscribe</a>
                 @endif
 
             </div>
