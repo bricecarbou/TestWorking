@@ -2,7 +2,7 @@
 
 @section('contain')
     <div class="section">
-        <h1 class="title is-1">My account</h1>
+        <h1 class="title is-1">{{ $nick }}</h1>
 
         <p>You are connected.</p>
 

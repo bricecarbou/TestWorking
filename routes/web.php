@@ -33,5 +33,13 @@ Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middlewar
 // admin
 Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
 
-Route::get('/{nick}', 'AccountController@look');
+
+// trade
+Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
+Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
+Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
+
+
+
+Route::get('/{nick}', 'AccountController@home');
 

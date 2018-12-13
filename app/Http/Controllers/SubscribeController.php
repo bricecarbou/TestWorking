@@ -27,6 +27,7 @@ class SubscribeController extends Controller
           $trader->password = bcrypt(request('password'));
           $trader->save();
       
-          return "Your Nickname is " . request('nick') . " and your clan is " . request('clan');
+          flash("Your subscrition is done.")->success();
+          return view('connexion');
     }
 }

@@ -15,6 +15,8 @@
             <div class="navbar-end">
                 @if(auth()->check())
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
+                    <a href="/new-trad" class="navbar-item {{ request()->is('new-trad') ? 'is-active' : ''}}">New Trad</a>
+                    <a href="/my-trads" class="navbar-item {{ request()->is('my-trads') ? 'is-active' : ''}}">My trads</a>
                     <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
                 @else
                     <a href="/connexion" class="navbar-item {{ request()->is('connexion') ? 'is-active' : ''}}">Connexion</a>

@@ -9,11 +9,15 @@ class AccountController extends Controller
     public function home()
     {
   
-        if (auth()->user()->nick === 'admin'){
+        $nick = auth()->user()->nick;
+
+        if ($nick === 'admin'){
             return view('/admin_card_enter');
         }
         
-        return view('my-account');
+        return  view('my-account', [
+            'nick' => $nick,
+        ]);
     }
 
     public function disconnect()
@@ -41,17 +45,6 @@ class AccountController extends Controller
         flash("Your password has been updated.")->success();
 
         return redirect('/my-account');
-    }
-
-    public function look()
-    {
-        $nick = request('nick');
-        
-        $user = \App\Trader::where('nick', $nick)->first();
-
-        return  view('trader', [
-            'trader' => $user,
-        ]);
     }
 
     public function admin_card_enter()
