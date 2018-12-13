@@ -24,5 +24,9 @@ Route::post('/subscribe', 'SubscribeController@processing');
 Route::get('/connexion', 'ConnexionController@form');
 Route::post('/connexion', 'ConnexionController@processing');
 
+// account
+Route::get('/my-account', 'AccountController@home');
+Route::get('/disconnect', 'AccountController@disconnect');
+Route::post('/modify-password', 'AccountController@modifypassword');
 
-Route::view('/my-account', 'my-account');
+Route::get('/{nick}', 'AccountController@look');

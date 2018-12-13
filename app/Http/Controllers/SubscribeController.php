@@ -21,7 +21,7 @@ class SubscribeController extends Controller
           ]);
       
       
-          $trader = new App\Trader;
+          $trader = new \App\Trader;
           $trader->nick = request('nick');
           $trader->clan = request('clan');
           $trader->password = bcrypt(request('password'));
