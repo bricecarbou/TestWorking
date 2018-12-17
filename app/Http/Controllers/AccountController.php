@@ -11,10 +11,6 @@ class AccountController extends Controller
   
         $nick = auth()->user()->nick;
 
-        if ($nick === 'admin'){
-            return view('/admin_card_enter');
-        }
-        
         return  view('my-account', [
             'nick' => $nick,
         ]);
@@ -50,19 +46,14 @@ class AccountController extends Controller
     public function admin_card_enter()
     {
 
-        // Validation des données
-        request()->validate([
-            'message' => ['required'],
-        ]);
+        $nick = auth()->user()->nick;
 
-        // Création d'un message dans la base de données avec Eloquent
-        Message::create([
-            'utilisateur_id' => auth()->id(),
-            'contenu' => request('message'),
-        ]);
+        if ($nick === 'admin')
+        {
+            return view('admin_card_enter');
+        }
 
-        // Redirection vers la page de profil avec un message flash.
-        flash("Votre message a bien été publié.")->success();
+        flash("Only the admin can access to this page.")->error();
         return back();
     }
 

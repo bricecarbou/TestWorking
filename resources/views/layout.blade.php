@@ -13,7 +13,11 @@
                 <a href="/" class="navbar-item">Welcome</a>
             </div>
             <div class="navbar-end">
-                @if(auth()->check())
+                @if((auth()->check()) AND auth()->user()->nick === 'admin')
+                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
+                    <a href="/admin_card_enter" class="navbar-item {{ request()->is('admin_card_enter') ? 'is-active' : ''}}">New Card</a>
+                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
+                @elseif (auth()->check())
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
                     <a href="/new-trad" class="navbar-item {{ request()->is('new-trad') ? 'is-active' : ''}}">New Trad</a>
                     <a href="/my-trads" class="navbar-item {{ request()->is('my-trads') ? 'is-active' : ''}}">My trads</a>

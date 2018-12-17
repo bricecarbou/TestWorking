@@ -8,7 +8,7 @@ use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 use App\Clan;
 
 
-class Trader extends Model implements Authenticatable 
+class Trader extends Model implements Authenticatable
 {
   protected $fillable = ['nick', 'password'];
 
@@ -17,6 +17,16 @@ class Trader extends Model implements Authenticatable
   public function clan()
   {
     return $this->belongsTo(Clan::class);
+  }
+
+  public function CardsFind()
+  {
+    return $this->hasMany(CardToFind::class);
+  }
+
+  public function CardsTrade()
+  {
+    return $this->hasMany(CardToTrade::class);
   }
 
   // We don't use token
