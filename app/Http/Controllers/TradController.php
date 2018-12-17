@@ -23,13 +23,18 @@ class TradController extends Controller
 
 
           $trad = new \App\Trad;
-          $cardtofind = new \App\CardsToFind;
-          $cardtotradeCard = new \App\CardsTotrade;
+          
 
-          $cardtofind->Card_id =  request('btn_cardwant');
-          $cardtotrade->CardToTradeCard() = request('btn_cardtrad');
-          $trad->nick = auth()->user()->nick;
+          $trad->card_id =  request('btn_cardwant');
+          $trad->cards()->sync('btn_cardtrad[]');
+ /*         if (!empty($_POST['btn_cardtrad'])) {
+              // Loop to store and display values of individual checked checkbox.
+              foreach ($_POST['btn_cardtrad'] as $selected) {
+                $trad->cards()->trad_id = $trad->id;
 
+              }
+          }
+          */
           $trad->save();
 
 

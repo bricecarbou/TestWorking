@@ -16,7 +16,7 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('CardName')->unique();
+            $table->string('CardName', 100)->unique();
             $table->integer('TypeId');
             $table->string('CardImagePath');
 

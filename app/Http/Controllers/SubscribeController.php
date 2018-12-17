@@ -15,7 +15,7 @@ class SubscribeController extends Controller
     {
         request()->validate([
             'nick'=>['required'],
-            'password'=>['required', 'confirmed', 'min:8'],
+            'password'=>['required', 'confirmed', 'min:4'],
             'password_confirmation' => ['required'],
             'nick'=>'unique:traders'
           ]);

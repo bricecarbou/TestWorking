@@ -14,19 +14,9 @@ class Trader extends Model implements Authenticatable
 
   use BasicAuthenticatable;
 
-  public function clan()
+  public function Trads()
   {
-    return $this->belongsTo(Clan::class);
-  }
-
-  public function CardsFind()
-  {
-    return $this->hasMany(CardToFind::class);
-  }
-
-  public function CardsTrade()
-  {
-    return $this->hasMany(CardToTrade::class);
+    return $this->belongTo(Trad::class);
   }
 
   // We don't use token

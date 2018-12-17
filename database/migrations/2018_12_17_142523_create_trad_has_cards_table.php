@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardToFindTable extends Migration
+class CreateTradHasCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateCardToFindTable extends Migration
      */
     public function up()
     {
-        Schema::create('card_to_find', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->integer('Trad_id');
-            $table->integer('Card_id');
-
-            $table->timestamps();
+        Schema::create('trad_has_cards', function (Blueprint $table) {
+			$table->integer('trad_id')->unsigned();
+			$table->integer('card_id')->unsigned();
         });
     }
 
@@ -30,6 +26,6 @@ class CreateCardToFindTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_to_find');
+        Schema::dropIfExists('trad_has_cards');
     }
 }

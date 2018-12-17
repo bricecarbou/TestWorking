@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trad extends Model
 {
-    protected $fillable = ['cardwant', 'cardtrad'];
-    
-    //
+      
+	public function cards()
+	{
+		return $this->belongsToMany(Card::class, 'trade_has_cards');
+	}
+
+	public function card()
+	{
+		return $this->belongsTo(Card::class);
+	}
+
 }

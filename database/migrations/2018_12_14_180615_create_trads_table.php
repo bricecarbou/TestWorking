@@ -15,7 +15,8 @@ class CreateTradsTable extends Migration
     {
         Schema::create('trads', function (Blueprint $table) {
             $table->increments('id');
-
+            
+			$table->integer('card_id')->unsigned();
 
             $table->timestamps();
         });
