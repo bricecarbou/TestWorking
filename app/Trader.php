@@ -16,7 +16,7 @@ class Trader extends Model implements Authenticatable
 
   public function Trads()
   {
-    return $this->belongTo(Trad::class);
+    return $this->hasMany(Trad::class);
   }
 
   // We don't use token

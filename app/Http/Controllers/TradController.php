@@ -25,18 +25,12 @@ class TradController extends Controller
           $trad = new \App\Trad;
           
 
-          $trad->card_id =  request('btn_cardwant');
-          $trad->cards()->sync('btn_cardtrad[]');
- /*         if (!empty($_POST['btn_cardtrad'])) {
-              // Loop to store and display values of individual checked checkbox.
-              foreach ($_POST['btn_cardtrad'] as $selected) {
-                $trad->cards()->trad_id = $trad->id;
-
-              }
-          }
-          */
+          $trad->card_id = request('btn_cardwant');
+          $trad->trader_id = auth()->user()->id;
           $trad->save();
 
+
+          $trad->cards()->sync(request('btn_cardtrad'));
 
 
         flash("The new Trad is created.")->success();
@@ -45,6 +39,8 @@ class TradController extends Controller
 
     public function mytrads()
     {
-        return view('my-trads');
+        return view('my-trads',[
+            'trads' => auth()->user()->Trads()->get(),
+        ]);
     }
 }
