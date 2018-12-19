@@ -187,10 +187,12 @@ only screen and (max-width: 760px),
                                 <td>
                                     <b>{{$card_type->name}}<b>
                                     <ul>
-                                        @foreach($card_type->cards as $card)
-                                            <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
-                                                <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
-                                            </li>
+                                        @foreach($cardsToTrade as $card)
+                                            @if($card->card_type_id == $card_type->id)
+                                                <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
+                                                    <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
+                                                </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </td>

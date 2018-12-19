@@ -9,8 +9,32 @@ class TradController extends Controller
     public function newtrad()
     {
         $cards = \App\card::all();
-        return view('new-trad', [
+        $cardsTrader = \App\Trader::RecoverTraderCards();
+
+ 
+        foreach($cardsTrader as $cardTrader)
+        {
+            if( ($cardTrader[3] === "Common") AND ($cardTrader[2] >= '250'))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+            }
+            if( ($cardTrader[3] === "Rare") AND ($cardTrader[2] >= '50'))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+            }
+            if( ($cardTrader[3] === "Epic") AND ($cardTrader[2] >= '10'))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+            }
+            if( ($cardTrader[3] === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+            }           
+        }
+
+         return view('new-trad', [
             'cards' => $cards,
+            'cardsToTrade' => $cardsToTrade,
         ]);
     }
 
@@ -23,7 +47,7 @@ class TradController extends Controller
 
 
         $trad = new \App\Trad;
-        
+    
         $trad->card_id = request('btn_cardwant');
 
 

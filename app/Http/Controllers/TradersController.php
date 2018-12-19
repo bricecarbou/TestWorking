@@ -13,5 +13,6 @@ class TradersController extends Controller
         return view('traders', [
             'traders' => $traders,
         ]);
-    } 
+    }
+    
 }
