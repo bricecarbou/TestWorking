@@ -29,15 +29,18 @@ Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middle
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
 
 // admin
 Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
 
 
 // trade
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
 Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
+Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 
 
 

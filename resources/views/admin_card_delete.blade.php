@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('contain')
-
 <style>
     ul {
     list-style-type: none;
@@ -12,10 +11,6 @@
     }
 
     input[type="checkbox"][id^="cb"] {
-    display: none;
-    }
-
-    input[type="radio"][id^="r"] {
     display: none;
     }
 
@@ -77,14 +72,14 @@
 </style>
 
     <div class="section">
-        <h1 class="title is-1">New Trad</h1>
+        <h1 class="title is-1">Admin page to delete a card</h1>
     </div>
 
-    <form class="section" action="/new-trad" method="post">
+    <form class="section" action="/admin_card_delete" method="post">
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">Select the Card you want</label>
+            <label class="label">Select the Card you want deleted (WARNING reverse is not possible!!!)</label>
             <table class="table is-bordered is-fullwidth">
                 <thead>
                     <tr>
@@ -100,8 +95,8 @@
                                 <th>
                                     <ul>
                                     @foreach($card_type->cards as $card)
-                                        <li><input type="radio" value="{{ $card->id }}" name="btn_cardwant" id="r{{$card->id}}"/>
-                                            <label for="r{{$card->id}}"><img src="{{ $card->CardImagePath }}"/></label>
+                                        <li><input type="checkbox" value="{{$card->id}}" name="btn_cardwantdelete[]" id="cb{{$card->id}}"/>
+                                            <label for="cb{{$card->id}}"><img src="{{ $card->CardImagePath }}"/></label>
                                         </li>
                                     @endforeach
                                     </ul>    
@@ -113,42 +108,9 @@
             </table>
         </div>
 
-        <div class="field">
-            <label class="label">Select the Cards to trade</label>
-            <label class="label">PLEASE SELECT SAME TYPE OF CARD</label>
-                <table class="table is-bordered is-fullwidth">
-                    <thead>
-                        <tr>
-                            @foreach(App\CardType::all() as $card_type)
-                                <th>{{ $card_type->name }}</th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <div class="checkbox-wrapper">
-                                @foreach(App\CardType::all() as $card_type)
-                                    <th>
-                                        <ul>
-                                            @foreach($card_type->cards as $card)
-                                                <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
-                                                    <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </th>
-                                @endforeach    
-                            </div>
-                        </tr>
-                    </tbody>
-                </table>
-        </div>
-        
-
-
-        <div class="field">
+         <div class="field">
             <div class="control">
-                <button class="button is-link" name="btn_Create" type="submit">Create the new Trad</button>
+                <button class="button is-link" type="submit">Delete the Cards</button>
             </div>
         </div>
     </form>

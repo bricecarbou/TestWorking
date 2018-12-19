@@ -16,6 +16,7 @@
                 @if((auth()->check()) AND auth()->user()->nick === 'admin')
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
                     <a href="/admin_card_enter" class="navbar-item {{ request()->is('admin_card_enter') ? 'is-active' : ''}}">New Card</a>
+                    <a href="/admin_card_delete" class="navbar-item {{ request()->is('admin_card_delete') ? 'is-active' : ''}}">Delete Card</a>
                     <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
                 @elseif (auth()->check())
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>

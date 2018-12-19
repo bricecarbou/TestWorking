@@ -17,7 +17,10 @@ class CreateCardsTable extends Migration
             $table->increments('id');
 
             $table->string('CardName', 100)->unique();
-            $table->integer('TypeId');
+            
+            $table->unsignedInteger('card_type_id');
+            $table->foreign('card_type_id')->references('id')->on('card_types');
+
             $table->string('CardImagePath');
 
             $table->timestamps();

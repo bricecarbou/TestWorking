@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTradHasCardsTable extends Migration
+class CreateCardTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTradHasCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trad_has_cards', function (Blueprint $table) {
-            $table->integer('trad_id')->unsigned();
-            $table->foreign('trad_id')->references('id')->on('trads')->onDelete('cascade');
-            $table->integer('card_id')->unsigned();
+        Schema::create('card_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateTradHasCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trad_has_cards');
+        Schema::dropIfExists('card_types');
     }
 }

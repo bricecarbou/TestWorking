@@ -57,4 +57,18 @@ class AccountController extends Controller
         return back();
     }
 
+    public function admin_card_delete()
+    {
+
+        $nick = auth()->user()->nick;
+
+        if ($nick === 'admin')
+        {
+            return view('admin_card_delete');
+        }
+
+        flash("Only the admin can access to this page.")->error();
+        return back();
+    }
+
 }

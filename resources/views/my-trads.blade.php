@@ -31,7 +31,9 @@
                             @endforeach
                         </th>
                         <th>
-                        Faire button delete
+                            <div class="control">
+                               <a class="button is-link" href="/my-trads/{{$trad->id}}">Delete</a>
+                            </div>
                         </th>
                     </tr>
                 @endforeach  

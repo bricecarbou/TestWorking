@@ -2,7 +2,7 @@
 
 @section('contain')
     <div class="section">
-        <h1 class="title is-1">Admin page for submit a new card</h1>
+        <h1 class="title is-1">Admin page to add a card</h1>
 
         @if (auth()->check() AND auth()->user()->nick === 'admin')
             <form action="/admin_card_enter" method="post">
@@ -20,10 +20,9 @@
 
                 <p><label class="control-label col-sm-4" for="text">Type:</label>
                     <select  class="question_type form-control" name="card_type" >
-                        <option value="C" > Common </option>
-                        <option value="R" > Rare </option>
-                        <option value="E" > Epique </option>
-                        <option value="L" > Legendary </option>
+                        @foreach(App\CardType::all() as $card_type)
+                            <option value="{{$card_type->id}}"> {{ $card_type->name }} </option>
+                        @endforeach
                     </select>
                 </p>
 
