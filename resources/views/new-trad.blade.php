@@ -3,7 +3,11 @@
 @section('contain')
 
 <style>
-    ul {
+
+/*****************************************
+ *    CARD show style
+ *********************************************/
+     ul {
     list-style-type: none;
     }
 
@@ -73,7 +77,72 @@
     transform: scale(0.8);
     box-shadow: 0 0 5px #333;
     z-index: -1;
-    }    
+    }
+
+/*****************************************
+ *    responsive table for mobile
+ *********************************************/
+    table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) { 
+    /*background: #eee; */
+    }
+    th { 
+    /*background: #333;*/ 
+    color: white; 
+    font-weight: bold; 
+    }
+    td, th { 
+    padding: 6px; 
+    border: 1px solid #ccc;
+    text-align: left; 
+    }
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	/* tr { border: 1px solid #ccc; } */
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+}
+
 </style>
 
     <div class="section">
@@ -85,27 +154,21 @@
 
         <div class="field">
             <label class="label">Select the Card you want</label>
-            <table class="table is-bordered is-fullwidth">
-                <thead>
-                    <tr>
-                        @foreach(App\CardType::all() as $card_type)
-                            <th>{{ $card_type->name }}</th>
-                        @endforeach
-                    </tr>
-                </thead>
+            <table class="table ">
                 <tbody>
                     <tr>
                         <div class="radio-wrapper">
                             @foreach(App\CardType::all() as $card_type)
-                                <th>
+                                <td>
+                                    <b>{{$card_type->name}}<b>
                                     <ul>
-                                    @foreach($card_type->cards as $card)
-                                        <li><input type="radio" value="{{ $card->id }}" name="btn_cardwant" id="r{{$card->id}}"/>
-                                            <label for="r{{$card->id}}"><img src="{{ $card->CardImagePath }}"/></label>
-                                        </li>
-                                    @endforeach
+                                        @foreach($card_type->cards as $card)
+                                            <li><input type="radio" value="{{ $card->id }}" name="btn_cardwant" id="r{{$card->id}}"/>
+                                                <label for="r{{$card->id}}"><img src="{{ $card->CardImagePath }}"/></label>
+                                            </li>
+                                        @endforeach
                                     </ul>    
-                                </th>
+                                </td>
                             @endforeach
                         </div>
                     </tr>            
@@ -116,32 +179,26 @@
         <div class="field">
             <label class="label">Select the Cards to trade</label>
             <label class="label">PLEASE SELECT SAME TYPE OF CARD</label>
-                <table class="table is-bordered is-fullwidth">
-                    <thead>
-                        <tr>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <div class="checkbox-wrapper">
                             @foreach(App\CardType::all() as $card_type)
-                                <th>{{ $card_type->name }}</th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <div class="checkbox-wrapper">
-                                @foreach(App\CardType::all() as $card_type)
-                                    <th>
-                                        <ul>
-                                            @foreach($card_type->cards as $card)
-                                                <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
-                                                    <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </th>
-                                @endforeach    
-                            </div>
-                        </tr>
-                    </tbody>
-                </table>
+                                <td>
+                                    <b>{{$card_type->name}}<b>
+                                    <ul>
+                                        @foreach($card_type->cards as $card)
+                                            <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
+                                                <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                            @endforeach    
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
 
