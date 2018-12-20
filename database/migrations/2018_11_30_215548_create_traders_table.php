@@ -15,7 +15,7 @@ class CreateTradersTable extends Migration
     {
         Schema::create('traders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nick', 10)->unique();
+            $table->string('nick')->unique();
 
             $table->string('clan');
             /*$table->foreign('clan_id')->references('id')->on('clans');*/
