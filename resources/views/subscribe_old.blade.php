@@ -1,36 +1,41 @@
 @extends('layout')
 
+
 @section('contain')
-    <div class="section">
-        <h1 class="title is-1">{{ $nick }}</h1>
-        <b>#{{auth()->user()->cr_key}}</b>
-        <p>You are connected.</p>
-
-        <a href="/disconnect" class="button">Disconnect</a>
-    </div>
-
-   <form class="section" action="/modify-cr_key" method="post">
+    <form action="/subscribe" method="post">
         {{ csrf_field() }}
 
+
         <div class="field">
-            <label class="label">My new Clash Royale ID</label>
+            <label class="label">Nick Name</label>
             <div class="control">
-                <input class="input" name="cr_key">
+              <input class="input" type="nick" name="nick" value="{{ old('nick') }}">
             </div>
+            @if($errors->has('nick'))
+              <p class="help is-danger">{{ $errors->first('nick') }}</p>
+            @endif
         </div>
 
         <div class="field">
+            <label class="label">CR key (without the #)</label>
             <div class="control">
-                <button class="button is-link" type="submit">Modify my id</button>
+              <input class="input"  name="cr_key" value="{{ old('cr_key') }}">
             </div>
+            @if($errors->has('cr_key'))
+              <p class="help is-danger">{{ $errors->first('cr_key') }}</p>
+            @endif
         </div>
-    </form>
 
-    <form class="section" action="/modify-password" method="post">
-        {{ csrf_field() }}
+        <p><label class="control-label col-sm-4" for="text">Clan:</label>
+            <select  class="question_type form-control" name="clan" >
+              <option value="GEFR" > Great Escape FR </option>
+              <option value="GE2" >Great Escape 2</option>
+            </select>
+        </p>
+
 
         <div class="field">
-            <label class="label">New password</label>
+            <label class="label">Password</label>
             <div class="control">
                 <input class="input" type="password" name="password">
             </div>
@@ -51,8 +56,9 @@
 
         <div class="field">
             <div class="control">
-                <button class="button is-link" type="submit">Modify my password</button>
+                <button class="button is-link" type="submit">Subscribe</button>
             </div>
         </div>
+
     </form>
 @endsection

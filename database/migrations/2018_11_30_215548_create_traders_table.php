@@ -20,6 +20,8 @@ class CreateTradersTable extends Migration
             $table->string('clan');
             /*$table->foreign('clan_id')->references('id')->on('clans');*/
 
+            $table->string('cr_key');
+
 
             $table->string('password');
             $table->timestamps();

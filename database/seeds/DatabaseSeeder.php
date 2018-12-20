@@ -118,11 +118,11 @@ class DatabaseSeeder extends Seeder
         
 
         // admin
-        DB::table('traders')->insert(['nick'=>'admin', 'clan'=>'GEFR', 'password'=>bcrypt('Karolyn'), 'id'=>'1']);
+        DB::table('traders')->insert(['nick'=>'admin', 'cr_key'=>'0000', 'clan'=>'GEFR', 'password'=>bcrypt('Karolyn'), 'id'=>'1']);
         
         //users
-        DB::table('traders')->insert(['nick'=>'Bryyyce2', 'clan'=>'GE2', 'password'=>bcrypt('toto'), 'id'=>'2']);
-        DB::table('traders')->insert(['nick'=>'Test', 'clan'=>'GE2', 'password'=>bcrypt('toto'), 'id'=>'3']);
+        DB::table('traders')->insert(['nick'=>'Bryyyce2', 'cr_key'=>'802UYJP8', 'clan'=>'GE2', 'password'=>bcrypt('toto'), 'id'=>'2']);
+        DB::table('traders')->insert(['nick'=>'Test', 'cr_key'=>'802UYJP8', 'clan'=>'GE2', 'password'=>bcrypt('toto'), 'id'=>'3']);
        
     }   
 }

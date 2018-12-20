@@ -23,9 +23,10 @@ class ConnexionController extends Controller
             'password' => request('password'),
         ]);
 
+
         if ($result) {
             flash("Your are connected")->success();
-            return redirect('/my-account');
+            return redirect('/my-trads');
         }
 
         return back()->withInput()->withErrors([

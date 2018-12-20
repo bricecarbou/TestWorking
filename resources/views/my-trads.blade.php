@@ -73,15 +73,17 @@
                 width: 45%; 
                 padding-right: 10px; 
                 white-space: nowrap;
-            }
-            
-        }  
+            }   
+        }
     </style>
-
-
-    <div class="section">
-        <h1 class="title is-1">My current Trads</h1>
+    
+    <br />
+    <div class="CreateTrade">
+        <p style="text-align:center"> 
+            <a class="button is-link" href="/new-trad" >Create a New Trad</a>
+        </p>
     </div>
+    <br />
 
     @auth
         <table class="table">
@@ -111,6 +113,7 @@
                                 </ul>
                         </td>
                         <td>
+                            <br />
                             <div class="control">
                                <a class="button is-link" href="/my-trads/{{$trad->id}}">Delete</a>
                             </div>

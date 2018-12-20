@@ -1,10 +1,21 @@
 @extends('layout')
 
 @section('contain')
-    <div class="title m-b-md">
+
+    <style>
+        img.displayed {
+            display: block;
+            margin-left: auto;
+            margin-right: auto 
+        }
+
+    </style>
+
+    <div class="title">
         <br />
-        <center>Welcome to the Trading Application for Clash Royale</center>
+            <p style="text-align:center">Welcome to the Trading Application for Clash Royale</p>
         <br />
-        <br />
+        <img class="displayed" src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
+
     </div>
 @endsection

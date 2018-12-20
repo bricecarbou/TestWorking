@@ -28,7 +28,7 @@ class AccountController extends Controller
     public function modifypassword()
     {
         request()->validate([
-            'password' => ['required', 'confirmed', 'min:8'],
+            'password' => ['required', 'confirmed', 'min:4'],
             'password_confirmation' => ['required'],
         ]);
 
@@ -42,6 +42,23 @@ class AccountController extends Controller
 
         return redirect('/my-account');
     }
+
+    public function modifycr_key()
+    {
+        request()->validate([
+            'cr_key' => ['required'],
+        ]);
+
+        $user = auth()->user();
+        $user->cr_key = request('cr_key');
+
+        $user->save();
+
+        flash("Your Clash Royale ID has been updated.")->success();
+
+        return redirect('/my-account');
+    }
+
 
     public function admin_card_enter()
     {

@@ -10,19 +10,28 @@
     <body>
         <nav class="navbar is-light">
             <div class="navbar-start">
-                <a href="/" class="navbar-item">Welcome</a>
+                <a href="/" class="navbar-item">
+                    <img alt='Welcome' src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
+                </a>
             </div>
             <div class="navbar-end">
                 @if((auth()->check()) AND auth()->user()->nick === 'admin')
-                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
+                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">
+                        <img alt="{{auth()->user()->nick}}" src="https://vignette.wikia.nocookie.net/clashroyale/images/4/47/Blue_King.png" />   
+                    </a>
                     <a href="/admin_card_enter" class="navbar-item {{ request()->is('admin_card_enter') ? 'is-active' : ''}}">New Card</a>
                     <a href="/admin_card_delete" class="navbar-item {{ request()->is('admin_card_delete') ? 'is-active' : ''}}">Delete Card</a>
-                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
+                    <img alt="Disconnect" src="https://cdn3.iconfinder.com/data/icons/fatcow/32/disconnect.png" />
                 @elseif (auth()->check())
-                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">My account</a>
-                    <a href="/new-trad" class="navbar-item {{ request()->is('new-trad') ? 'is-active' : ''}}">New Trad</a>
-                    <a href="/my-trads" class="navbar-item {{ request()->is('my-trads') ? 'is-active' : ''}}">My trads</a>
-                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">Disconnect</a>
+                    <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">
+                        <img alt="{{auth()->user()->nick}}" src="https://vignette.wikia.nocookie.net/clashroyale/images/4/47/Blue_King.png" />
+                    </a>                   
+                    <a href="/my-trads" class="navbar-item {{ request()->is('my-trads') ? 'is-active' : ''}}">
+                        <img alt="My trads" src="http://chittagongit.com//images/arrows-icon/arrows-icon-13.jpg" />
+                    </a>
+                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">
+                        <img alt="Disconnect" src="https://cdn3.iconfinder.com/data/icons/fatcow/32/disconnect.png" />
+                    </a>
                 @else
                     <a href="/connexion" class="navbar-item {{ request()->is('connexion') ? 'is-active' : ''}}">Connexion</a>
                     <a href="/subscribe" class="navbar-item {{ request()->is('subscribe') ? 'is-active' : ''}}">Subscribe</a>
@@ -40,7 +49,8 @@
         <footer class="footer">
             <div class="content has-text-centered">
                 <p>
-                <a href="https://www.facebook.com/GreatEscapeFRCR/">Great Escape FR</a>
+                    <img src="https://www.facebook.com/images/fb_icon_325x325.png" height="30" width="20"/>
+                    <a style="color:#B0C4DE" href="https://www.facebook.com/GreatEscapeFRCR/">Great Escape FR</a>
                 </p>
             </div>
         </footer>
