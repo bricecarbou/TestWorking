@@ -104,4 +104,18 @@ class AccountController extends Controller
         return back();
     }
 
+    public function admin_analyse()
+    {
+
+        $nick = auth()->user()->nick;
+
+        if ($nick === 'admin')
+        {
+            return view('admin_analyse');
+        }
+
+        flash("Only the admin can access to this page.")->error();
+        return back();
+    }
+
 }

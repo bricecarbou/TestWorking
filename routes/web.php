@@ -32,11 +32,11 @@ Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_analyse', 'AccountController@admin_analyse')->middleware('App\Http\Middleware\Auth');
 
 // admin
 Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
-
 
 // trade
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
