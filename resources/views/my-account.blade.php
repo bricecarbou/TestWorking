@@ -10,6 +10,22 @@
 
         <a href="/disconnect" class="button">Disconnect</a>
     </div>
+    <form class="section" action="/modify-clan" method="post">
+        {{ csrf_field() }}
+
+        <div class="field">
+            <label class="label">My new Clan</label>
+            <div class="control">
+                <input class="input" name="clan">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit">Modify my id</button>
+            </div>
+        </div>
+    </form>
 
    <form class="section" action="/modify-cr_key" method="post">
         {{ csrf_field() }}

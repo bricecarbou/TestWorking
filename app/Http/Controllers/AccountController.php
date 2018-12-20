@@ -59,6 +59,22 @@ class AccountController extends Controller
         return redirect('/my-account');
     }
 
+    public function modifyclan()
+    {
+        request()->validate([
+            'clan' => ['required'],
+        ]);
+
+        $user = auth()->user();
+        $user->clan = request('clan');
+
+        $user->save();
+
+        flash("Your Clan has been updated.")->success();
+
+        return redirect('/my-account');
+    }
+
 
     public function admin_card_enter()
     {
