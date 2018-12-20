@@ -42,8 +42,6 @@ $opts = [
 
 $context = stream_context_create($opts);
 
-    dd(file_get_contents("https://api.royaleapi.com/player/802UYJP8",true, $context));
-
      /*  Card object
      * @method    string              getName()                       Returns the name of the Card.
      * @method    string              getKey()                        Returns the key of the Card.
@@ -65,7 +63,7 @@ $context = stream_context_create($opts);
      * @method    int                 getUpgradeExp()                 Returns the remaining experience when upgrade
      * @method    array               getUpgradeStats()               Returns the card stats
      */
-    echo "<br><b>PLAYER CARDS INFO </b><br>";
+ 
     foreach ($player->getCards() as $card) {
         $cards_info[] = [
         $card->getId(),
