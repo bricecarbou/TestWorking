@@ -58,7 +58,6 @@ class AdminController extends Controller
             'btn_cardwantdelete'=>['required'],
         ]);
 
-
         $array_id=request('btn_cardwantdelete');
 
         foreach ($array_id as $card_id) 
