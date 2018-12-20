@@ -8,7 +8,7 @@ class TradController extends Controller
 {
     public function newtrad()
     {
-        $cards = \App\card::all();
+        $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards();
 
  
