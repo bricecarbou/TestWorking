@@ -3,6 +3,8 @@
 @section('contain')
     <div class="section">
         <h1 class="title is-1">{{ $nick }}</h1>
+        <b>clan: {{auth()->user()->clan}}</b>
+        <br />
         <b>#{{auth()->user()->cr_key}}</b>
         <p>You are connected.</p>
 
