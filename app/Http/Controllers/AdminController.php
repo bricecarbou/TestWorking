@@ -69,5 +69,4 @@ class AdminController extends Controller
         flash("Cards deleted.")->success();
         return back();
     }
-
 }
