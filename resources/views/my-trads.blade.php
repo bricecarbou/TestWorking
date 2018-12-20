@@ -11,6 +11,20 @@
             display: inline-block;
         }
 
+        label {
+            border: 0px solid #fff;
+            padding: 0px;
+            display: block;
+            position: relative;
+            margin: -5px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
         /* 
         Generic Styling, for Desktops/Laptops 
         */
@@ -93,14 +107,14 @@
                         <td>
                             <b>Search Card</b>
                             <ul>
-                                <li><img src='{{$trad->card->CardImagePath}}' width="45" height="45"></li>
+                                <li><label><img src='{{$trad->card->CardImagePath}}' width="45" height="45"></label></li>
                             </ul>
                         </td>
                         <td> 
                             <b>Traded Cards</b>
                             <ul>
                                 @foreach($trad->cards as $card)
-                                    <li><img src='{{$card->CardImagePath}}' width="45" height="45"></li>
+                                    <li><label><img src='{{$card->CardImagePath}}' width="45" height="45"></label></li>
                                 @endforeach
                             </ul>
                         </td>
