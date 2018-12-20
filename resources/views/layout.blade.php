@@ -22,8 +22,9 @@
                     <a href="/admin_card_enter" class="navbar-item {{ request()->is('admin_card_enter') ? 'is-active' : ''}}">New Card</a>
                     <a href="/admin_card_delete" class="navbar-item {{ request()->is('admin_card_delete') ? 'is-active' : ''}}">Delete Card</a>
                     <a href="/admin_analyse" class="navbar-item {{ request()->is('admin_analyse') ? 'is-active' : ''}}">Analyze</a>
-                    <img alt="Disconnect" src="https://cdn3.iconfinder.com/data/icons/fatcow/32/disconnect.png" />
-                @elseif (auth()->check())
+                    <a href="/disconnect" class="navbar-item {{ request()->is('disconnect') ? 'is-active' : ''}}">
+                        <img alt="Disconnect" src="https://cdn3.iconfinder.com/data/icons/fatcow/32/disconnect.png" />
+                    </a>                @elseif (auth()->check())
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">
                         <img alt="{{auth()->user()->nick}}" src="https://vignette.wikia.nocookie.net/clashroyale/images/4/47/Blue_King.png" />
                     </a>                   
