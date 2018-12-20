@@ -14,15 +14,16 @@
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">My new Clan</label>
-            <div class="control">
-                <input class="input" name="clan">
-            </div>
+            <label class="control-label col-sm-4" for="text">Modify my Clan:</label>
+            <select  class="question_type form-control" name="clan" >
+                <option value="GEFR" > Great Escape FR </option>
+                <option value="GE2" >Great Escape 2</option>
+                <option value="BOMG3" >Boreal MG 3</option>
+            </select>
         </div>
-
         <div class="field">
             <div class="control">
-                <button class="button is-link" type="submit">Modify my id</button>
+                <button class="button is-link" type="submit">Modify my Clan</button>
             </div>
         </div>
     </form>

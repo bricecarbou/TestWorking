@@ -37,7 +37,8 @@
 
                                 <div class="field">
                                     <div class="control">
-                                        <input class="input is-large" name="cr_key" placeholder="Your Cr Key (without the #)" autofocus="">
+                                        <label>(without the #)</label>
+                                        <input class="input is-large" name="cr_key" placeholder="Your Cr id" autofocus="">
                                     </div>
                                 </div>
 
@@ -46,6 +47,7 @@
                                     <select  class="question_type form-control" name="clan" >
                                         <option value="GEFR" > Great Escape FR </option>
                                         <option value="GE2" >Great Escape 2</option>
+                                        <option value="BOMG3" >Boreal MG 3</option>
                                     </select>
                                 </div>
 
