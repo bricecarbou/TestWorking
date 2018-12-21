@@ -6,6 +6,28 @@ use App\Card;
 
 class AdminController extends Controller
 {
+    public function cardIdRecover()
+    {
+       
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->nick === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+
+        // Validation des données
+        request()->validate([
+            'card_name_recover' => ['required'],
+         ]);
+
+        $card_id_recover = \App\Card::RecoverCardId(request('card_name_recover'));
+
+        return view('admin_card_enter',[
+            'card_id_recover' => $card_id_recover,
+        ]);
+    }
+
     public function new()
     {
        

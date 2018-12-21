@@ -35,6 +35,7 @@ Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middlew
 Route::get('/admin_trader_delete', 'AccountController@admin_trader_delete')->middleware('App\Http\Middleware\Auth');
 
 // admin
+Route::post('/admin_card_id_recover', 'AdminController@cardIdRecover')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_trader_delete', 'AdminController@traderDelete')->middleware('App\Http\Middleware\Auth');

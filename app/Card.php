@@ -19,4 +19,24 @@ class Card extends Model
 		return $this->belongsTo(CardType::class);
 	}
 
+	public static function RecoverCardId($card_name)
+    {
+        /* https://docs.royaleapi.com/#/ */
+
+        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA2MywiaWRlbiI6IjQzODY2MzgzODU2NTY2MjcyMSIsIm1kIjp7InVzZXJuYW1lIjoiQnJ5eXljZSIsImtleVZlcnNpb24iOjMsImRpc2NyaW1pbmF0b3IiOiI4NDcyIn0sInRzIjoxNTQ1MjE2NjU2NDE2fQ.OjyVcrLaVSXjHBMCys3FAesv_ZUH02ooTmqQVsM0AmU";
+		$opts = [
+			"http" => [
+				"header" => "auth:" . $token
+			]
+		];
+		
+		$context = stream_context_create($opts);
+		
+		$value= strstr(file_get_contents("https://api.royaleapi.com/constants?keys=cards",true, $context),$card_name);
+
+		$start = strpos($value , '"id"');
+		$test = substr($value, $start + 5, 8);
+
+        return ($test);
+    }
 }

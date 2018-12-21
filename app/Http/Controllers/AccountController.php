@@ -75,7 +75,6 @@ class AccountController extends Controller
         return redirect('/my-account');
     }
 
-
     public function admin_card_enter()
     {
 

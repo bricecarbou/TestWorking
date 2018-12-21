@@ -7,7 +7,7 @@ ini_set('max_execution_time', 3000);
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
-use App\Clan;
+
 use CR\Api;
 require '../vendor/autoload.php';
 
@@ -36,7 +36,9 @@ class Trader extends Model implements Authenticatable
 
     public static function RecoverTraderCards()
     {
-        
+        /* https://docs.royaleapi.com/#/ */
+        /* https://packagist.org/packages/firegore2/clash-royale-php */ 
+
         $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA2MywiaWRlbiI6IjQzODY2MzgzODU2NTY2MjcyMSIsIm1kIjp7InVzZXJuYW1lIjoiQnJ5eXljZSIsImtleVZlcnNpb24iOjMsImRpc2NyaW1pbmF0b3IiOiI4NDcyIn0sInRzIjoxNTQ1MjE2NjU2NDE2fQ.OjyVcrLaVSXjHBMCys3FAesv_ZUH02ooTmqQVsM0AmU";
         $api = new Api($token, 600);
         $player  = $api->getPlayer([auth()->user()->cr_key]);
@@ -81,6 +83,4 @@ class Trader extends Model implements Authenticatable
         }
         return ($cards_info);
     }
-
-
   }
