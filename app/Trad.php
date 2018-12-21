@@ -26,31 +26,27 @@ class Trad extends Model
 	public function getMatchTraders()
 	{
 
-		//recupérons l'id de la carte recherchée par un trad 
-		//qui propose la carte que l'on recherche
+		//recupérons la liste des trader proposant la carte que l'on recherche, plus la carte qu'ils recherchent
 		$a = Trad::whereHas('cards', function($query){
 			return $query->where('card_id', $this->card->id);
 		})
-		->pluck('card_id');
-		
+		->select('trader_id', 'card_id')->get();
+	
 		$trader_id = array();
 
 		// verifions que nous donnons bien la carte que 
-		// le trader de l'autre coté recherche
-		foreach($a as $card_id)
+		// les traders rrecherchent
+		foreach($a as $possibleTrad)
 		{
 			foreach ($this->cards as $card)
 			{
-				if ( (int)$card_id  === $card->id )
+				if ( $card->id  == $possibleTrad->card_id)
 				{
-					
-					$trader_id = Trad::whereHas('cards', function($query){
-						return $query->where('card_id', $this->card->id);
-					})
-					->pluck('trader_id');
+					$trader_id[] = $possibleTrad->trader_id;
 				}
 			}
 		}
+
 		return Trader::find($trader_id);
 	}
 }
