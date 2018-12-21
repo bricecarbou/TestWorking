@@ -28,6 +28,11 @@ class Trader extends Model implements Authenticatable
         return '';
     }
 
+    public static function countTraders()
+    {
+        return Trader::count();
+    }   
+
 
     public static function RecoverTraderCards()
     {
@@ -74,8 +79,8 @@ class Trader extends Model implements Authenticatable
             $card->getRarity(),
             $card->getLevel()];
         }
-
-
         return ($cards_info);
     }
+
+
   }

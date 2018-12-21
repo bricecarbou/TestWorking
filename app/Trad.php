@@ -22,6 +22,11 @@ class Trad extends Model
 		return $this->belongsTo(Trader::class);
 	}
 
+	public static function countTrads()
+    {
+        return Trad::count();
+    }   
+
 	// liste des trade dont la carte recherche appartient à la liste des cartes à échanger
 	public function getMatchTraders()
 	{
