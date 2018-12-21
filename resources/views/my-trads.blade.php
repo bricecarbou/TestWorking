@@ -100,6 +100,9 @@
     <br />
 
     @auth
+        <p>You can use the clan <b>"Trade GE"</b> for your inter clan trading</p>
+        <p>Think to 2h30 time delay</p>
+
         <table class="table">
             <tbody>
                 @foreach($trads as $trad)
