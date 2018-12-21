@@ -56,6 +56,7 @@ class AdminController extends Controller
 
         $card->CardName = request('card_name');
         $card->CardImagePath = request('card_image_url');
+        $card->id = request('card_id');
         $card->card_type_id = request('card_type');
 
         $card->save();
