@@ -82,7 +82,9 @@ class AccountController extends Controller
 
         if ($nick === 'admin')
         {
-            return view('admin_card_enter');
+            return view('admin_card_enter',[
+                'card_id_recover' => ' ',
+            ]);
         }
 
         flash("Only the admin can access to this page.")->error();

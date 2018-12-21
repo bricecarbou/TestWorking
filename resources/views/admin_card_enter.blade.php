@@ -42,8 +42,11 @@
                 <div class="field">
                     <label class="label">The card id (recover from previous button)</label>
                     <div class="control">
-                        <input class="input" name="card_id" placeholder="Card id" value="{{$card_id_recover }}">
+                        <input class="input" name="card_id" placeholder="Card id" value="{{$card_id_recover}}">
                     </div>
+                    @if($errors->has('card_id_recover'))
+                        <p class="help is-danger">{{ $errors->first('card_id_recover')}}</p>
+                    @endif
                 </div>
 
                 <p><label class="control-label col-sm-4" for="text">Type:</label>

@@ -35,8 +35,8 @@ class Card extends Model
 		$value= strstr(file_get_contents("https://api.royaleapi.com/constants?keys=cards",true, $context),$card_name);
 
 		$start = strpos($value , '"id"');
-		$test = substr($value, $start + 5, 8);
+		$card_id = substr($value, $start + 5, 8);
 
-        return ($test);
+        return ($card_id);
     }
 }
