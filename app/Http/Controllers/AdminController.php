@@ -65,7 +65,33 @@ class AdminController extends Controller
             Card::find($card_id)->delete();
         }
 
-        flash("Cards deleted.")->success();
+        flash("Card(s) deleted.")->success();
+        return back();
+    }
+
+    public function traderDelete()
+    {
+       
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->nick === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+
+        // Validation des données
+        request()->validate([
+            'btn_traderwantdelete'=>['required'],
+        ]);
+
+        $array_id=request('btn_traderwantdelete');
+        
+        foreach ($array_id as $trader_id) 
+        {
+            \App\Trader::find($trader_id)->delete();
+        }
+
+        flash("Trader(s) deleted.")->success();
         return back();
     }
 }

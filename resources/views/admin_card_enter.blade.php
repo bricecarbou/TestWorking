@@ -38,7 +38,7 @@
 
                 <div class="field">
                     <div class="control">
-                        <button class="button is-link" type="submit">Register</button>
+                        <button onclick="return confirm('Are you sure?')" class="button is-link" type="submit">Register</button>
                     </div>
                 </div>
             </form>        

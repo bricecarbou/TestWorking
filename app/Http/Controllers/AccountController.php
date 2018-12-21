@@ -104,14 +104,14 @@ class AccountController extends Controller
         return back();
     }
 
-    public function admin_analyse()
+    public function admin_trader_delete()
     {
 
         $nick = auth()->user()->nick;
 
         if ($nick === 'admin')
         {
-            return view('admin_analyse');
+            return view('admin_trader_delete');
         }
 
         flash("Only the admin can access to this page.")->error();

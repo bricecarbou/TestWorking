@@ -110,7 +110,7 @@
 
          <div class="field">
             <div class="control">
-                <button class="button is-link" type="submit">Delete the Cards</button>
+                <button onclick="return confirm('Are you sure?')" class="button is-link" type="submit">Delete the Cards</button>
             </div>
         </div>
     </form>
