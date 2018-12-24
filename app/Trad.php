@@ -96,9 +96,13 @@ class Trad extends Model
 
 							foreach ($cardsToTrade as $cardToTrade) 
 							{
-								if ($card_id === $cardToTrade->id) {
-									$keep = true;
-									break;
+								if(!($cardsToTrade === null))
+								{
+									if ($card_id === $cardToTrade->id) 
+									{
+										$keep = true;
+										break;
+									}
 								}
 							}
 
