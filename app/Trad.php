@@ -67,7 +67,10 @@ class Trad extends Model
 			{
 				$cardsTrader = \App\Trader::RecoverTraderCards($trader->cr_key);
 
-				foreach ($cardsTrader as $cardTrader) {
+				foreach ($cardsTrader as $cardTrader) 
+				{
+				if (!($cardTrader[0] === 26000032))
+				{
 					if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
 						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 					}
@@ -80,6 +83,7 @@ class Trad extends Model
 					if (($cardTrader[3] === "Legendary") and (((($cardTrader[2] >= '1') and ($cardTrader[4] > '1')) or ($cardTrader[2] >= '2') and ($cardTrader[4] > '0')) or ($cardTrader[4] > '4'))) {
 						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 					}
+				}
 				}
 
 				$trads = $trader->trads()->get();
@@ -102,8 +106,15 @@ class Trad extends Model
 
 							if($keep === false)
 							{
+								dump("detach");
 								$trad->cards()->detach($card_id);
 							}
+						}
+
+						dump($trad->cards);
+						if ($trad->cards->isEmpty())
+						{
+							Trad::find($trad->id)->delete();
 						}
 					}
 				}
