@@ -54,4 +54,61 @@ class Trad extends Model
 
 		return Trader::find($trader_id);
 	}
+
+	public function updateAll()
+	{
+
+		/* update of the trads */
+		$trads = Trad::all();
+		$traders = \App\Trader::all();
+
+		//$cardsTrader = \App\Trader::RecoverTraderCards();
+	
+		foreach($cardsTrader as $cardTrader)
+		{
+
+			if( ($cardTrader[3] === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
+			{
+				$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+			}
+			if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
+			{
+				$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+			}
+			if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
+			{
+				$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+			}
+			if( ($cardTrader[3] === "Legendary") AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
+			{
+				$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+			}  
+		}
+
+		foreach($trads as $trad)
+		{
+			
+			foreach($trad->cards as $card)
+			{
+				$keep = false;
+				$card_id = $card->id;
+
+				foreach($cardsToTrade as $cardToTrade)
+				{
+
+					if ($card_id === $cardToTrade->id) {
+						$keep = true;
+						break;
+					}
+				}
+
+				/*if($keep === false)
+				{
+					$trad->find($card_id)->delete();
+				}*/
+
+			}
+		}
+
+	}
 }

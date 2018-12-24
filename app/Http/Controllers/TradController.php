@@ -10,7 +10,8 @@ class TradController extends Controller
     {
 
         $cards = \App\Card::all();
-        $cardsTrader = \App\Trader::RecoverTraderCards();
+        dd(auth()->user()->cr_key);
+        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
  
         foreach($cardsTrader as $cardTrader)
@@ -87,8 +88,9 @@ class TradController extends Controller
     {
         /* update of the trads */
         $trads = auth()->user()->Trads()->get();
-
-        $cardsTrader = \App\Trader::RecoverTraderCards();
+        $cardsToTrade = array();
+        dump($cardsToTrade);
+        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
         foreach($cardsTrader as $cardTrader)
         {
@@ -119,19 +121,20 @@ class TradController extends Controller
                 $keep = false;
                 $card_id = $card->id;
 
+                dump($cardsToTrade);
+
                 foreach($cardsToTrade as $cardToTrade)
                 {
-
-                    if ($card_id === $cardToTrade->id) {
+                    if ($card_id === $cardToTrade->i) {
                         $keep = true;
                         break;
                     }
                 }
 
-                if($keep === false)
+                /*if($keep === false)
                 {
                     $trad->cards->find($card_id)->delete();
-                }
+                }*/
 
             }
         }
