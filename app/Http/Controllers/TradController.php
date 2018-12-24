@@ -10,7 +10,6 @@ class TradController extends Controller
     {
 
         $cards = \App\Card::all();
-        dd(auth()->user()->cr_key);
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
  
