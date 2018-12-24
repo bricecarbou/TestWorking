@@ -69,8 +69,6 @@ class Trad extends Model
 
 				foreach ($cardsTrader as $cardTrader) 
 				{
-				if (!($cardTrader[0] === 26000032))
-				{
 					if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
 						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 					}
@@ -84,7 +82,6 @@ class Trad extends Model
 						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 					}
 				}
-				}
 
 				$trads = $trader->trads()->get();
 
@@ -97,7 +94,8 @@ class Trad extends Model
 							$keep = false;
 							$card_id = $card->id;
 
-							foreach ($cardsToTrade as $cardToTrade) {
+							foreach ($cardsToTrade as $cardToTrade) 
+							{
 								if ($card_id === $cardToTrade->id) {
 									$keep = true;
 									break;
