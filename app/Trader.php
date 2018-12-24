@@ -72,7 +72,7 @@ class Trader extends Model implements Authenticatable
         * @method    int                 getUpgradeExp()                 Returns the remaining experience when upgrade
         * @method    array               getUpgradeStats()               Returns the card stats
         */
-    
+
         foreach ($player->getCards() as $card) {
             $cards_info[] = [
             $card->getId(),

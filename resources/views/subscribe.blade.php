@@ -38,7 +38,7 @@
                                 <div class="field">
                                     <div class="control">
                                         <label>(without the #)</label>
-                                        <input class="input is-large" name="cr_key" placeholder="Your Cr id" autofocus="">
+                                        <input class="input is-large" name="cr_key" placeholder="Your CR id" autofocus="">
                                     </div>
                                 </div>
 
@@ -58,6 +58,7 @@
                                 </div>
                                 <div class="field">
                                     <div class="control">
+                                        <label>(Warning: check that first charactere is not uppercase)</label>
                                         <input class="input is-large" type="password_confirmation" name="password_confirmation" placeholder="Confirme Your Password">
                                     </div>
                                 </div>

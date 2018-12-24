@@ -50,7 +50,16 @@ class AccountController extends Controller
         ]);
 
         $user = auth()->user();
-        $user->cr_key = request('cr_key');
+        $cr_key = request('cr_key');
+
+        if (substr($cr_key, 0 , 1) == "#")
+        {
+            $user->cr_key = substr($cr_key, 1);
+        }
+        else
+        {
+          $user->cr_key = $cr_key;
+        }
 
         $user->save();
 

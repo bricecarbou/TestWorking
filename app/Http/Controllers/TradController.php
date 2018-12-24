@@ -96,4 +96,12 @@ class TradController extends Controller
 
         return back();
     }
+
+    public function allTrads()
+    {
+        return view('trads',[
+            'trads' => \App\Trad::all(),
+        ]);
+    }
+
 }

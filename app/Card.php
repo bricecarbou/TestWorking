@@ -31,7 +31,7 @@ class Card extends Model
 		];
 		
 		$context = stream_context_create($opts);
-		
+
 		$value= strstr(file_get_contents("https://api.royaleapi.com/constants?keys=cards",true, $context),$card_name);
 
 		$start = strpos($value , '"id"');
