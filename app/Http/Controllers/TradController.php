@@ -104,4 +104,13 @@ class TradController extends Controller
         ]);
     }
 
+    public function updateAll()
+    {
+         \App\Trad::updateAll();
+        
+        return view('trads',[
+            'trads' => \App\Trad::all(),
+        ]);
+    }
+
 }

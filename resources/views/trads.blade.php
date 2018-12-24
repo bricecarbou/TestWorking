@@ -95,6 +95,14 @@
             <h1 class="title is-1">List of the Trads</h1>
         </div>
 
+        @if (auth()->check() AND auth()->user()->nick === 'admin')
+            <div class="UpdateAll">
+                <p style="text-align:center"> 
+                    <a class="button is-link" href="/updateAll" >Update all the trads</a>
+                </p>
+            </div>
+        @endif
+
         <table class="table">
             <tbody>
                 @foreach($trads as $trad)

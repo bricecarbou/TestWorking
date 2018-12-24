@@ -46,6 +46,7 @@ Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\M
 Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
+Route::get('/updateAll','TradController@updateAll')->middleware('App\Http\Middleware\Auth');
 
 
 
