@@ -106,12 +106,10 @@ class Trad extends Model
 
 							if($keep === false)
 							{
-								dump("detach");
 								$trad->cards()->detach($card_id);
 							}
 						}
 
-						dump($trad->cards);
 						if ($trad->cards->isEmpty())
 						{
 							Trad::find($trad->id)->delete();
