@@ -59,65 +59,57 @@ class Trad extends Model
 	{
 
 		/* update of the trads */
-		$traders = \App\Trader::all();
+		$trads = \App\Trad::all();
 
-        foreach ($traders as $trader) {
+		foreach ($trads as $trad) 
+		{
+			
+			$trader = \App\Trader::find($trad->trader_id);
+			$cardsTrader = \App\Trader::RecoverTraderCards($trader->cr_key);
+			$cardsToTrade = array();
 
-			if(!($trader->nick === 'admin'))
+			foreach ($cardsTrader as $cardTrader) 
 			{
-				$cardsTrader = \App\Trader::RecoverTraderCards($trader->cr_key);
-
-				foreach ($cardsTrader as $cardTrader) 
-				{
-					if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
-						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-					}
-					if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '10'))) {
-						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-					}
-					if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '7'))) {
-						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-					}
-					if (($cardTrader[3] === "Legendary") and (((($cardTrader[2] >= '1') and ($cardTrader[4] > '1')) or ($cardTrader[2] >= '2') and ($cardTrader[4] > '0')) or ($cardTrader[4] > '4'))) {
-						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-					}
+				if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
+					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
+				if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '10'))) {
+					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+				}
+				if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '7'))) {
+					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+				}
+				if (($cardTrader[3] === "Legendary") and (((($cardTrader[2] >= '1') and ($cardTrader[4] > '1')) or ($cardTrader[2] >= '2') and ($cardTrader[4] > '0')) or ($cardTrader[4] > '4'))) {
+					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+				}
+			}
 
-				$trads = $trader->trads()->get();
+			foreach ($trad->cards as $card) 
+			{
+				$keep = false;
+				$card_id = $card->id;
 
-				if(!($trads ===  null))
+				foreach ($cardsToTrade as $cardToTrade) 
 				{
-					foreach ($trads as $trad) 
+					if(!($cardToTrade === null))
 					{
-						foreach ($trad->cards as $card) 
+						if ($card_id === $cardToTrade->id) 
 						{
-							$keep = false;
-							$card_id = $card->id;
-
-							foreach ($cardsToTrade as $cardToTrade) 
-							{
-								if(!($cardToTrade === null))
-								{
-									if ($card_id === $cardToTrade->id) 
-									{
-										$keep = true;
-										break;
-									}
-								}
-							}
-
-							if($keep === false)
-							{
-								$trad->cards()->detach($card_id);
-							}
-						}
-
-						if ($trad->cards->isEmpty())
-						{
-							Trad::find($trad->id)->delete();
+							$keep = true;
+							break;
 						}
 					}
 				}
+
+				if($keep === false)
+				{
+					$trad->cards()->detach($card_id);
+				}
+			}
+
+			if ($trad->cards->isEmpty())
+			{
+				Trad::find($trad->id)->delete();
 			}
 		}
 	}
