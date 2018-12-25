@@ -11,7 +11,7 @@ class TradController extends Controller
 
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
-
+        $cardTrader = array();
  
         foreach($cardsTrader as $cardTrader)
         {
