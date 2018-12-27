@@ -6,6 +6,8 @@
         <b>clan: {{auth()->user()->clan}}</b>
         <br />
         <b>#{{auth()->user()->cr_key}}</b>
+        <br />
+        <b>Discord id: {{ $discord_id }}</b>
         <p>You are connected.</p>
 
         <a href="/disconnect" class="button">Disconnect</a>
@@ -41,6 +43,23 @@
         <div class="field">
             <div class="control">
                 <button class="button is-link" type="submit">Modify my id</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="section" action="/modify-discord_id" method="post">
+        {{ csrf_field() }}
+
+        <div class="field">
+            <label class="label">My discord ID (recove from discord with command @\nickname)</label>
+            <div class="control">
+                <input class="input" name="discordID">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit">Modify my Dicord ID</button>
             </div>
         </div>
     </form>

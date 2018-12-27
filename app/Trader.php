@@ -87,21 +87,42 @@ class Trader extends Model implements Authenticatable
 
     public static function sendDiscordMsg ($dest, $emit, $cardNameDest, $cardNameEmit)
     {
-        /*//=======================================================================
+        //=======================================================================
         // Create new webhook in your Discord channel settings and copy&paste URL
         //=======================================================================
         $webhookurl = "https://discordapp.com/api/webhooks/527800077692043274/ioGX7L082aHkeiJIBvtgwJRFrMLAueNsygAWZeUnIsoEMMUYRMIE5Gf2Z5fcSwdw1aJ9";
         //=======================================================================
         // Compose message. You can use Markdown
         //=======================================================================
-        //<@438663838565662721>
-        $msg = "$dest , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit)";
+ 
+    
+        $discord_dest = \App\Discordid::where('trader_id', $dest->id)->get();
+        $discord_emit = \App\Discordid::where('trader_id', $emit->id)->get();
 
-        (new \AG\DiscordMsg(
-            $msg, // message
-            $webhookurl, // chanel webhook link
-            "Trad Bot", // bot name
-            '' // avatar url
-        ))->send();*/
+        if (!($discord_dest->isEmpty()) AND !($discord_emit->isEmpty())) 
+        {
+            $id_dest = $discord_dest[0]->discord_id;
+            $id_emit = $discord_emit[0]->discord_id;
+            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)";
+
+            (new \AG\DiscordMsg(
+                $msg, // message
+                $webhookurl, // chanel webhook link
+                "Trad Bot", // bot name
+                '' // avatar url
+            ))->send();
+        }
+        elseif (!($discord_dest->isEmpty())) 
+        {
+            $id_dest = $discord_dest[0]->discord_id;
+            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)";
+
+            (new \AG\DiscordMsg(
+                $msg, // message
+                $webhookurl, // chanel webhook link
+                "Trad Bot", // bot name
+                '' // avatar url
+            ))->send();
+        }
     }
 }

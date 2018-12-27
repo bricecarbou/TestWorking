@@ -29,6 +29,7 @@ Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middle
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');

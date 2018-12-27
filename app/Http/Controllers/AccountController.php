@@ -10,9 +10,11 @@ class AccountController extends Controller
     {
   
         $nick = auth()->user()->nick;
+        $discord = \App\Discordid::where('trader_id', auth()->user()->id)->get();
 
         return  view('my-account', [
             'nick' => $nick,
+            'discord_id'  => $discord[0]->discord_id,
         ]);
     }
 
@@ -80,6 +82,24 @@ class AccountController extends Controller
         $user->save();
 
         flash("Your Clan has been updated.")->success();
+
+        return redirect('/my-account');
+    }
+
+    public function modifyDiscordID()
+    {
+        request()->validate([
+            'discordID' => ['required'],
+        ]);
+
+        $discord = new \App\Discordid;
+
+        $user = auth()->user();
+        $discord->discord_id = request('discordID');
+        $discord->trader_id = $user->id;
+        $discord->save();
+
+        flash("Your Discord id has been updated.")->success();
 
         return redirect('/my-account');
     }
