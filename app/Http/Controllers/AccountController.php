@@ -12,10 +12,20 @@ class AccountController extends Controller
         $nick = auth()->user()->nick;
         $discord = \App\Discordid::where('trader_id', auth()->user()->id)->get();
 
-        return  view('my-account', [
-            'nick' => $nick,
-            'discord_id'  => $discord[0]->discord_id,
-        ]);
+        if(!($discord->isEmpty()))
+        {
+            return  view('my-account', [
+                'nick' => $nick,
+                'discord_id'  => $discord[0]->discord_id,
+            ]);
+        }
+        else
+        {
+            return  view('my-account', [
+                'nick' => $nick,
+                'discord_id'  => "to be completed",
+            ]);            
+        }
     }
 
     public function disconnect()
