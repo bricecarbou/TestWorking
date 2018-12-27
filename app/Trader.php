@@ -87,7 +87,7 @@ class Trader extends Model implements Authenticatable
 
     public static function sendDiscordMsg ($dest, $emit, $cardNameDest, $cardNameEmit)
     {
-        //=======================================================================
+        /*//=======================================================================
         // Create new webhook in your Discord channel settings and copy&paste URL
         //=======================================================================
         $webhookurl = "https://discordapp.com/api/webhooks/527800077692043274/ioGX7L082aHkeiJIBvtgwJRFrMLAueNsygAWZeUnIsoEMMUYRMIE5Gf2Z5fcSwdw1aJ9";
@@ -102,6 +102,6 @@ class Trader extends Model implements Authenticatable
             $webhookurl, // chanel webhook link
             "Trad Bot", // bot name
             '' // avatar url
-        ))->send();
+        ))->send();*/
     }
 }
