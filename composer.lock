@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d074c8dfa6b8e1f097e8a3b6068eabb1",
+    "content-hash": "b17044b6938098561e5433cd8ae51b71",
     "packages": [
+        {
+            "name": "agorlov/discordmsg",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/agorlov/discordmsg.git",
+                "reference": "fd872760d21efc562bf52064d18210d304838797"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/agorlov/discordmsg/zipball/fd872760d21efc562bf52064d18210d304838797",
+                "reference": "fd872760d21efc562bf52064d18210d304838797",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Msg.php",
+                    "DiscordMsg.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandr Gorlov",
+                    "email": "a.gorlov@gmail.com"
+                }
+            ],
+            "description": "PHP Class To Send Discord message",
+            "homepage": "https://github.com/agorlov/discordmsg",
+            "keywords": [
+                "class",
+                "discord",
+                "library",
+                "message",
+                "notification",
+                "php"
+            ],
+            "time": "2018-08-04T12:12:27+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

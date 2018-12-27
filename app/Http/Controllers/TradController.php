@@ -33,7 +33,7 @@ class TradController extends Controller
             }           
         }
 
-         return view('new-trad', [
+        return view('new-trad', [
             'cards' => $cards,
             'cardsToTrade' => $cardsToTrade,
         ]);

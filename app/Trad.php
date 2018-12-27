@@ -37,7 +37,6 @@ class Trad extends Model
 		})
 		->select('trader_id', 'card_id')->get();
 	
-		//$trader_id = array();
 		$trads = array();
 
 		// verifions que nous donnons bien la carte que 
@@ -48,14 +47,12 @@ class Trad extends Model
 			{
 				if ( $card->id  == $possibleTrad->card_id)
 				{
-					//$trader_id[] = $possibleTrad->trader_id;
 					$trads[] = $possibleTrad;
 				}
 			}
 		}
 
 		return $trads;
-		//return Trader::find($trader_id);
 	}
 
 	public static function updateAll()

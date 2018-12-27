@@ -84,4 +84,24 @@ class Trader extends Model implements Authenticatable
         }
         return ($cards_info);
     }
-  }
+
+    public static function sendDiscordMsg ($dest, $emit, $cardNameDest, $cardNameEmit)
+    {
+        //=======================================================================
+        // Create new webhook in your Discord channel settings and copy&paste URL
+        //=======================================================================
+        $webhookurl = "https://discordapp.com/api/webhooks/527800077692043274/ioGX7L082aHkeiJIBvtgwJRFrMLAueNsygAWZeUnIsoEMMUYRMIE5Gf2Z5fcSwdw1aJ9";
+        //=======================================================================
+        // Compose message. You can use Markdown
+        //=======================================================================
+        //<@438663838565662721>
+        $msg = "$dest , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit)";
+
+        (new \AG\DiscordMsg(
+            $msg, // message
+            $webhookurl, // chanel webhook link
+            "Trad Bot", // bot name
+            '' // avatar url
+        ))->send();
+    }
+}
