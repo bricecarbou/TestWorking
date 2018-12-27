@@ -19,8 +19,8 @@ class CreateDiscordidsTable extends Migration
             $table->integer('trader_id')->unsigned();
             $table->foreign('trader_id')->references('id')->on('traders')->onDelete('cascade');
 
-            $table->unsignedInteger('discord_id');
-
+            $table->string('discord_id');
+            
             $table->timestamps();
         });
     }
