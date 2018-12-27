@@ -124,8 +124,9 @@
                         <td>
                             <b>Traders to contact</b>
                                 <ul>
-                                    @foreach($trad->getMatchTraders() as $trader)
-                                        <li>{{$trader->nick}} ({{$trader->clan}})</li>
+                                    @foreach($trad->getMatchTrads() as $trad)
+                                        {{-- <li>{{ $trader->nick}} ({{$trader->clan}})</li> --}}
+                                        <li>{{\App\Trader::find($trad->trader_id)->nick}} ({{\App\Trader::find($trad->trader_id)->clan}}) -> <img src='{{\App\Card::find($trad->card_id)->CardImagePath}}' width="45" height="45"> </li>
                                     @endforeach
                                 </ul>
                         </td>

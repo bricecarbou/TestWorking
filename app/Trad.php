@@ -28,7 +28,7 @@ class Trad extends Model
     }   
 
 	// liste des trade dont la carte recherche appartient à la liste des cartes à échanger
-	public function getMatchTraders()
+	public function getMatchTrads()
 	{
 
 		//recupérons la liste des trader proposant la carte que l'on recherche, plus la carte qu'ils recherchent
@@ -37,7 +37,8 @@ class Trad extends Model
 		})
 		->select('trader_id', 'card_id')->get();
 	
-		$trader_id = array();
+		//$trader_id = array();
+		$trads = array();
 
 		// verifions que nous donnons bien la carte que 
 		// les traders rrecherchent
@@ -47,12 +48,14 @@ class Trad extends Model
 			{
 				if ( $card->id  == $possibleTrad->card_id)
 				{
-					$trader_id[] = $possibleTrad->trader_id;
+					//$trader_id[] = $possibleTrad->trader_id;
+					$trads[] = $possibleTrad;
 				}
 			}
 		}
 
-		return Trader::find($trader_id);
+		return $trads;
+		//return Trader::find($trader_id);
 	}
 
 	public static function updateAll()
