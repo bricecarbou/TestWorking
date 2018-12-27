@@ -51,7 +51,7 @@
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">My discord ID (write in discord this command \@nickname#id)</label>
+            <label class="label">My discord ID, only the numbers (write in discord this command \@nickname#id)</label>
             <div class="control">
                 <input class="input" name="discordID">
             </div>
