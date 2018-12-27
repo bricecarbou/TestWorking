@@ -102,12 +102,26 @@ class AccountController extends Controller
             'discordID' => ['required'],
         ]);
 
-        $discord = new \App\Discordid;
+        $discord = \App\Discordid::where('trader_id', auth()->user()->id)->get();
 
-        $user = auth()->user();
-        $discord->discord_id = request('discordID');
-        $discord->trader_id = $user->id;
-        $discord->save();
+        if ($discord->isEmpty()) 
+        {
+            $newdiscord = new \App\Discordid;
+
+            $user = auth()->user();
+            $newdiscord->discord_id = request('discordID');
+            $newdiscord->trader_id = $user->id;
+            $newdiscord->save();
+
+        }
+        else
+        {
+            $discord[0]->discord_id = request('discordID');
+            $discord[0]->save();
+
+        }
+
+
 
         flash("Your Discord id has been updated.")->success();
 
