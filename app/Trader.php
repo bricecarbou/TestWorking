@@ -126,7 +126,7 @@ class Trader extends Model implements Authenticatable
         elseif (!($discord_emit->isEmpty())) 
         {
             $id_emit = $discord_emit[0]->discord_id;
-            $msg = "$dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)  ==> ENTER YOUR Discord ID!!!!";
+            $msg = " ENTER YOUR Discord ID!!!!  ==> $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)";
 
             (new \AG\DiscordMsg(
                 $msg, // message
