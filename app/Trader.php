@@ -123,6 +123,18 @@ class Trader extends Model implements Authenticatable
                 '' // avatar url
             ))->send();
         }
+        elseif (!($discord_emit->isEmpty())) 
+        {
+            $id_emit = $discord_emit[0]->discord_id;
+            $msg = "$dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)  ==> ENTER YOUR Discord ID!!!!";
+
+            (new \AG\DiscordMsg(
+                $msg, // message
+                $webhookurl, // chanel webhook link
+                "Trad Bot", // bot name
+                '' // avatar url
+            ))->send();
+        }
         else
         {
             $msg = "ENTER YOUR Discord ID!!!!    $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)";
