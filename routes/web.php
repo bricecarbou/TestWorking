@@ -28,7 +28,7 @@ Route::post('/connexion', 'ConnexionController@processing');
 Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middleware\Auth');
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
-Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-cr_key', 'A@modifycr_key')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
@@ -45,6 +45,7 @@ Route::post('/admin_trader_delete', 'AdminController@traderDelete')->middleware(
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
 Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
+Route::get('/discord/{traddest}/{trad}', 'TradController@sendDiscordMsg')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
 Route::get('/updateAll','TradController@updateAll')->middleware('App\Http\Middleware\Auth');

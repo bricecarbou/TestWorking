@@ -90,6 +90,19 @@ class TradController extends Controller
         ]);
     }
 
+    public function sendDiscordMsg (\App\Trad $traddest, \App\Trad $trad)
+    {
+
+        \App\Trader::sendDiscordMsg (
+            \App\Trader::find($traddest->trader_id),
+            auth()->user(),
+            \App\Card::find($traddest->card_id)->CardName,
+            $trad->card->CardName
+        );
+
+        return back();
+    }
+
     public function delete(\App\Trad $trad)
     {
 		$trad->delete();

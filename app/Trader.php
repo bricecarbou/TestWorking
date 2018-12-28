@@ -95,7 +95,6 @@ class Trader extends Model implements Authenticatable
         // Compose message. You can use Markdown
         //=======================================================================
  
-    
         $discord_dest = \App\Discordid::where('trader_id', $dest->id)->get();
         $discord_emit = \App\Discordid::where('trader_id', $emit->id)->get();
 
@@ -115,7 +114,7 @@ class Trader extends Model implements Authenticatable
         elseif (!($discord_dest->isEmpty())) 
         {
             $id_dest = $discord_dest[0]->discord_id;
-            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)";
+            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)  ==> ENTER YOUR Discord ID!!!!";
 
             (new \AG\DiscordMsg(
                 $msg, // message
@@ -123,6 +122,17 @@ class Trader extends Model implements Authenticatable
                 "Trad Bot", // bot name
                 '' // avatar url
             ))->send();
+        }
+        else
+        {
+            $msg = "ENTER YOUR Discord ID!!!!    $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)";
+
+            (new \AG\DiscordMsg(
+                $msg, // message
+                $webhookurl, // chanel webhook link
+                "Trad Bot", // bot name
+                '' // avatar url
+            ))->send();            
         }
     }
 }

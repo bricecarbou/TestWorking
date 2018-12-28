@@ -35,7 +35,7 @@ class Trad extends Model
 		$a = Trad::whereHas('cards', function($query){
 			return $query->where('card_id', $this->card->id);
 		})
-		->select('trader_id', 'card_id')->get();
+		->get();
 	
 		$trads = array();
 
