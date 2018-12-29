@@ -121,7 +121,7 @@ class TradController extends Controller
         }
         */
         dump(\App\Trader::find('42'));
-        dump(\App\Trader::find('43'));
+        dump(\App\Trad::where('trader_id', '43'));
         
         /*return view('trads',[
             'trads' => \App\Trad::all(),
