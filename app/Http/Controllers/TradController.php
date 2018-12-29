@@ -117,7 +117,7 @@ class TradController extends Controller
         foreach ($trads as $trad) 
         {
             dump($trad);
-            dump($trad->trader_id);
+            dump(\App\Trader::find($trad->trader_id)->nick);
         }
         
         /*return view('trads',[
