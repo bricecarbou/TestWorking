@@ -112,13 +112,16 @@ class TradController extends Controller
 
     public function allTrads()
     {
-        $trads = \App\Trad::all();
+        /*$trads = \App\Trad::all();
 
         foreach ($trads as $trad) 
         {
             dump($trad);
             dump(\App\Trader::find($trad->trader_id)->nick);
         }
+        */
+        dump(\App\Trader::find('42'));
+        dump(\App\Trader::find('43'));
         
         /*return view('trads',[
             'trads' => \App\Trad::all(),
