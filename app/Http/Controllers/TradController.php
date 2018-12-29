@@ -120,8 +120,8 @@ class TradController extends Controller
             dump(\App\Trader::find($trad->trader_id)->nick);
         }
         */
-        dump(\App\Trader::find('42'));
-        dump(\App\Trad::where('trader_id', '43'));
+        dump(\App\Trad::where('trader_id', '43')->get());
+        
         
         /*return view('trads',[
             'trads' => \App\Trad::all(),
