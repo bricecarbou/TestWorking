@@ -102,7 +102,7 @@ class Trader extends Model implements Authenticatable
         {
             $id_dest = $discord_dest[0]->discord_id;
             $id_emit = $discord_emit[0]->discord_id;
-            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)";
+            $msg = "<@$id_dest> ($dest->nick), I have $cardNameDest for you vs $cardNameEmit. Please contact me <@$id_emit> ($emit->nick)";
 
             (new \AG\DiscordMsg(
                 $msg, // message
@@ -114,7 +114,7 @@ class Trader extends Model implements Authenticatable
         elseif (!($discord_dest->isEmpty())) 
         {
             $id_dest = $discord_dest[0]->discord_id;
-            $msg = "<@$id_dest> , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)  ==> ENTER YOUR Discord ID!!!!";
+            $msg = "<@$id_dest> ($dest->nick) , I have $cardNameDest for you vs $cardNameEmit. Please contact me $emit->nick  ==> ENTER YOUR Discord ID!!!!";
 
             (new \AG\DiscordMsg(
                 $msg, // message
@@ -126,7 +126,7 @@ class Trader extends Model implements Authenticatable
         elseif (!($discord_emit->isEmpty())) 
         {
             $id_emit = $discord_emit[0]->discord_id;
-            $msg = " ENTER YOUR Discord ID!!!!  ==> $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me (<@$id_emit>)";
+            $msg = " ENTER YOUR Discord ID!!!!  ==> $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me <@$id_emit> ($emit->nick))";
 
             (new \AG\DiscordMsg(
                 $msg, // message
@@ -137,7 +137,7 @@ class Trader extends Model implements Authenticatable
         }
         else
         {
-            $msg = "ENTER YOUR Discord ID!!!!    $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me ($emit->nick)";
+            $msg = "ENTER YOUR Discord ID!!!!    $dest->nick , I have $cardNameDest for you vs $cardNameEmit. Please contact me $emit->nick";
 
             (new \AG\DiscordMsg(
                 $msg, // message
