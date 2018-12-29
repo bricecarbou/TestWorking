@@ -112,9 +112,17 @@ class TradController extends Controller
 
     public function allTrads()
     {
-        return view('trads',[
+        $trads = \App\Trad::all();
+
+        foreach ($trads as $trad) 
+        {
+            dump($trad);
+            dump($trad->trader_id);
+        }
+        
+        /*return view('trads',[
             'trads' => \App\Trad::all(),
-        ]);
+        ]);*/
     }
 
     public function updateAll()

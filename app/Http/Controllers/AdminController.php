@@ -94,15 +94,7 @@ class AdminController extends Controller
 
     public function traderDelete()
     {
-        $trads = \App\Trad::all();
-
-        foreach ($traders as $trad) 
-        {
-            dump($trad);
-            dump($trad->trader_id);
-        }
-
-        /*
+       
         // Vérification que la personne est bien connectée
         if (!(auth()->user()->nick === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
@@ -124,5 +116,5 @@ class AdminController extends Controller
 
         flash("Trader(s) deleted.")->success();
         return back();
-    }*/
+    }
 }
