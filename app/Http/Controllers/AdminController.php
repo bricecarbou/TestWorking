@@ -112,6 +112,11 @@ class AdminController extends Controller
         foreach ($array_id as $trader_id) 
         {
             \App\Trader::find($trader_id)->delete();
+            $trads = \App\Trad::where('trader_id', $trader_id)->get();
+            foreach ($trads as $trad) 
+            {
+                $trad->delete();
+            } 
         }
 
         flash("Trader(s) deleted.")->success();
