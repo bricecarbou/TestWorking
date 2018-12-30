@@ -34,7 +34,7 @@
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">My new Clash Royale ID</label>
+            <label class="label">My Clash Royale ID</label>
             <div class="control">
                 <input class="input" name="cr_key">
             </div>
@@ -51,7 +51,7 @@
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">My discord ID, only the numbers (write in discord this command \@nickname#id)</label>
+            <label class="label">My discord ID, only the numbers (tip in discord this command \@user)</label>
             <div class="control">
                 <input class="input" name="discordID">
             </div>
