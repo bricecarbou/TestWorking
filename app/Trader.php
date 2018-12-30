@@ -146,5 +146,14 @@ class Trader extends Model implements Authenticatable
                 '' // avatar url
             ))->send();            
         }
+
+        $msg = "Think to DELETE your trad in application if you conlude please. I love you <3 <3 <3";
+
+        (new \AG\DiscordMsg(
+            $msg, // message
+            $webhookurl, // chanel webhook link
+            "Trad Bot", // bot name
+            '' // avatar url
+        ))->send();
     }
 }
