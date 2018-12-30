@@ -58,6 +58,9 @@ class Trad extends Model
 	public static function updateAll()
 	{
 
+		/* Delete the old trad */
+		// \App\Trad::deleteOldTrads();
+				
 		/* update of the trads */
 		$trads = \App\Trad::all();
 
@@ -110,6 +113,25 @@ class Trad extends Model
 			if ($trad->cards->isEmpty())
 			{
 				Trad::find($trad->id)->delete();
+			}
+		}
+	}
+
+
+	public static function deleteOldTrads()
+	{
+
+		/* update of the old trads */
+		$trads = \App\Trad::all();
+		$today = time();
+
+		//20 jours en seconde
+		$limit_date = 1728000;
+		foreach ($trads as $trad) 
+		{
+			if ((strtotime($trad->created_at) + $limit_date) < $today)
+			{
+				$trad->delete();
 			}
 		}
 	}
