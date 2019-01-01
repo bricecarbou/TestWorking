@@ -12,7 +12,12 @@ class TradController extends Controller
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
         $cardTrader = array();
- 
+        
+        if(auth()->user()->id === 2)
+        {
+            dump($cardsToTrade);
+        }
+
         foreach($cardsTrader as $cardTrader)
         {
             if( ($cardTrader[3] === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
