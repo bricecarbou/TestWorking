@@ -189,7 +189,7 @@ class AccountController extends Controller
           $trader->cr_key = $cr_key;
         }
 
-        $user->save();
+        $trader->save();
 
         flash("The Clash Royale ID has been updated.")->success();
 
