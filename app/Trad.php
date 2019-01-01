@@ -76,10 +76,10 @@ class Trad extends Model
 				if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
 					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
-				if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '10'))) {
+				if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '12'))) {
 					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
-				if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '7'))) {
+				if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '12'))) {
 					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
 				if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12'))) {
