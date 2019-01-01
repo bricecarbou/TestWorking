@@ -13,6 +13,11 @@ class TradController extends Controller
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
         $cardsToTrade = array();
 
+        if($trader->id ===2)
+        {
+            dump($cardsTrader);
+        }
+
         foreach($cardsTrader as $cardTrader)
         {
             if( ($cardTrader[3] === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
@@ -32,7 +37,7 @@ class TradController extends Controller
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }           
         }
-        
+
         return view('new-trad', [
             'cards' => $cards,
             'cardsToTrade' => $cardsToTrade,
