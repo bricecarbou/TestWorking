@@ -11,12 +11,7 @@ class TradController extends Controller
 
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
-        $cardTrader = array();
-        
-        if(auth()->user()->id === 2)
-        {
-            dump($cardsToTrade);
-        }
+        $cardsToTrade = array();
 
         foreach($cardsTrader as $cardTrader)
         {
@@ -37,12 +32,7 @@ class TradController extends Controller
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }           
         }
-
-        if(auth()->user()->id === 2)
-        {
-            dump($cardsToTrade);
-        }
-
+        
         return view('new-trad', [
             'cards' => $cards,
             'cardsToTrade' => $cardsToTrade,
