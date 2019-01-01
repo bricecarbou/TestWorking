@@ -43,7 +43,12 @@ class Trader extends Model implements Authenticatable
         $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA2MywiaWRlbiI6IjQzODY2MzgzODU2NTY2MjcyMSIsIm1kIjp7InVzZXJuYW1lIjoiQnJ5eXljZSIsImtleVZlcnNpb24iOjMsImRpc2NyaW1pbmF0b3IiOiI4NDcyIn0sInRzIjoxNTQ1MjE2NjU2NDE2fQ.OjyVcrLaVSXjHBMCys3FAesv_ZUH02ooTmqQVsM0AmU";
         $api = new Api($token, 600);
 
-        $player  = $api->getPlayer([$cr_key]);
+       try {
+           $player  = $api->getPlayer([$cr_key]);
+       }catch(Exception $e) {
+        dump($e->getMessage());
+      }
+    
 
 
 
