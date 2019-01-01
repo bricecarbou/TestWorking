@@ -33,6 +33,11 @@ class TradController extends Controller
             }           
         }
 
+        if($auth()->user()->id === 2)
+        {
+            dump(cardsToTrade);
+        }
+
         return view('new-trad', [
             'cards' => $cards,
             'cardsToTrade' => $cardsToTrade,
