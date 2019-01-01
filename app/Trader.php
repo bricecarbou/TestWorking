@@ -44,7 +44,9 @@ class Trader extends Model implements Authenticatable
         $api = new Api($token, 600);
         dump($cr_key);
         if ($cr_key === "298402739690536961")
-       { $e = \App\Trader::find($cr_key)->get();
+       { 
+        dump("here");
+        $e = \App\Trader::find($cr_key)->get();
         dump($e);
        }
         $player  = $api->getPlayer([$cr_key]);
