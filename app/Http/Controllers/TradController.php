@@ -33,7 +33,7 @@ class TradController extends Controller
             }           
         }
 
-        if($auth()->user()->id === 2)
+        if(auth()->user()->id === 2)
         {
             dump(cardsToTrade);
         }
