@@ -94,7 +94,7 @@ class Trad extends Model
 
 				if(($trader->id ===2) AND ($card_id === 26000048))
 				{
-					dd("nightwitch");
+					dump("nightwitch");
 				}
 
 				foreach ($cardsToTrade as $cardToTrade) 
