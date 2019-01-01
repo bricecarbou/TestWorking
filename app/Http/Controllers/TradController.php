@@ -13,29 +13,24 @@ class TradController extends Controller
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
         $cardsToTrade = array();
 
-        if($trader->id ===2)
-        {
-            dump($cardsTrader);
-        }
-
         foreach($cardsTrader as $cardTrader)
         {
             if( ($cardTrader[3] === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
+            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '12')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
+            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '12')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Legendary") AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
+            if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
-            }           
+            } 
         }
 
         return view('new-trad', [

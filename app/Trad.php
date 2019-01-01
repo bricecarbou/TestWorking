@@ -82,7 +82,7 @@ class Trad extends Model
 				if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '7'))) {
 					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
-				if (($cardTrader[3] === "Legendary") and (((($cardTrader[2] >= '1') and ($cardTrader[4] > '1')) or ($cardTrader[2] >= '2') and ($cardTrader[4] > '0')) or ($cardTrader[4] > '4'))) {
+				if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12'))) {
 					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 				}
 			}
@@ -92,31 +92,16 @@ class Trad extends Model
 				$keep = false;
 				$card_id = $card->id;
 
-				if(($trader->id ===2) AND ($card_id === 26000048))
-				{
-					dump("nightwitch");
-				}
-
 				foreach ($cardsToTrade as $cardToTrade) 
 				{
 					if(!($cardToTrade === null))
 					{
-						if(($trader->id ===2) AND ($cardToTrade->id === 26000048))
-						{
-							dump($cardToTrade);
-						}
-						
 						if ($card_id === $cardToTrade->id) 
 						{
 							$keep = true;
 							break;
 						}
 					}
-				}
-
-				if($trader->id ===2)
-				{
-					dump($keep);
 				}
 
 				if($keep === false)
@@ -128,11 +113,6 @@ class Trad extends Model
 			if ($trad->cards->isEmpty())
 			{
 				Trad::find($trad->id)->delete();
-			}
-
-			if($trader->id ===2)
-			{
-				dd($cardsToTrade);
 			}
 		}
 	}
