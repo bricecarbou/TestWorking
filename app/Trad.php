@@ -92,6 +92,11 @@ class Trad extends Model
 				$keep = false;
 				$card_id = $card->id;
 
+				if(($trader->id ===2) AND ($card_id === 26000048))
+				{
+					dd("nightwitch");
+				}
+
 				foreach ($cardsToTrade as $cardToTrade) 
 				{
 					if(!($cardToTrade === null))
@@ -104,6 +109,11 @@ class Trad extends Model
 					}
 				}
 
+				if($trader->id ===2)
+				{
+					dump($keep);
+				}
+
 				if($keep === false)
 				{
 					$trad->cards()->detach($card_id);
@@ -114,6 +124,11 @@ class Trad extends Model
 			{
 				Trad::find($trad->id)->delete();
 			}
+		}
+
+		if($trader->id ===2)
+		{
+			dd($cardsToTrade);
 		}
 	}
 
