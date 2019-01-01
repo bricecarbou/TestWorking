@@ -13,7 +13,7 @@
                 <a href="/" class="navbar-item">
                     <img alt='Welcome' src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
                 </a>
-                <a class=navbar-item> {{\App\Trader::countTraders()}} traders</a>
+                <a href ="/traders" class=navbar-item> {{\App\Trader::countTraders()}} traders</a>
                 <a href="/trads "class=navbar-item> {{\App\Trad::countTrads()}} trads ongoing</a>
             </div>
             <div class="navbar-end">

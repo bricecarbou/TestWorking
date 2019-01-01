@@ -172,4 +172,72 @@ class AccountController extends Controller
         return back();
     }
 
+    public function admin_modifycr_key(\App\Trader $trader)
+    {
+        request()->validate([
+            'cr_key' => ['required'],
+        ]);
+
+        $cr_key = request('cr_key');
+
+        if (substr($cr_key, 0 , 1) == "#")
+        {
+            $trader->cr_key = substr($cr_key, 1);
+        }
+        else
+        {
+          $trader->cr_key = $cr_key;
+        }
+
+        $user->save();
+
+        flash("The Clash Royale ID has been updated.")->success();
+
+        return back();
+    }
+
+    public function admin_modifyclan(\App\Trader $trader)
+    {
+        request()->validate([
+            'clan' => ['required'],
+        ]);
+
+        $trader->clan = request('clan');
+
+        $trader->save();
+
+        flash("The Clan has been updated.")->success();
+
+        return back();
+    }
+
+    public function admin_modifyDiscordID(\App\Trader $trader)
+    {
+        request()->validate([
+            'discordID' => ['required'],
+        ]);
+
+        $discord = \App\Discordid::where('trader_id', $trader->id)->get();
+
+        if ($discord->isEmpty()) 
+        {
+            $newdiscord = new \App\Discordid;
+
+            $newdiscord->discord_id = request('discordID');
+            $newdiscord->trader_id = $trader->id;
+            $newdiscord->save();
+
+        }
+        else
+        {
+            $discord[0]->discord_id = request('discordID');
+            $discord[0]->save();
+
+        }
+
+
+        flash("The Discord id has been updated.")->success();
+
+        return back();
+    }
 }

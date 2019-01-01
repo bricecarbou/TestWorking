@@ -122,4 +122,33 @@ class AdminController extends Controller
         flash("Trader(s) deleted.")->success();
         return back();
     }
+
+    public function traderAccount(\App\Trader $trader)
+    {
+       
+        
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->nick === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+
+        $discord = \App\Discordid::where('trader_id', $trader->id)->get();
+        
+        if ($discord->isEmpty()) 
+        {
+            $discord_id = "it is empty";
+        }
+        else
+        {
+            $discord_id = $discord[0]->discord_id;
+        }
+
+        
+        return view('admin_trader_account', [
+            'trader' => $trader,
+            'discord_id' => $discord_id,
+        ]);
+    }
 }

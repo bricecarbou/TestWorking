@@ -33,13 +33,16 @@ Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middlewa
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
-Route::get('/admin_trader_delete', 'AccountController@admin_trader_delete')->middleware('App\Http\Middleware\Auth');
 
 // admin
 Route::post('/admin_card_id_recover', 'AdminController@cardIdRecover')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_trader_delete', 'AdminController@traderDelete')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_trader_account/{trader}', 'AdminController@traderAccount')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_modify-cr_key/{trader}', 'AccountController@admin_modifycr_key')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_modify-discord_id/{trader}', 'AccountController@admin_modifyDiscordID')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_modify-clan/{trader}', 'AccountController@admin_modifyclan')->middleware('App\Http\Middleware\Auth');
 
 // trade
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
@@ -48,6 +51,7 @@ Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middlewa
 Route::get('/discord/{traddest}/{trad}', 'TradController@sendDiscordMsg')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
+Route::get('/traders','TradersController@liste')->middleware('App\Http\Middleware\Auth');
 Route::get('/updateAll','TradController@updateAll')->middleware('App\Http\Middleware\Auth');
 
 
