@@ -95,12 +95,18 @@ class Trad extends Model
 				if(($trader->id ===2) AND ($card_id === 26000048))
 				{
 					dump("nightwitch");
+					dump($cardsToTrade);
 				}
 
 				foreach ($cardsToTrade as $cardToTrade) 
 				{
 					if(!($cardToTrade === null))
 					{
+						if(($trader->id ===2) AND ($cardToTrade->id === 26000048))
+						{
+							dump($cardToTrade);
+						}
+						
 						if ($card_id === $cardToTrade->id) 
 						{
 							$keep = true;
