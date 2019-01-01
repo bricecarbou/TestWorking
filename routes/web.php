@@ -33,6 +33,7 @@ Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middlewa
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
 Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_trader_delete', 'AccountController@admin_trader_delete')->middleware('App\Http\Middleware\Auth');
 
 // admin
 Route::post('/admin_card_id_recover', 'AdminController@cardIdRecover')->middleware('App\Http\Middleware\Auth');
