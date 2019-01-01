@@ -14,4 +14,5 @@ class TradersController extends Controller
             'traders' => $traders,
         ]);
     }
+
 }

@@ -155,4 +155,18 @@ class Trader extends Model implements Authenticatable
             ))->send();            
         }
     }
+
+    public static function discordID($trader_id)
+    {
+        $discord = \App\Discordid::where('trader_id', $trader_id)->get();
+
+        if(!($discord->isEmpty()))
+        {
+            return  $discord[0]->discord_id;
+        }
+        else
+        {
+            return  "to be completed";            
+        }
+    }
 }

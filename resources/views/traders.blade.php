@@ -26,6 +26,18 @@
                             </td>
                            @if (auth()->check() AND auth()->user()->nick === 'admin')
                                 <td>
+                                    <b>Cr Key</b>
+                                        <ul>
+                                            <li>{{$trader->cr_key}}</li>
+                                        </ul>
+                                </td>
+                                <td>
+                                    <b>Discord ID</b>
+                                        <ul>
+                                            <li>{{ \App\Trader::discordID($trader->id)}}</li>
+                                        </ul>
+                                </td>
+                                <td>
                                     <br />
                                     <div class="control">
                                         <a class="button is-link" href="/admin_trader_account/{{$trader->id}}">Update</a>
