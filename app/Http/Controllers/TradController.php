@@ -140,6 +140,7 @@ class TradController extends Controller
             foreach ($alltrads_loc as $trad)
             {  
                 if ($trad->card_id === $searchcard) {
+                    dump("here");
                     $alltrads = $alltrads->push($trad);
                 }
             }
