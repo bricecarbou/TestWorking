@@ -52,9 +52,10 @@ Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middlewa
 Route::get('/discord/{traddest}/{trad}', 'TradController@sendDiscordMsg')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
+Route::post('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
+Route::get('/tradsFilter','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
 Route::get('/traders','TradersController@liste')->middleware('App\Http\Middleware\Auth');
 Route::get('/updateAll','TradController@updateAll')->middleware('App\Http\Middleware\Auth');
-
 
 
 

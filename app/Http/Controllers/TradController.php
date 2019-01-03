@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Trad;
+use App\Trader;
+use Illuminate\Database\Eloquent\Builder;
 
 class TradController extends Controller
 {
+
     public function newtrad()
     {
 
@@ -112,10 +115,30 @@ class TradController extends Controller
 
     public function allTrads()
     {
-        return view('trads',[
-            'trads' => \App\Trad::all(),
-        ]);
+        $clan = request('clan');
+
+        if (($clan === "all") OR ($clan === null)) {
+            return view('trads', [
+                'trads' => Trad::all(),
+            ]);
+        } else {
+            $traders = Trader::where('clan', $clan)->get();
+            $alltrads = collect([]);
+
+            foreach ($traders as $trader)
+            {
+                $trads = Trad::where('trader_id', $trader->id)->get();
+                if (! $trads->isEmpty()) {
+                    $alltrads = $alltrads->merge($trads);
+                }
+            }
+
+            return view('trads', [
+                'trads' => $alltrads,
+            ]);
+        }
     }
+
 
     public function updateAll()
     {

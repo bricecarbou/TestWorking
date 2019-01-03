@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\Filters\TradFilter;
 use Illuminate\Database\Eloquent\Model;
 
 class Trad extends Model
 {
-      
+  
 	public function cards()
 	{
 		return $this->belongsToMany(Card::class, 'trad_has_cards');
