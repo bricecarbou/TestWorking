@@ -133,6 +133,7 @@ class TradController extends Controller
                 }
             }
 
+            
             return view('trads', [
                 'trads' => $alltrads,
             ]);

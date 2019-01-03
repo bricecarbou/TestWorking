@@ -107,7 +107,7 @@
             <div class="field">
                 <label class="control-label col-sm-4" for="text">Filter on Clan:</label>
                 <select  class="question_type form-control" name="clan" >
-                    <option value="GEFR" > All </option>
+                    <option value="all" > All </option>
                     <option value="GEFR" > Great Escape FR </option>
                     <option value="GE2" >Great Escape 2</option>
                 </select>
