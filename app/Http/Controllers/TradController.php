@@ -133,18 +133,13 @@ class TradController extends Controller
                 }
             }
         }
-        dump("here1");
 
         if (($searchcard === "all") OR ($searchcard === null)) {
             $alltrads = $alltrads_loc;
         } else {
             foreach ($alltrads_loc as $trad)
             {  
-                dump("here2");
-                dump($trad->card_id);
-                dump($searchcard);
-                if ($trad->card_id === $searchcard) {
-                    dump("here3");
+                if ("$trad->card_id" === $searchcard) {
                     $alltrads = $alltrads->push($trad);
                 }
             }
