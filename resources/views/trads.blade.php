@@ -46,7 +46,12 @@
             text-align: left; 
         }
 
-
+        .block {
+            float:left;
+            width:333px;
+            margin:0;
+            padding:0;
+        }
         /* 
         Max width before this PARTICULAR table gets nasty
         This query will take effect for any screen smaller than 760px
@@ -104,20 +109,29 @@
         @endif
         <form class="section" action="/trads" method="post">
         {{ csrf_field() }}
-            <div class="field">
+            <div class="block">
                 <label class="control-label col-sm-4" for="text">Filter on Clan:</label>
                 <select  class="question_type form-control" name="clan" >
                     <option value="all" > All </option>
                     <option value="GEFR" > Great Escape FR </option>
                     <option value="GE2" >Great Escape 2</option>
                 </select>
+            </div>     
+            <div class="block">
+                <label class="control-label col-sm-4" for="text">Filter on Search Card:</label>
+                <select  class="question_type form-control" name="searchcard" >
+                    <option value="all" > All </option>
+                    @foreach(App\Card::all() as $card)
+                        <option value="{{$card->id}}" > {{$card->CardName}} </option>
+                    @endforeach
+                 </select>
             </div>
-            <div class="field">
+            <div class="block">
                 <div class="control">
                     <button class="button is-link" type="submit">Filter</button>
                 </div>
             </div>
-
+            <br clear="both" />
         </form>
 
         <table class="table">

@@ -116,28 +116,38 @@ class TradController extends Controller
     public function allTrads()
     {
         $clan = request('clan');
+        $searchcard = request('searchcard');
+        $alltrads_loc = collect([]);
+        $alltrads = collect([]);
 
         if (($clan === "all") OR ($clan === null)) {
-            return view('trads', [
-                'trads' => Trad::all(),
-            ]);
+            $alltrads_loc = Trad::all();
         } else {
             $traders = Trader::where('clan', $clan)->get();
-            $alltrads = collect([]);
 
             foreach ($traders as $trader)
             {
                 $trads = Trad::where('trader_id', $trader->id)->get();
                 if (! $trads->isEmpty()) {
-                    $alltrads = $alltrads->merge($trads);
+                    $alltrads_loc = $alltrads_loc->merge($trads);
                 }
             }
-
-            
-            return view('trads', [
-                'trads' => $alltrads,
-            ]);
         }
+
+        if (($searchcard === "all") OR ($searchcard === null)) {
+            $alltrads = $alltrads_loc;
+        } else {
+            foreach ($alltrads_loc as $trad)
+            {  
+                if ($trad->card_id === $searchcard) {
+                    $alltrads = $alltrads->push($trad);
+                }
+            }
+        }
+
+        return view('trads', [
+            'trads' => $alltrads,
+        ]);
     }
 
 
