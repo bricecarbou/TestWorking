@@ -129,11 +129,8 @@ class Trad extends Model
 		//20 jours en seconde
 		$limit_date = 1296000;
 
-		dump($today);
 		foreach ($trads as $trad) 
 		{
-			dump((strtotime($trad->created_at) + $limit_date));
-			
 			if ((strtotime($trad->created_at) + $limit_date) < $today)
 			{
 				$trad->delete();
