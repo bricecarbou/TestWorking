@@ -48,7 +48,7 @@
 
         .block {
             float:left;
-            width:333px;
+            width:200px;
             margin:0;
             padding:0;
         }
@@ -93,6 +93,7 @@
                 white-space: nowrap;
             }   
         }
+
     </style>
     
     @auth
@@ -110,6 +111,15 @@
         <form class="section" action="/trads" method="post">
         {{ csrf_field() }}
             <div class="block">
+                <label class="control-label col-sm-4" for="text">Filter on Name:</label>
+                <select  class="question_type form-control" name="name" >
+                    <option value="all" > All </option>
+                    @foreach(App\Trader::all() as $trader)
+                        <option value="{{$trader->id}}" >{{$trader->nick}}</option>
+                    @endforeach
+                </select>
+            </div>             
+            <div class="block">
                 <label class="control-label col-sm-4" for="text">Filter on Clan:</label>
                 <select  class="question_type form-control" name="clan" >
                     <option value="all" > All </option>
@@ -118,11 +128,20 @@
                 </select>
             </div>     
             <div class="block">
-                <label class="control-label col-sm-4" for="text">Filter on Search Card:</label>
+                <label class="control-label col-sm-4" for="text">(Filter) I give:</label>
                 <select  class="question_type form-control" name="searchcard" >
                     <option value="all" > All </option>
                     @foreach(App\Card::all() as $card)
-                        <option value="{{$card->id}}" > {{$card->CardName}} </option>
+                        <option value="{{$card->id}}" > {{$card->CardName}}  </option>
+                    @endforeach
+                 </select>
+            </div>
+            <div class="block">
+                <label class="control-label col-sm-4" for="text">(Filter) I want:</label>
+                <select  class="question_type form-control" name="wantcard" >
+                    <option value="all" > All </option>
+                    @foreach(App\Card::all() as $card)
+                        <option value="{{$card->id}}" > {{$card->CardName}}  </option>
                     @endforeach
                  </select>
             </div>

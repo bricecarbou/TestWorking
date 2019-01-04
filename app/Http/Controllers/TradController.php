@@ -115,13 +115,17 @@ class TradController extends Controller
 
     public function allTrads()
     {
+        $name = request('name');
         $clan = request('clan');
         $searchcard = request('searchcard');
-        $alltrads_loc = collect([]);
+        $wantcard = request('wantcard');
+        $alltrads_clan = collect([]);
+        $alltrads_card = collect([]);
+        $alltrads_wantcard = collect([]);
         $alltrads = collect([]);
 
         if (($clan === "all") OR ($clan === null)) {
-            $alltrads_loc = Trad::all();
+            $alltrads_clan = Trad::all();
         } else {
             $traders = Trader::where('clan', $clan)->get();
 
@@ -129,17 +133,41 @@ class TradController extends Controller
             {
                 $trads = Trad::where('trader_id', $trader->id)->get();
                 if (! $trads->isEmpty()) {
-                    $alltrads_loc = $alltrads_loc->merge($trads);
+                    $alltrads_clan = $alltrads_clan->merge($trads);
                 }
             }
         }
 
         if (($searchcard === "all") OR ($searchcard === null)) {
-            $alltrads = $alltrads_loc;
+            $alltrads_card = $alltrads_clan;
         } else {
-            foreach ($alltrads_loc as $trad)
+            foreach ($alltrads_clan as $trad)
             {  
                 if ("$trad->card_id" === $searchcard) {
+                    $alltrads_card = $alltrads_card->push($trad);
+                }
+            }
+        }
+
+        if (($wantcard === "all") OR ($wantcard === null)) {
+            $alltrads_wantcard = $alltrads_card;
+        } else {
+            foreach ($alltrads_card as $trad)
+            {  
+                foreach ($trad->cards as $card) {
+                    if ("$card->id" === $wantcard) {
+                        $alltrads_wantcard = $alltrads_wantcard->push($trad);
+                    }
+                }
+            }
+        }
+
+        if (($name === "all") OR ($name === null)) {
+            $alltrads = $alltrads_wantcard;
+        } else {
+            foreach ($alltrads_wantcard as $trad)
+            {  
+                if ("$trad->trader_id" === $name) {
                     $alltrads = $alltrads->push($trad);
                 }
             }
