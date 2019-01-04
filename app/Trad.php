@@ -60,7 +60,7 @@ class Trad extends Model
 	{
 
 		/* Delete the old trad */
-		// \App\Trad::deleteOldTrads();
+		\App\Trad::deleteOldTrads();
 				
 		/* update of the trads */
 		$trads = \App\Trad::all();
@@ -127,7 +127,7 @@ class Trad extends Model
 		$today = time();
 
 		//20 jours en seconde
-		$limit_date = 1728000;
+		$limit_date = 1296000;
 		foreach ($trads as $trad) 
 		{
 			if ((strtotime($trad->created_at) + $limit_date) < $today)
