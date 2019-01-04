@@ -131,7 +131,7 @@
                 <label class="control-label col-sm-4" for="text">(Filter) I give:</label>
                 <select  class="question_type form-control" name="searchcard" >
                     <option value="all" > All </option>
-                    @foreach(App\Card::all() as $card)
+                    @foreach(App\Card::orderBy('CardName', 'asc')->get() as $card)
                         <option value="{{$card->id}}" > {{$card->CardName}}  </option>
                     @endforeach
                  </select>
@@ -140,7 +140,7 @@
                 <label class="control-label col-sm-4" for="text">(Filter) I want:</label>
                 <select  class="question_type form-control" name="wantcard" >
                     <option value="all" > All </option>
-                    @foreach(App\Card::all() as $card)
+                    @foreach(App\Card::orderBy('CardName', 'asc')->get() as $card)
                         <option value="{{$card->id}}" > {{$card->CardName}}  </option>
                     @endforeach
                  </select>
