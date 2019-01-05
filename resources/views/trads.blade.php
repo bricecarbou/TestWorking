@@ -114,7 +114,7 @@
                 <label class="control-label col-sm-4" for="text">Filter on Name:</label>
                 <select  class="question_type form-control" name="name" >
                     <option value="all" > All </option>
-                    @foreach(App\Trader::all() as $trader)
+                    @foreach(App\Trader::orderBy('nick', 'asc') as $trader)
                         <option value="{{$trader->id}}" >{{$trader->nick}}</option>
                     @endforeach
                 </select>
