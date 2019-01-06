@@ -112,7 +112,7 @@ class Trad extends Model
 			}
 
 			
-			dd($trad);
+			dd($trad->cards);
 			if ($trad->cards->isEmpty())
 			{
 				Trad::find($trad->id)->delete();
