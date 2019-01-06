@@ -14,6 +14,7 @@ class TradController extends Controller
 
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
+
         $cardsToTrade = array();
 
         foreach($cardsTrader as $cardTrader)
@@ -22,15 +23,15 @@ class TradController extends Controller
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             } 
