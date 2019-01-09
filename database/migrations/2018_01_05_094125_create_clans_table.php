@@ -18,7 +18,7 @@ class CreateClansTable extends Migration
 
             $table->string('name');
             
-            $table->integer('group_id');
+            $table->unsignedInteger('group_id');
             $table->foreign('group_id')->references('id')->on('clan_groups')->onDelete('cascade');
 
             $table->timestamps();

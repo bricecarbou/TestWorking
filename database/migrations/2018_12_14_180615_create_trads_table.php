@@ -16,7 +16,7 @@ class CreateTradsTable extends Migration
         Schema::create('trads', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->integer('trader_id')->unsigned();
+            $table->unsignedInteger('trader_id');
             $table->foreign('trader_id')->references('id')->on('traders')->onDelete('cascade');
 
             $table->integer('card_id')->unsigned();
