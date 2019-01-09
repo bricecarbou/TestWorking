@@ -13,7 +13,6 @@
 
     </style>
 
-<script async="async" data-cfasync="false" src="//tharbadir.com/2?z=2293545"></script>
 
 
     <div class="title">
