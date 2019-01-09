@@ -57,9 +57,6 @@ class Trad extends Model
 		})
 		->get();
 
-		foreach($a as $possibleTrad)
-
-
 		$trads = array();
 
 		// verifions que nous donnons bien la carte que 
