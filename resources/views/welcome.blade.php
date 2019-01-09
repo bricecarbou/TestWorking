@@ -1,3 +1,5 @@
+<meta name="propeller" content="244fb340f26445c9b5e482f7171535e9">
+
 @extends('layout')
 
 @section('contain')
@@ -10,8 +12,6 @@
         }
 
     </style>
-
-<meta name="propeller" content="244fb340f26445c9b5e482f7171535e9">
 
     <div class="title">
         <br />
