@@ -11,6 +11,8 @@
 
     </style>
 
+<meta name="propeller" content="244fb340f26445c9b5e482f7171535e9">
+
     <div class="title">
         <br />
             <p style="text-align:center">Welcome to the Trading Application for Clash Royale</p>
