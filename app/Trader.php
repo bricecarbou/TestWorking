@@ -145,13 +145,13 @@ class Trader extends Model implements Authenticatable
         // Compose message. You can use Markdown
         //=======================================================================
  
-        $discord_dest = \App\Discordid::where('trader_id', $dest->id)->get();
-        $discord_emit = \App\Discordid::where('trader_id', $emit->id)->get();
+        $discord_dest = $dest->discord_id;
+        $discord_emit = $emit->discord_id;
 
         if (!($discord_dest->isEmpty()) AND !($discord_emit->isEmpty())) 
         {
-            $id_dest = $discord_dest[0]->discord_id;
-            $id_emit = $discord_emit[0]->discord_id;
+            $id_dest = $discord_dest;
+            $id_emit = $discord_emit;
             $msg = "<@$id_dest> ($dest->nick), I have $cardNameDest for you vs $cardNameEmit. Please contact me <@$id_emit> ($emit->nick)";
 
             (new \AG\DiscordMsg(
