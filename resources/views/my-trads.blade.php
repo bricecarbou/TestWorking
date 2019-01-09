@@ -90,6 +90,8 @@
             }   
         }
     </style>
+
+<script type="text/javascript" src="//bodelen.com/apu.php?zoneid=2293550"></script>
     
     <br />
     <div class="CreateTrade">

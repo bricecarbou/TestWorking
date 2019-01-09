@@ -12,12 +12,12 @@
         }
 
     </style>
+    <script async="async" data-cfasync="false" src="//tharbadir.com/2?z=2293545"></script>
 
     <div class="title">
         <br />
             <p style="text-align:center">Welcome to the Trading Application for Clash Royale</p>
         <br />
         <img class="displayed" src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
-
     </div>
 @endsection
