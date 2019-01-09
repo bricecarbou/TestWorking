@@ -18,10 +18,10 @@ class CreateTradersTable extends Migration
 
             $table->string('nick')->unique();
 
-            $table->integer('role_id');
+            $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 
-            $table->integer('clan_id');
+            $table->integer('clan_id')->unsigned();
             $table->foreign('clan_id')->references('id')->on('clans')->onDelete('cascade');
 
             $table->string('cr_key');
