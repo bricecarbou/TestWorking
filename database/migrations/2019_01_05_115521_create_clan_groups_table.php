@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscordidsTable extends Migration
+class CreateClanGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDiscordidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discordids', function (Blueprint $table) {
+        Schema::create('clan_groups', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('trader_id')->unsigned();
-            $table->foreign('trader_id')->references('id')->on('traders')->onDelete('cascade');
-
-            $table->string('discord_id');
+            $table->string('name');
             
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ class CreateDiscordidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discordids');
+        Schema::dropIfExists('clan_groups');
     }
 }

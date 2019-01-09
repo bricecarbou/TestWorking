@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use Vinkla\Hashids\Facades\Hashids;
+use App\Trader;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -10,22 +13,10 @@ class AccountController extends Controller
     {
   
         $nick = auth()->user()->nick;
-        $discord = \App\Discordid::where('trader_id', auth()->user()->id)->get();
 
-        if(!($discord->isEmpty()))
-        {
-            return  view('my-account', [
-                'nick' => $nick,
-                'discord_id'  => $discord[0]->discord_id,
-            ]);
-        }
-        else
-        {
-            return  view('my-account', [
-                'nick' => $nick,
-                'discord_id'  => "to be completed",
-            ]);            
-        }
+        return  view('my-account', [
+            'nick' => $nick,
+        ]);    
     }
 
     public function disconnect()
@@ -37,6 +28,97 @@ class AccountController extends Controller
         return redirect('/');
     }
 
+    public function password_recovering()
+    {
+        request()->validate([
+            'email' => ['required'],
+        ]);
+
+        $email = request('email');
+        
+        $trader = \App\Trader::where('email', $email)->get()->first();
+
+        if (!$trader)
+        {
+            flash("Your email is not find.")->error();
+            return redirect('/password_recovering');
+        }
+        else
+        {
+            //return view('update_password', compact('trader')); 
+
+            $title = "Password of Trad application";
+            $content = "Your password is:"  ;
+
+
+            $user_email = $trader->email;
+            $user_name = $trader->nick;
+
+            try
+            {
+                $hash = Hashids::encode($trader->id);
+                $url=env('APP_URL').'/update_password/'.$hash;
+                $data = ['email'=> $user_email,'name'=> $user_name,'subject' => $title, 'content' => $content, 'url'=> $url];
+                Mail::send('email.recover_password', $data, function($message) use($data, $trader)
+                {
+                    $subject=$data['subject'];
+                    $message->from('brice@organit.fr');
+                    $message->to($data['email'], $trader->nick)->subject($subject);
+                });
+            }
+            catch (\Exception $e)
+            {
+                dd($e->getMessage());
+            }
+    
+            
+            flash("Your password has been mail.")->success();
+            return redirect('/connexion');
+        }
+
+
+    }
+ 
+    public function password_recovering_post()
+    {
+        $trader = Trader::find(request('trader_id'));
+        
+        request()->validate([
+            'password' => ['required', 'confirmed', 'min:4'],
+            'password_confirmation' => ['required'],
+        ]);
+
+        $trader->update([
+            'password' => bcrypt(request('password')),
+        ]);
+
+        flash("Your password has been updated.")->success();
+
+        $result = auth()->attempt([
+            'nick' => $trader->nick,
+            'password' => request('password'),
+        ]);
+
+        if ($result) {
+            return redirect('/my-trads');
+        }
+
+        return back()->withInput()->withErrors([
+            'nick' => 'Your credentials are incorrect.',
+        ]); 
+
+
+    }
+
+    public function password_recovering_decodehash($hash)
+    {
+        $id = Hashids::decode($hash);
+
+        auth()->loginUsingId($id[0]);
+
+        return redirect('my-account');
+    }
+ 
     public function modifypassword()
     {
         request()->validate([
@@ -51,6 +133,23 @@ class AccountController extends Controller
         ]);
 
         flash("Your password has been updated.")->success();
+
+        return redirect('/my-account');
+    }
+
+    public function modifyemail()
+    {
+        request()->validate([
+            'email' => ['required'],
+        ]);
+
+        $user = auth()->user();
+
+        auth()->user()->update([
+            'email' => (request('email')),
+        ]);
+
+        flash("Your email has been updated.")->success();
 
         return redirect('/my-account');
     }
@@ -87,7 +186,7 @@ class AccountController extends Controller
         ]);
 
         $user = auth()->user();
-        $user->clan = request('clan');
+        $user->clan_id = request('clan');
 
         $user->save();
 
@@ -96,81 +195,23 @@ class AccountController extends Controller
         return redirect('/my-account');
     }
 
+
     public function modifyDiscordID()
     {
         request()->validate([
             'discordID' => ['required'],
         ]);
 
-        $discord = \App\Discordid::where('trader_id', auth()->user()->id)->get();
+        $user = auth()->user();
+        $user->discord_id = request('discordID');
 
-        if ($discord->isEmpty()) 
-        {
-            $newdiscord = new \App\Discordid;
-
-            $user = auth()->user();
-            $newdiscord->discord_id = request('discordID');
-            $newdiscord->trader_id = $user->id;
-            $newdiscord->save();
-
-        }
-        else
-        {
-            $discord[0]->discord_id = request('discordID');
-            $discord[0]->save();
-
-        }
-
-
+        $user->save();
 
         flash("Your Discord id has been updated.")->success();
 
         return redirect('/my-account');
     }
 
-    public function admin_card_enter()
-    {
-
-        $nick = auth()->user()->nick;
-
-        if ($nick === 'admin')
-        {
-            return view('admin_card_enter',[
-                'card_id_recover' => ' ',
-            ]);
-        }
-
-        flash("Only the admin can access to this page.")->error();
-        return back();
-    }
-
-    public function admin_card_delete()
-    {
-
-        $nick = auth()->user()->nick;
-
-        if ($nick === 'admin')
-        {
-            return view('admin_card_delete');
-        }
-
-        flash("Only the admin can access to this page.")->error();
-        return back();
-    }
-
-    public function admin_trader_delete()
-    {
-
-        $nick = auth()->user()->nick;
-
-        if ($nick === 'admin')
-        {
-            return view('admin_trader_delete');
-        }
-
-        flash("Only the admin can access to this page.")->error();
-        return back();
-    }
 
     public function admin_modifycr_key(\App\Trader $trader)
     {
@@ -217,26 +258,26 @@ class AccountController extends Controller
             'discordID' => ['required'],
         ]);
 
-        $discord = \App\Discordid::where('trader_id', $trader->id)->get();
+        $trader->discord_id = request('discordID');
 
-        if ($discord->isEmpty()) 
-        {
-            $newdiscord = new \App\Discordid;
-
-            $newdiscord->discord_id = request('discordID');
-            $newdiscord->trader_id = $trader->id;
-            $newdiscord->save();
-
-        }
-        else
-        {
-            $discord[0]->discord_id = request('discordID');
-            $discord[0]->save();
-
-        }
-
+        $trader->save();
 
         flash("The Discord id has been updated.")->success();
+
+        return back();
+    }
+
+    public function admin_modifyrole(\App\Trader $trader)
+    {
+        request()->validate([
+            'role' => ['required'],
+        ]);
+
+        $trader->role_id = request('role');
+
+        $trader->save();
+
+        flash("The role has been updated.")->success();
 
         return back();
     }

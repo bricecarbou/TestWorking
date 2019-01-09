@@ -1,3 +1,6 @@
+<meta name="propeller" content="244fb340f26445c9b5e482f7171535e9">
+
+
 @extends('layout')
 
 @section('contain')
@@ -10,6 +13,10 @@
         }
 
     </style>
+
+
+<script async="async" data-cfasync="false" src="//tharbadir.com/2?z=2293545"></script>
+
 
     <div class="title">
         <br />

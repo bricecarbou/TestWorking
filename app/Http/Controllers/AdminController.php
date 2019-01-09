@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Card;
 
 class AdminController extends Controller
@@ -46,12 +45,6 @@ class AdminController extends Controller
 
 
         // Card create
-/*        Card::create([
-            'CardName' => request('card_name'),
-            'card_type_id' => request('card_type'),
-            'CardImagePath' => request('card_image_url'),
-        ]);
-*/
         $card = new \App\Card;
 
         $card->CardName = request('card_name');
@@ -92,7 +85,95 @@ class AdminController extends Controller
         return back();
     }
 
-    public function traderDelete()
+    public function traderDelete(\App\Trader $trader)
+    {
+       
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->nick === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+ 
+        $trads = \App\Trad::where('trader_id', $trader->id)->get();
+        foreach ($trads as $trad) 
+        {
+            $trad->delete();
+        }        
+        
+        $trader->delete();
+
+        flash("Trader(s) deleted.")->success();
+        return back();
+    }
+
+    public function traderAccount(\App\Trader $trader, $action)
+    {
+               
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin') AND !(auth()->user()->role->name === 'leader') ) {
+            flash("Only the admin or leader can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+
+        switch ($action) {
+            case "update":
+                return view('admin_trader_account', [
+                    'trader' => $trader,
+                ]);
+            break;
+    
+            case "delete":
+                $this->traderDelete($trader);
+                return back();
+            break;
+        }      
+    }
+
+    public function admin_card_enter()
+    {
+
+        $nick = auth()->user()->nick;
+
+        if ($nick === 'admin')
+        {
+            return view('admin_card_enter',[
+                'card_id_recover' => ' ',
+            ]);
+        }
+
+        flash("Only the admin can access to this page.")->error();
+        return back();
+    }
+
+    public function admin_card_delete()
+    {
+
+        $nick = auth()->user()->nick;
+
+        if ($nick === 'admin')
+        {
+            return view('admin_card_delete');
+        }
+
+        flash("Only the admin can access to this page.")->error();
+        return back();
+    }
+
+    public function newGroup()
+    {
+       
+        if (auth()->user()->role->name === 'admin')
+        {
+            return view('admin_group');
+        }
+
+        flash("Only the admin can access to this page.")->error();
+        return back();
+    }
+
+    public function admin_new_group()
     {
        
         // Vérification que la personne est bien connectée
@@ -104,51 +185,45 @@ class AdminController extends Controller
 
         // Validation des données
         request()->validate([
-            'btn_traderwantdelete'=>['required'],
+            'group_name' => ['required'],
         ]);
 
-        $array_id=request('btn_traderwantdelete');
-        
-        foreach ($array_id as $trader_id) 
-        {
-            \App\Trader::find($trader_id)->delete();
-            $trads = \App\Trad::where('trader_id', $trader_id)->get();
-            foreach ($trads as $trad) 
-            {
-                $trad->delete();
-            } 
-        }
 
-        flash("Trader(s) deleted.")->success();
+        // Card create
+        $group = new \App\ClanGroup;
+
+        $group->name = request('group_name');
+        $group->save();
+
+       // Redirection vers la page avec un message flash.
+        flash("New group submitted.")->success();
         return back();
     }
 
-    public function traderAccount(\App\Trader $trader)
+    public function admin_delete_group()
     {
        
-        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
 
-            return redirect('/connexion');
+            return redirect('/my-account');
         }
 
-        $discord = \App\Discordid::where('trader_id', $trader->id)->get();
-        
-        if ($discord->isEmpty()) 
-        {
-            $discord_id = "it is empty";
-        }
-        else
-        {
-            $discord_id = $discord[0]->discord_id;
-        }
-
-        
-        return view('admin_trader_account', [
-            'trader' => $trader,
-            'discord_id' => $discord_id,
+        // Validation des données
+        request()->validate([
+            'group' => ['required'],
         ]);
+
+
+        $group_id = request('group');
+
+        $group = \App\ClanGroup::where('id', $group_id)->get()->first();
+
+        $group->delete();
+     
+        
+        flash("Group deleted.")->success();
+        return back();
     }
 }

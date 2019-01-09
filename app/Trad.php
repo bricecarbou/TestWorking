@@ -26,18 +26,33 @@ class Trad extends Model
 	public static function countTrads()
     {
         return Trad::count();
-    }   
+	}  
+	
+	public static function countGroupTrads()
+    {
+		$a = Trad::whereHas('trader', function($query){
+			return $query->whereHas('clan', function($querygroup){
+				return $querygroup->where('group_id', auth()->user()->clan->group_id);
+			});
+		})->get();
+
+		return $a->count();
+    }  
 
 	// liste des trade dont la carte recherche appartient à la liste des cartes à échanger
 	public function getMatchTrads()
 	{
 
-		//recupérons la liste des trader proposant la carte que l'on recherche, plus la carte qu'ils recherchent
-		$a = Trad::whereHas('cards', function($query){
-			return $query->where('card_id', $this->card->id);
-		})
-		->get();
-	
+		//recupérons la liste des trad proposant la carte que l'on recherche, plus la carte qu'ils recherchent, dans notre group de clan
+		$clan = Clan::find(auth()->user()->clan_id);
+
+		$a = Trad::whereHas('trader', function($query) use ($clan){
+			return $query->whereHas('clan', function($querygroup) use ($clan){
+				return $querygroup->where('group_id', $clan->group_id);
+			});
+		})->get();
+
+
 		$trads = array();
 
 		// verifions que nous donnons bien la carte que 
@@ -70,50 +85,54 @@ class Trad extends Model
 			
 			$trader = \App\Trader::find($trad->trader_id);
 			$cardsTrader = \App\Trader::RecoverTraderCards($trader->cr_key);
-			$cardsToTrade = array();
 
-			foreach ($cardsTrader as $cardTrader) 
+			if (! ($cardsTrader === "error")) 
 			{
-				if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
-					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-				}
-				if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '12'))) {
-					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-				}
-				if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '12'))) {
-					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-				}
-				if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12'))) {
-					$cardsToTrade[] = \App\Card::find($cardTrader[0]);
-				}
-			}
+				$cardsToTrade = array();
 
-			foreach ($trad->cards as $card) 
-			{
-				$keep = false;
-				$card_id = $card->id;
-
-				foreach ($cardsToTrade as $cardToTrade) 
+				foreach ($cardsTrader as $cardTrader) 
 				{
-					if(!($cardToTrade === null))
-					{
-						if ($card_id === $cardToTrade->id) 
-						{
-							$keep = true;
-							break;
-						}
+					if (($cardTrader[3] === "Common") and (($cardTrader[2] >= '250') or ($cardTrader[4] > '12'))) {
+						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+					}
+					if (($cardTrader[3] === "Rare") and (($cardTrader[2] >= '50') or ($cardTrader[4] > '10'))) {
+						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+					}
+					if (($cardTrader[3] === "Epic") and (($cardTrader[2] >= '10')or ($cardTrader[4] > '7'))) {
+						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
+					}
+					if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4'))) {
+						$cardsToTrade[] = \App\Card::find($cardTrader[0]);
 					}
 				}
 
-				if($keep === false)
+				foreach ($trad->cards as $card) 
 				{
-					$trad->cards()->detach($card_id);
-				}
-			}
+					$keep = false;
+					$card_id = $card->id;
 
-			if ($trad->cards->isEmpty())
-			{
-				Trad::find($trad->id)->delete();
+					foreach ($cardsToTrade as $cardToTrade) 
+					{
+						if(!($cardToTrade === null))
+						{
+							if ($card_id === $cardToTrade->id) 
+							{
+								$keep = true;
+								break;
+							}
+						}
+					}
+
+					if($keep === false)
+					{
+						$trad->cards()->detach($card_id);
+					}
+				}
+
+				if ($trad->cards->isEmpty())
+				{
+					Trad::find($trad->id)->delete();
+				}
 			}
 		}
 	}

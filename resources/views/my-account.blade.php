@@ -2,12 +2,16 @@
 
 @section('contain')
     <div class="section">
-        <h1 class="title is-1">{{ $nick }}</h1>
-        <b>clan: {{auth()->user()->clan}}</b>
+        <h1 class="title is-1">{{ auth()->user()->nick }}</h1>
+        <b>clan: {{auth()->user()->clan->name}}</b>
+        <br />
+        <b>role: {{auth()->user()->role->name}}</b>
         <br />
         <b>#{{auth()->user()->cr_key}}</b>
         <br />
-        <b>Discord id: {{ $discord_id }}</b>
+        <b>Discord id: {{ auth()->user()->discord_id }}</b>
+        <br />
+        <b>Email: {{ auth()->user()->email }} </b>
         <p>You are connected.</p>
 
         <a href="/disconnect" class="button">Disconnect</a>
@@ -18,9 +22,9 @@
         <div class="field">
             <label class="control-label col-sm-4" for="text">Modify my Clan:</label>
             <select  class="question_type form-control" name="clan" >
-                <option value="GEFR" > Great Escape FR </option>
-                <option value="GE2" >Great Escape 2</option>
-                <option value="BOMG3" >Boreal MG 3</option>
+                @foreach (\App\Clan::clanOfMyGroup() as $clan)
+                    <option value="{{$clan->id}}" > {{$clan->name}} </option>
+                @endforeach
             </select>
         </div>
         <div class="field">
@@ -45,6 +49,10 @@
                 <button class="button is-link" type="submit">Modify my id</button>
             </div>
         </div>
+
+        <div class="control">
+            <a class="button is-link" href="/error_CR_id">Help</a>
+        </div>
     </form>
 
     <form class="section" action="/modify-discord_id" method="post">
@@ -60,6 +68,27 @@
         <div class="field">
             <div class="control">
                 <button class="button is-link" type="submit">Modify my Dicord ID</button>
+            </div>
+        </div>
+
+        <div class="control">
+            <a class="button is-link" href="/help_discordid">Help</a>
+        </div>
+    </form>
+
+    <form class="section" action="/modify-email" method="post">
+        {{ csrf_field() }}
+
+        <div class="field">
+            <label class="label">Enter my email for password recovery</label>
+            <div class="control">
+                <input class="input" name="email">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit">Modify my email</button>
             </div>
         </div>
     </form>

@@ -45,9 +45,9 @@
                                 <div class="field">
                                     <label class="control-label col-sm-4" for="text">Clan:</label>
                                     <select  class="question_type form-control" name="clan" >
-                                        <option value="GEFR" > Great Escape FR </option>
-                                        <option value="GE2" >Great Escape 2</option>
-                                        <option value="BOMG3" >Boreal MG 3</option>
+                                        @foreach (\App\ClanGroup::orderBy('name', 'asc')->get() as $clan)
+                                            <option value="{{$clan->id}}" > {{$clan->name}} </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -58,8 +58,7 @@
                                 </div>
                                 <div class="field">
                                     <div class="control">
-                                        <label>(Warning: check that first charactere is not uppercase)</label>
-                                        <input class="input is-large" type="password_confirmation" name="password_confirmation" placeholder="Confirme Your Password">
+                                        <input class="input is-large" type="password" name="password_confirmation" placeholder="Confirme Your Password">
                                     </div>
                                 </div>
 

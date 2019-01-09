@@ -9,18 +9,30 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 
 use CR\Api;
+use CR\Exceptions\CRResponseException;
+
 require '../vendor/autoload.php';
 
 class Trader extends Model implements Authenticatable
 {
-    protected $fillable = ['nick', 'password'];
+    protected $fillable = ['nick', 'password', 'cr_key', 'discord_id', 'email'];
 
     use BasicAuthenticatable;
+
+    public function clan()
+	{
+		return $this->belongsTo(Clan::class);
+	}
 
     public function Trads()
     {
         return $this->hasMany(Trad::class);
     }
+
+    public function role()
+	{
+		return $this->belongsTo(Role::class);
+	}
 
     // We don't use token
     public function getRememberTokenName()
@@ -30,9 +42,40 @@ class Trader extends Model implements Authenticatable
 
     public static function countTraders()
     {
-        return Trader::count();
+        $a = Trader::all();
+
+        $a->forget(0);
+
+        return $a->count();
     }   
 
+    public static function countGroupTraders()
+    {
+		$a = Trader::whereHas('clan', function($query){
+			return $query->where('group_id', auth()->user()->clan->group_id);
+		})
+		->get();
+
+		return $a->count();
+    } 
+    public static function allTradersGroup()
+    {
+        if (auth()->user()->role->name === 'admin') 
+        {
+            $traders = \App\Trader::all();
+        } 
+        else 
+        {
+            $traders = \App\Trader::whereHas('clan', function ($query) {
+                return $query->where('group_id', auth()->user()->clan->group_id);
+            })
+            ->get();
+        }
+
+        $traders->forget(0);  
+
+        return $traders->sortBy('nick');
+    }
 
     public static function RecoverTraderCards($cr_key)
     {
@@ -43,14 +86,11 @@ class Trader extends Model implements Authenticatable
         $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA2MywiaWRlbiI6IjQzODY2MzgzODU2NTY2MjcyMSIsIm1kIjp7InVzZXJuYW1lIjoiQnJ5eXljZSIsImtleVZlcnNpb24iOjMsImRpc2NyaW1pbmF0b3IiOiI4NDcyIn0sInRzIjoxNTQ1MjE2NjU2NDE2fQ.OjyVcrLaVSXjHBMCys3FAesv_ZUH02ooTmqQVsM0AmU";
         $api = new Api($token, 600);
 
-       try {
-           $player  = $api->getPlayer([$cr_key]);
-       }catch(Exception $e) {
-        dump($e->getMessage());
-      }
-    
-
-
+        try {
+            $player  = $api->getPlayer([$cr_key]);
+        } catch (CRResponseException $e) {
+            return "error";
+        }
 
         $opts = [
           "http" => [
@@ -82,7 +122,8 @@ class Trader extends Model implements Authenticatable
         * @method    array               getUpgradeStats()               Returns the card stats
         */
 
-        foreach ($player->getCards() as $card) {
+        foreach ($player->getCards() as $card) 
+        {
             $cards_info[] = [
             $card->getId(),
             $card->getName(),
@@ -99,6 +140,7 @@ class Trader extends Model implements Authenticatable
         // Create new webhook in your Discord channel settings and copy&paste URL
         //=======================================================================
         $webhookurl = "https://discordapp.com/api/webhooks/527800077692043274/ioGX7L082aHkeiJIBvtgwJRFrMLAueNsygAWZeUnIsoEMMUYRMIE5Gf2Z5fcSwdw1aJ9";
+        
         //=======================================================================
         // Compose message. You can use Markdown
         //=======================================================================
@@ -156,17 +198,4 @@ class Trader extends Model implements Authenticatable
         }
     }
 
-    public static function discordID($trader_id)
-    {
-        $discord = \App\Discordid::where('trader_id', $trader_id)->get();
-
-        if(!($discord->isEmpty()))
-        {
-            return  $discord[0]->discord_id;
-        }
-        else
-        {
-            return  "to be completed";            
-        }
-    }
 }

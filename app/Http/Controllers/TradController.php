@@ -14,6 +14,12 @@ class TradController extends Controller
 
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
+
+        if ($cardsTrader === "error")
+        {
+            return view('error_CR_id');
+        }
+        
         $cardsToTrade = array();
 
         foreach($cardsTrader as $cardTrader)
@@ -22,15 +28,15 @@ class TradController extends Controller
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             }
-            if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '9')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '8')) OR ($cardTrader[4] > '12')))
+            if( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
             } 
@@ -83,6 +89,7 @@ class TradController extends Controller
 
 
         flash("The new Trad is created.")->success();
+        
         return  back();
     }
 
@@ -124,10 +131,23 @@ class TradController extends Controller
         $alltrads_wantcard = collect([]);
         $alltrads = collect([]);
 
+
         if (($clan === "all") OR ($clan === null)) {
-            $alltrads_clan = Trad::all();
+            if (auth()->user()->role->name === 'admin') 
+            {
+                $alltrads_clan = Trad::all();
+            }
+            else
+            {
+                $alltrads_clan = \App\Trad::whereHas('trader', function ($query) {
+                    return $query->whereHas('clan', function($query_group){
+                        return $query_group->where('group_id', auth()->user()->clan->group_id);
+                    });
+                })
+                ->get();
+            }
         } else {
-            $traders = Trader::where('clan', $clan)->get();
+            $traders = Trader::where('clan_id', $clan)->get();
 
             foreach ($traders as $trader)
             {

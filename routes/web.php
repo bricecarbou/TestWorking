@@ -13,9 +13,6 @@
 
 Route::view('/','welcome');
 
-// traders route
-Route::get('/traders', 'TradersController@liste')->middleware('App\Http\Middleware\Auth');
-
 // Subcription route
 Route::get('/subscribe', 'SubscribeController@form');
 Route::post('/subscribe', 'SubscribeController@processing');
@@ -24,26 +21,41 @@ Route::post('/subscribe', 'SubscribeController@processing');
 Route::get('/connexion', 'ConnexionController@form');
 Route::post('/connexion', 'ConnexionController@processing');
 
+Route::view('/password_recovering', 'password_recovering');
+Route::post('/password_recovering', 'AccountController@password_recovering');
+Route::get('/update_password/{hash}', 'AccountController@password_recovering_decodehash');
+Route::post('/update_password', 'AccountController@password_recovering_post');
+
 // account
 Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middleware\Auth');
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-email', 'AccountController@modifyemail')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
-Route::get('/admin_card_enter', 'AccountController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
-Route::get('/admin_card_delete', 'AccountController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
-Route::get('/admin_trader_delete', 'AccountController@admin_trader_delete')->middleware('App\Http\Middleware\Auth');
-
-// admin
-Route::post('/admin_card_id_recover', 'AdminController@cardIdRecover')->middleware('App\Http\Middleware\Auth');
-Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
-Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
-Route::post('/admin_trader_delete', 'AdminController@traderDelete')->middleware('App\Http\Middleware\Auth');
-Route::get('/admin_trader_account/{trader}', 'AdminController@traderAccount')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-cr_key/{trader}', 'AccountController@admin_modifycr_key')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-discord_id/{trader}', 'AccountController@admin_modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-clan/{trader}', 'AccountController@admin_modifyclan')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_modify-role/{trader}', 'AccountController@admin_modifyrole')->middleware('App\Http\Middleware\Auth');
+
+//leader
+Route::view('/leader_page', 'leader_page')->middleware('App\Http\Middleware\Auth');
+Route::post('/Add_clan', 'LeaderController@AddClan')->middleware('App\Http\Middleware\Auth');
+Route::post('/Delete_clan', 'LeaderController@DeleteClan')->middleware('App\Http\Middleware\Auth');
+
+// admin
+Route::get('/admin_trader_account/{trader}/{action}', 'AdminController@traderAccount')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_new_group', 'AdminController@newGroup')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_card_enter', 'AdminController@admin_card_enter')->middleware('App\Http\Middleware\Auth');
+Route::get('/admin_card_delete', 'AdminController@admin_card_delete')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_card_id_recover', 'AdminController@cardIdRecover')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_new_group', 'AdminController@admin_new_group')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_delete_group', 'AdminController@admin_delete_group')->middleware('App\Http\Middleware\Auth');
+
+
 
 // trade
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
@@ -54,9 +66,10 @@ Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Mi
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
 Route::post('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
 Route::get('/traders','TradersController@liste')->middleware('App\Http\Middleware\Auth');
+Route::post('/traders','TradersController@liste')->middleware('App\Http\Middleware\Auth');
 Route::get('/updateAll','TradController@updateAll')->middleware('App\Http\Middleware\Auth');
-
+Route::view('/help_discordid','help_discordid')->middleware('App\Http\Middleware\Auth');
+Route::view('/error_CR_id','error_CR_id')->middleware('App\Http\Middleware\Auth');
 
 
 Route::get('/{nick}', 'AccountController@home');
-

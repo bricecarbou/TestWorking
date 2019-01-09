@@ -96,12 +96,13 @@
 
     </style>
     
+    
     @auth
         <div class="section">
             <h1 class="title is-1">List of the Trads</h1>
         </div>
 
-        @if (auth()->check() AND auth()->user()->nick === 'admin')
+        @if (auth()->check() AND ((auth()->user()->role->name === 'admin') OR (auth()->user()->role->name === 'leader')))
             <div class="UpdateAll">
                 <p style="text-align:center"> 
                     <a class="button is-link" href="/updateAll" >Update all the trads</a>
@@ -113,9 +114,9 @@
             <div class="block">
                 <label class="control-label col-sm-4" for="text">Filter on Name:</label>
                 <select  class="question_type form-control" name="name" >
-                    <option value="all" > All </option>
-                    @foreach(App\Trader::orderBy('nick', 'asc')->get() as $trader)
-                        <option value="{{$trader->id}}" >{{$trader->nick}}</option>
+                    <option value="all"> All </option>
+                    @foreach(App\Trader::allTradersGroup() as $trader)
+                        <option value="{{$trader->id}}">{{$trader->nick}}</option>
                     @endforeach
                 </select>
             </div>             
@@ -123,8 +124,9 @@
                 <label class="control-label col-sm-4" for="text">Filter on Clan:</label>
                 <select  class="question_type form-control" name="clan" >
                     <option value="all" > All </option>
-                    <option value="GEFR" > Great Escape FR </option>
-                    <option value="GE2" >Great Escape 2</option>
+                    @foreach (\App\Clan::clanOfMyGroup() as $clan)
+                        <option value="{{$clan->id}}" > {{$clan->name}} </option>
+                    @endforeach
                 </select>
             </div>     
             <div class="block">
@@ -166,7 +168,7 @@
                         <td>
                             <b>Clan</b>
                                 <ul>
-                                    <li>({{\App\Trader::find($trad->trader_id)->clan}})</li>
+                                    <li>{{\App\Trader::find($trad->trader_id)->clan->name}}</li>
                                 </ul>
                         </td>
                         <td>

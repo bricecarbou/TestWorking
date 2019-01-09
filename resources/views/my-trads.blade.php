@@ -90,7 +90,8 @@
             }   
         }
     </style>
-    
+
+
     <br />
     <div class="CreateTrade">
         <p style="text-align:center"> 
@@ -125,9 +126,8 @@
                             <b>Traders to contact</b>
                                 <ul>
                                     @foreach($trad->getMatchTrads() as $traddest)
-                                        {{-- <li><a href={{\App\Trader::sendDiscordMsg(\App\Trader::find($traddest->trader_id), auth()->user(), \App\Card::find($traddest->card_id)->CardName, $trad->card->CardName)}}> --}}
                                         <li><a href='/discord/{{$traddest->id}}/{{$trad->id}}'>
-                                            {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
+                                            {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan->name}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
                                         </a></li>
                                     @endforeach
                                 </ul>

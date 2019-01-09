@@ -15,15 +15,22 @@ class CreateTradersTable extends Migration
     {
         Schema::create('traders', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('nick')->unique();
 
-            $table->string('clan');
-            /*$table->foreign('clan_id')->references('id')->on('clans');*/
+            $table->integer('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+
+            $table->integer('clan_id');
+            $table->foreign('clan_id')->references('id')->on('clans')->onDelete('cascade');
 
             $table->string('cr_key');
+            $table->string('discord_id')->nullable();
 
+            $table->string('email')->nullable();
 
             $table->string('password');
+
             $table->timestamps();
         });
     }
