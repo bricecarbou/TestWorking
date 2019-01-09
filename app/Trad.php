@@ -46,11 +46,18 @@ class Trad extends Model
 		//recupérons la liste des trad proposant la carte que l'on recherche, plus la carte qu'ils recherchent, dans notre group de clan
 		$clan = Clan::find(auth()->user()->clan_id);
 
-		$a = Trad::whereHas('trader', function($query) use ($clan){
+		/*$a = Trad::whereHas('trader', function($query) use ($clan){
 			return $query->whereHas('clan', function($querygroup) use ($clan){
 				return $querygroup->where('group_id', $clan->group_id);
 			});
-		})->get();
+		})->get();*/
+
+		$a = Trad::whereHas('cards', function($query){
+			return $query->where('card_id', $this->card->id);
+		})
+		->get();
+
+		foreach($a as $possibleTrad)
 
 
 		$trads = array();
@@ -61,7 +68,7 @@ class Trad extends Model
 		{
 			foreach ($this->cards as $card)
 			{
-				if ( $card->id  == $possibleTrad->card_id)
+				if (( $card->id  == $possibleTrad->card_id) and ($possibleTrad->trader->clan->group_id == $clan->group_id))
 				{
 					$trads[] = $possibleTrad;
 				}
