@@ -45,7 +45,7 @@
                                 <div class="field">
                                     <label class="control-label col-sm-4" for="text">Clan:</label>
                                     <select  class="question_type form-control" name="clan" >
-                                        @foreach (\App\ClanGroup::orderBy('name', 'asc')->get() as $clan)
+                                        @foreach (\App\ClanGroup::orderBy('name', 'asc')->get()->forget(0) as $clan)
                                             <option value="{{$clan->id}}" > {{$clan->name}} </option>
                                         @endforeach
                                     </select>
