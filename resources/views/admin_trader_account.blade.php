@@ -20,8 +20,8 @@
         <div class="field">
             <label class="label">Modify the role</label>
             <select  class="question_type form-control" name="role" >
-                @foreach (App\Role::all() as $role)
-                    <option value="{{$role->id}}" >{{$role->id}}: {{$role->name}} </option>
+                @foreach (App\Role::all()->forget(0) as $role)
+                    <option value="{{$role->id}}" > {{$role->name}} </option>
                 @endforeach
             </select>
         </div>
@@ -39,7 +39,7 @@
         <div class="field">
             <label class="control-label col-sm-4" for="text">Modify the Clan:</label>
             <select  class="question_type form-control" name="clan" >
-                @foreach (\App\Clan::orderBy('name', 'asc')->get() as $clan)
+                @foreach (\App\Clan::clanOfMyGroup() as $clan)
                     <option value="{{$clan->id}}" > {{$clan->name}} </option>
                 @endforeach
             </select>

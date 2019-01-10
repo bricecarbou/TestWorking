@@ -117,7 +117,7 @@
                     <label class="control-label col-sm-4" for="text">Filter on Role:</label>
                     <select  class="question_type form-control" name="role" >
                         <option value="all"> All </option>
-                        @foreach(App\Role::all() as $role)
+                        @foreach(App\Role::all()->forget(0) as $role)
                             <option value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
                     </select>
