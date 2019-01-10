@@ -100,6 +100,8 @@
     </div>
     <br />
 
+    <script type="text/javascript" src="http://ads.allotraffic.com/skycraper?id=46372"></script>
+
     @auth
         <table class="table">
             <tbody>
