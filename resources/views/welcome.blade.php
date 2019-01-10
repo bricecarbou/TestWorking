@@ -16,7 +16,7 @@
 
 <p style="text-align:center"><script type="text/javascript" src="http://ads.allotraffic.com/bandeau?id=46372"></script></p>
 
-
+<p style="text-align:center"><script src="//pubdirecte.com/script/banniere.php?said=126532"></script>
 
     <div class="title">
         <br />
