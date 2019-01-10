@@ -100,7 +100,7 @@
     </div>
     <br />
 
-    <script type="text/javascript" src="http://ads.allotraffic.com/skycraper?id=46372"></script>
+    <script src="//pubdirecte.com/script/banniere.php?said=126534"></script>
 
     @auth
         <table class="table">

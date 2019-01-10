@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('contain')
+
+<p style="text-align:center"><script src="//pubdirecte.com/script/banniere.php?said=126532"></script>
+
     <div class="section">
         <h1 class="title is-1">{{ auth()->user()->nick }}</h1>
         <b>clan: {{auth()->user()->clan->name}}</b>

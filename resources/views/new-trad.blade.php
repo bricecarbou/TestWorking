@@ -145,6 +145,7 @@ only screen and (max-width: 760px),
 
 </style>
 
+<script type="text/javascript" src="http://ads.allotraffic.com/skycraper?id=46372"></script>
 
     <div class="section">
         <h1 class="title is-1">New Trad</h1>
