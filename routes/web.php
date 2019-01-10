@@ -54,6 +54,8 @@ Route::post('/admin_card_enter', 'AdminController@new')->middleware('App\Http\Mi
 Route::post('/admin_card_delete', 'AdminController@delete')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_new_group', 'AdminController@admin_new_group')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_delete_group', 'AdminController@admin_delete_group')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_new_role', 'AdminController@admin_new_role')->middleware('App\Http\Middleware\Auth');
+Route::post('/admin_delete_role', 'AdminController@admin_delete_role')->middleware('App\Http\Middleware\Auth');
 
 
 

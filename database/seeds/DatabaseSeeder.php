@@ -131,6 +131,7 @@ class DatabaseSeeder extends Seeder
         DB::table('roles')->insert(['id'=>1, 'name'=>'admin']);
         DB::table('roles')->insert(['id'=>2, 'name'=>'leader']);
         DB::table('roles')->insert(['id'=>3, 'name'=>'trader']);
+        DB::table('roles')->insert(['id'=>4, 'name'=>'new']);
 
    
         //users

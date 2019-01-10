@@ -9,6 +9,14 @@ class LeaderController extends Controller
 
     public function AddClan()
     {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin') and !(auth()->user()->role->name === 'leader')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+
         request()->validate([
             'clan' => ['required'],
         ]);
@@ -24,6 +32,13 @@ class LeaderController extends Controller
   
     public function DeleteClan()
     {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin') and !(auth()->user()->role->name === 'leader')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
         request()->validate([
             'clan' => ['required'],
         ]);

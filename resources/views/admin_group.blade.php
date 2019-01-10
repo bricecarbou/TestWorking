@@ -43,6 +43,47 @@
                     </div>
                 </div>
             </form>     
+
+
+            <form action="/admin_new_role" method="post">
+                {{ csrf_field() }}
+
+                <div class="field">
+                    <label class="label">Create a new role</label>
+                    <div class="control">
+                        <input class="input" name="role_name" placeholder="Role Name">
+                    </div>
+                    @if($errors->has('role_name'))
+                        <p class="help is-danger">{{ $errors->first('role_name') }}</p>
+                    @endif
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button onclick="return confirm('Are you sure?')" class="button is-link" type="submit">Register</button>
+                    </div>
+                </div>
+            </form>   
+
+            <form action="/admin_delete_role" method="post">
+                {{ csrf_field() }}
+
+                <div class="field">
+                    <label class="label">Delete a role (and all users with this role)</label>
+                    <select  class="question_type form-control" name="role" >
+                        @foreach (\App\Role::orderBy('name', 'asc')->get() as $role)
+                            <option value="{{$role->id}}" > {{$role->name}} </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button onclick="return confirm('Are you sure?')" class="button is-link" type="submit">Delete</button>
+                    </div>
+                </div>
+            </form>     
+
         @endif
     </div>
 @endsection

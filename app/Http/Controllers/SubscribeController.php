@@ -25,7 +25,7 @@ class SubscribeController extends Controller
       
         $trader = new \App\Trader;
         $trader->nick = request('nick');
-        $trader->role_id = 3;
+        $trader->role_id = 4;
         $a = request('clan');
         //trouver le premier clan du group
         $clan = \App\Clan::where('group_id', $a)->get()->first();

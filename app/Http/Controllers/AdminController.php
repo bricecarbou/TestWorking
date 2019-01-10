@@ -226,4 +226,58 @@ class AdminController extends Controller
         flash("Group deleted.")->success();
         return back();
     }
+
+    public function admin_new_role()
+    {
+       
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->nick === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/connexion');
+        }
+
+        // Validation des données
+        request()->validate([
+            'role_name' => ['required'],
+        ]);
+
+
+        // Card create
+        $role = new \App\Role;
+
+        $role->name = request('role_name');
+        $role->save();
+
+       // Redirection vers la page avec un message flash.
+        flash("New role submitted.")->success();
+        return back();
+    }
+
+    public function admin_delete_role()
+    {
+       
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin')) {
+            flash("Only the admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+        // Validation des données
+        request()->validate([
+            'role' => ['required'],
+        ]);
+
+
+        $role_id = request('role');
+
+        $role = \App\Role::where('id', $role_id)->get()->first();
+
+        $role->delete();
+     
+        
+        flash("Role deleted.")->success();
+        return back();
+    }
 }

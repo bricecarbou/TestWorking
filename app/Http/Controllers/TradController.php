@@ -12,6 +12,14 @@ class TradController extends Controller
     public function newtrad()
     {
 
+        if (auth()->user()->role_id === "4") {
+
+            flash("Your account shall be validated to access to trads")->success();
+
+            return back();
+        }
+           
+
         $cards = \App\Card::all();
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
@@ -50,6 +58,7 @@ class TradController extends Controller
 
     public function createnewtrad()
     {
+
         request()->validate([
             'btn_cardwant'=>['required'],
             'btn_cardtrad'=>['required']
