@@ -91,6 +91,7 @@
         }
     </style>
 
+<script src="//pubdirecte.com/script/banniere.php?said=126534"></script>
 
     <br />
     <div class="CreateTrade">
@@ -100,7 +101,6 @@
     </div>
     <br />
 
-    <script src="//pubdirecte.com/script/banniere.php?said=126534"></script>
 
     @auth
         <table class="table">
