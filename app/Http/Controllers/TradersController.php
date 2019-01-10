@@ -10,7 +10,9 @@ class TradersController extends Controller
     {
 
         $clan_id = request('clan_id');
+        $role_id = request('role');
         $alltraders_clan = collect([]);
+        $alltraders_role = collect([]);
 
         if (($clan_id === "all") OR ($clan_id === null)) {
             if (auth()->user()->role->name === 'admin') 
@@ -33,8 +35,18 @@ class TradersController extends Controller
             }
         }
 
+        if (($role_id === "all") OR ($role_id === null)) {
+            $alltraders_role = $alltraders_clan;
+        } else {
+            foreach ($alltraders_clan as $trader)
+            {  
+                if ("$trader->role_id" === $role_id) {
+                    $alltraders_role = $alltraders_role->push($trader);
+                }
+            }
+        }
         return view('traders', [
-            'traders' => $alltraders_clan,
+            'traders' => $alltraders_role,
         ]);
     }
 }
