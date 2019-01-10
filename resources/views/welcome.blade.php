@@ -14,7 +14,7 @@
     </style>
 
 
-<p style="text-align:center"><script type="text/javascript" src="http://ads.allotraffic.com/bandeau?id=46372"></script></p>
+<script type="text/javascript" src="http://ads.allotraffic.com/bandeau?id=46372"></script>
 
 
     <div class="title">
