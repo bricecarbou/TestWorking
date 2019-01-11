@@ -62,8 +62,9 @@
         <footer class="footer">
             <div class="content has-text-centered">
                 <p>
-                    <img src="https://www.facebook.com/images/fb_icon_325x325.png" height="30" width="20"/>
-                    <a style="color:#B0C4DE" href="https://www.facebook.com/GreatEscapeFRCR/">Great Escape FR</a>
+                    <img src="{{ asset('img/logo_organit.png') }}" href="https://organit.fr/" height="200" width="300"/>
+                    <br />
+                    <a style="color:#B0C4DE" href="https://organit.fr/">Développons Votre Application Métier</a>
                 </p>
             </div>
         </footer>
