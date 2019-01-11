@@ -43,6 +43,7 @@ Route::post('/admin_modify-role/{trader}', 'AccountController@admin_modifyrole')
 Route::view('/leader_page', 'leader_page')->middleware('App\Http\Middleware\Auth');
 Route::post('/Add_clan', 'LeaderController@AddClan')->middleware('App\Http\Middleware\Auth');
 Route::post('/Delete_clan', 'LeaderController@DeleteClan')->middleware('App\Http\Middleware\Auth');
+Route::post('/Webhookurl', 'LeaderController@Webhookurl')->middleware('App\Http\Middleware\Auth');
 
 // admin
 Route::get('/admin_trader_account/{trader}/{action}', 'AdminController@traderAccount')->middleware('App\Http\Middleware\Auth');

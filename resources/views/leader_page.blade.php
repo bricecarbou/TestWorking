@@ -3,9 +3,26 @@
 @section('contain')
     <div class="section">
         <h1 class="title is-1">Manage Your Clans</h1>
-        <b>{{auth()->user()->nick}}</b>
+        <b>{{auth()->user()->clan->group->name}}</b>
+        <br />
+        <b>Webhook url: {{auth()->user()->clan->group->webhookurl}}</b>
+ 
     </div>
 
+    <form class="section" action="/Webhookurl" method="post">
+        {{ csrf_field() }}
+        <div class="field">
+            <label class="control-label col-sm-4" for="text">Complete the webhook url:</label>
+            <div class="control">
+                <input class="input" name="webhookurl">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit">Add the url</button>
+            </div>
+        </div>
+    </form>
     <form class="section" action="/Add_clan" method="post">
         {{ csrf_field() }}
 

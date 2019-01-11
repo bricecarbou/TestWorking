@@ -7,6 +7,32 @@ use Illuminate\Http\Request;
 class LeaderController extends Controller
 {
 
+    public function Webhookurl()
+    {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin') and !(auth()->user()->role->name === 'leader')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+
+        request()->validate([
+            'webhookurl' => ['required'],
+        ]);
+
+        $group = \App\ClanGroup::find(auth()->user()->clan->group->id);
+
+        $group->webhookurl = request('webhookurl');
+        $group->save();
+        
+        flash("The url fo webhook discord added.")->success();
+
+        return back();
+    }
+
+
+
     public function AddClan()
     {
         // Vérification que la personne est bien connectée
