@@ -6,8 +6,6 @@
         <b>{{auth()->user()->clan->group->name}}</b>
         <br />
         <b>Webhook url: {{auth()->user()->clan->group->webhookurl}}</b>
-        @endif
- 
     </div>
 
     <form class="section" action="/Webhookurl" method="post">
