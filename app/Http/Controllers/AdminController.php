@@ -280,4 +280,95 @@ class AdminController extends Controller
         flash("Role deleted.")->success();
         return back();
     }
+
+
+    public function admin_leader_page()
+    {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+        }
+
+        request()->validate([
+            'group' => ['required'],
+        ]);
+                
+        $group_id = request('group');
+
+        $group = \App\ClanGroup::find($group_id);
+ 
+        return view('admin_leader_page', [
+            'group' => $group,
+        ]);
+    }
+
+    public function Webhookurl(\App\clanGroup $group)
+    {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+
+        request()->validate([
+            'webhookurl' => ['required'],
+        ]);
+
+        $group->webhookurl = request('webhookurl');
+        $group->save();
+        
+        flash("The url fo webhook discord added.")->success();
+
+        return view('admin_leader_page', [
+            'group' => $group,
+        ]);
+    }
+
+    public function AddClan(\App\clanGroup $group)
+    {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+        request()->validate([
+            'clan' => ['required'],
+        ]);
+
+        \App\Clan::create(['name'=>request('clan'), 'group_id'=>$group->id]);
+        
+        flash("The Clan has been created.")->success();
+
+        return view('admin_leader_page', [
+            'group' => $group,
+        ]);
+    }
+  
+    public function DeleteClan(\App\clanGroup $group)
+    {
+        // Vérification que la personne est bien connectée
+        if (!(auth()->user()->role->name === 'admin')) {
+            flash("Only the leader or admin can  access to this page.")->error();
+
+            return redirect('/my-account');
+        }
+
+        request()->validate([
+            'clan' => ['required'],
+        ]);
+
+        $clan = \App\Clan::find(request('clan'));
+
+        $clan->delete();
+        
+        flash("The Clan has been Delete.")->success();
+
+        return view('admin_leader_page', [
+            'group' => $group,
+        ]);
+    }
 }

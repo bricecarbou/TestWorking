@@ -23,7 +23,6 @@
             </div>
             <div class="navbar-end">
                 @if((auth()->check()) AND auth()->user()->nick === 'admin')
-                    <a href="/leader_page" class="navbar-item {{ request()->is('leader_page') ? 'is-active' : ''}}">Leader Page</a>
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">
                         <img alt="{{auth()->user()->nick}}" src="https://vignette.wikia.nocookie.net/clashroyale/images/4/47/Blue_King.png" />   
                     </a>

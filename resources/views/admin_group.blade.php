@@ -5,6 +5,27 @@
         <h1 class="title is-1">Group Management</h1>
 
         @if (auth()->check() AND auth()->user()->role->name === 'admin')
+
+            <form action="/admin_leader_page" method="post">
+                {{ csrf_field() }}
+
+                <div class="field">
+                    <label class="label">Select a group to go on leader page</label>
+                    <select  class="question_type form-control" name="group" >
+                        @foreach (\App\ClanGroup::orderBy('name', 'asc')->get() as $group)
+                            <option value="{{$group->id}}" > {{$group->name}} </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Go to leader page</button>
+                    </div>
+                </div>
+            </form>   
+
+            <br />
             <form action="/admin_new_group" method="post">
                 {{ csrf_field() }}
 
