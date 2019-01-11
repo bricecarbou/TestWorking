@@ -281,4 +281,14 @@ class AccountController extends Controller
 
         return back();
     }
+
+    public function delete()
+    {
+       
+        $trader = auth()->user();
+        $trader->delete();
+
+        flash("Your account is deleted.")->success();
+        return view('welcome');
+    }
 }

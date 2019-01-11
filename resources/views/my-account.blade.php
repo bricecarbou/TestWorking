@@ -125,4 +125,12 @@
             </div>
         </div>
     </form>
+
+
+
+    <div class="control">
+        <a class="button is-link" onclick="return confirm('Are you sure?')" href="/delete_my_account">Delete my account</a>
+    </div>
+
+
 @endsection

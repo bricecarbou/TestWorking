@@ -29,6 +29,7 @@ Route::post('/update_password', 'AccountController@password_recovering_post');
 // account
 Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middleware\Auth');
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
+Route::get('/delete_my_account', 'AccountController@delete')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-email', 'AccountController@modifyemail')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
