@@ -143,6 +143,17 @@
                                         <li>{{$trader->nick}}</li>
                                     </ul>
                             </td>
+                            @if (auth()->check() AND ((auth()->user()->role->name== 'admin') OR (auth()->user()->role->name == 'leader')))
+                                <td>
+                                    <div class="control">
+                                        <a class="button is-link" href="/admin_trader_account/{{$trader->id}}/update">Update</a>
+                                    </div>
+                                    <br />
+                                    <div class="control">
+                                        <a class="button is-link" onclick="return confirm('Are you sure?')" href="/admin_trader_account/{{$trader->id}}/delete" >Delete</a>
+                                    </div>
+                                </td>
+                            @endif     
                             <td>
                                 <b>Clan</b>
                                     <ul>
@@ -167,16 +178,10 @@
                                         <ul>
                                             <li>{{$trader->discord_id}}</li>
                                         </ul>
+                                        <br />
+                                        <br />
                                 </td>
-                                <td>
-                                    <br />
-                                    <div class="control">
-                                        <a class="button is-link" href="/admin_trader_account/{{$trader->id}}/update">Update</a>
-                                    </div>
-                                    <div class="control">
-                                        <a class="button is-link" onclick="return confirm('Are you sure?')" href="/admin_trader_account/{{$trader->id}}/delete" >Delete</a>
-                                    </div>
-                                </td>
+
                             @endif
                         </tr>
                     @endforeach  
