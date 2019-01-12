@@ -189,11 +189,18 @@ class AdminController extends Controller
         ]);
 
 
-        // Card create
+        // GRoup create and 1 clan
         $group = new \App\ClanGroup;
 
         $group->name = request('group_name');
         $group->save();
+
+        $clan = new \App\Clan;
+
+        $clan->name = request('group_name');
+        $clan->group_id = $group->id;
+        $clan->save();
+
 
        // Redirection vers la page avec un message flash.
         flash("New group submitted.")->success();
