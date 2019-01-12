@@ -89,7 +89,7 @@ class AdminController extends Controller
     {
        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin') and (!(auth()->user()->role->name === 'leader'))) {
             flash("Only the admin can  access to this page.")->error();
 
             return redirect('/connexion');

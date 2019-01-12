@@ -243,7 +243,7 @@ class AccountController extends Controller
             'clan' => ['required'],
         ]);
 
-        $trader->clan = request('clan');
+        $trader->clan_id = request('clan');
 
         $trader->save();
 
