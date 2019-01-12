@@ -309,7 +309,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function Webhookurl(\App\clanGroup $group)
+    public function Webhookurl(\App\ClanGroup $group)
     {
         // Vérification que la personne est bien connectée
         if (!(auth()->user()->role->name === 'admin')) {
@@ -355,7 +355,7 @@ class AdminController extends Controller
         ]);
     }
   
-    public function DeleteClan(\App\clanGroup $group)
+    public function DeleteClan(\App\ClanGroup $group)
     {
         // Vérification que la personne est bien connectée
         if (!(auth()->user()->role->name === 'admin')) {
