@@ -4,7 +4,7 @@
     <div class="section">
         <h1 class="title is-1">Admin page to add a card</h1>
 
-        @if (auth()->check() AND auth()->user()->nick === 'admin')
+        @if (auth()->check() AND auth()->user()->role->name === 'admin')
             <form action="/admin_card_id_recover" method="post">
                 {{ csrf_field() }}
 

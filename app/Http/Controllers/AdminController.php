@@ -9,7 +9,7 @@ class AdminController extends Controller
     {
        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
 
             return redirect('/connexion');
@@ -31,7 +31,7 @@ class AdminController extends Controller
     {
        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
 
             return redirect('/connexion');
@@ -63,7 +63,7 @@ class AdminController extends Controller
     {
        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
 
             return redirect('/connexion');
@@ -150,9 +150,9 @@ class AdminController extends Controller
     public function admin_card_delete()
     {
 
-        $nick = auth()->user()->nick;
+        $role = auth()->user()->role->name;
 
-        if ($nick === 'admin')
+        if ($role === 'admin')
         {
             return view('admin_card_delete');
         }
@@ -177,7 +177,7 @@ class AdminController extends Controller
     {
        
         // Vérification que la personne est bien connectée
-        if (!(auth()->user()->nick === 'admin')) {
+        if (!(auth()->user()->role->name === 'admin')) {
             flash("Only the admin can  access to this page.")->error();
 
             return redirect('/connexion');

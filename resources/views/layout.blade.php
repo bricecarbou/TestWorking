@@ -13,7 +13,7 @@
                 <a href="/" class="navbar-item">
                     <img alt='Welcome' src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
                 </a>
-                @if((auth()->check()) AND auth()->user()->nick === 'admin')
+                @if((auth()->check()) AND auth()->user()->role->name === 'admin')
                     <a href ="/traders" class=navbar-item> {{\App\Trader::countTraders()}} traders</a>
                     <a href="/trads "class=navbar-item> {{\App\Trad::countTrads()}} trads ongoing</a>
                 @elseif (auth()->check())
@@ -22,7 +22,7 @@
                 @endif
             </div>
             <div class="navbar-end">
-                @if((auth()->check()) AND auth()->user()->nick === 'admin')
+                @if((auth()->check()) AND auth()->user()->role->name === 'admin')
                     <a href="/my-account" class="navbar-item {{ request()->is('my-account') ? 'is-active' : ''}}">
                         <img alt="{{auth()->user()->nick}}" src="https://vignette.wikia.nocookie.net/clashroyale/images/4/47/Blue_King.png" />   
                     </a>
