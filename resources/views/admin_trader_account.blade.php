@@ -20,7 +20,8 @@
         <div class="field">
             <label class="label">Modify the role</label>
             <select  class="question_type form-control" name="role" >
-                @foreach (App\Role::all()->forget(0) as $role)
+                <option value="{{\App\Role::where('name', 'trader')->first()->id}}" > trader </option>
+                @foreach (App\Role::all()->forget(0)->forget(2) as $role)
                     <option value="{{$role->id}}" > {{$role->name}} </option>
                 @endforeach
             </select>
