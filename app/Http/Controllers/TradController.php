@@ -14,7 +14,7 @@ class TradController extends Controller
 
         if (auth()->user()->role->name === 'new') {
 
-            flash("Your account shall be validated to access to trads")->error();
+            flash("Your account shall be validated by your leader to access to trads")->error();
 
             return back();
         }
