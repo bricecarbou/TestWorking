@@ -12,7 +12,7 @@ class TradController extends Controller
     public function newtrad()
     {
 
-        if (auth()->user()->role->name == 'new') {
+        if (auth()->user()->role->name === 'new') {
 
             flash("Your account shall be validated to access to trads")->error();
 
