@@ -185,7 +185,19 @@
                                 @endforeach
                             </ul>
                         </td>
-                    </tr>
+                        @if (auth()->check() AND ((auth()->user()->role->name== 'admin') OR (auth()->user()->role->name == 'leader')))
+                            <td> 
+                                <b>Trader to contact</b>
+                                <ul>
+                                    @foreach($trad->getMatchTrads() as $traddest)
+                                        <li><a href='/discord/{{$traddest->id}}/{{$trad->id}}'>
+                                            {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan->name}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
+                                        </a></li>
+                                    @endforeach
+                                </ul>
+                            </td> 
+                        @endif
+                     </tr>
                 @endforeach  
             </tbody>
         </table>
