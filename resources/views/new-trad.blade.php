@@ -100,6 +100,8 @@
     border: 1px solid #ccc;
     text-align: left; 
     }
+
+
 /* 
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
@@ -193,7 +195,11 @@ only screen and (max-width: 760px),
                                             @if(!($card == null))
                                                 @if($card->card_type_id == $card_type->id)
                                                     <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
-                                                        <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
+                                                        @if ($card->CardName == "max")
+                                                            <label for="cb{{$card->id}}"><img style="background:url({{ asset('img/Background_img.png')}})" src="{{$card->CardImagePath}}"/></label> 
+                                                        @else
+                                                            <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
+                                                        @endif
                                                     </li>
                                                 @endif
                                             @endif
