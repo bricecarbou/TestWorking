@@ -43,28 +43,59 @@ class Trad extends Model
 	public function getMatchTrads()
 	{
 
-		//recupérons la liste des trad proposant la carte que l'on recherche, plus la carte qu'ils recherchent, dans notre group de clan
-		$clan = Clan::find(auth()->user()->clan_id);
+ 
+		if (auth()->user()->role->name === 'admin') 
+        {
+			//recupérons la liste des trad proposant la carte que l'on recherche, plus la carte qu'ils recherchent, dans notre group de clan
+			$clan = Clan::all();	
+			
+			$a = Trad::whereHas('cards', function($query){
+				return $query->where('card_id', $this->card->id);
+			})
+			->get();
 
-		$a = Trad::whereHas('cards', function($query){
-			return $query->where('card_id', $this->card->id);
-		})
-		->get();
+			$trads = array();
 
-		$trads = array();
-
-		// verifions que nous donnons bien la carte que 
-		// les traders rrecherchent
-		foreach($a as $possibleTrad)
-		{
-			foreach ($this->cards as $card)
+			// verifions que nous donnons bien la carte que 
+			// les traders rrecherchent
+			foreach($a as $possibleTrad)
 			{
-				if (( $card->id  == $possibleTrad->card_id) and ($possibleTrad->trader->clan->group_id == $clan->group_id))
+				foreach ($this->cards as $card)
 				{
-					$trads[] = $possibleTrad;
+					if (( $card->id  == $possibleTrad->card_id) and ($possibleTrad->trader->clan->group_id == $this->trader->clan->group_id))
+					{
+						$trads[] = $possibleTrad;
+					}
+				}
+			}
+
+		} 
+		else
+		{
+			//recupérons la liste des trad proposant la carte que l'on recherche, plus la carte qu'ils recherchent, dans notre group de clan
+			$clan = Clan::find(auth()->user()->clan_id);
+
+			$a = Trad::whereHas('cards', function($query){
+				return $query->where('card_id', $this->card->id);
+			})
+			->get();
+
+			$trads = array();
+
+			// verifions que nous donnons bien la carte que 
+			// les traders rrecherchent
+			foreach($a as $possibleTrad)
+			{
+				foreach ($this->cards as $card)
+				{
+					if (( $card->id  == $possibleTrad->card_id) and ($possibleTrad->trader->clan->group_id == $clan->group_id))
+					{
+						$trads[] = $possibleTrad;
+					}
 				}
 			}
 		}
+
 
 		return $trads;
 	}
