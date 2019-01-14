@@ -58,7 +58,7 @@
         <div class="field">
             <label class="label">The Clash Royale ID</label>
             <div class="control">
-                <input class="input" name="cr_key">
+                <input class="input" name="cr_key" value={{$trader->cr_key}} maxlength="10">
             </div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="field">
             <label class="label">The discord ID, only the numbers (tip in discord this command \@user)</label>
             <div class="control">
-                <input class="input" name="discordID">
+                <input class="input" name="discordID" value={{$trader->discord_id}}>
             </div>
         </div>
 

@@ -157,7 +157,7 @@ class AccountController extends Controller
     public function modifycr_key()
     {
         request()->validate([
-            'cr_key' => ['required'],
+            'cr_key' => ['required'], 
         ]);
 
         $user = auth()->user();

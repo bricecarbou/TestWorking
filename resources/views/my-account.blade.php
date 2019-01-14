@@ -43,7 +43,7 @@
         <div class="field">
             <label class="label">My Clash Royale ID</label>
             <div class="control">
-                <input class="input" name="cr_key">
+                <input class="input" name="cr_key" value={{auth()->user()->cr_key}} maxlength="10">
             </div>
         </div>
 
@@ -64,7 +64,7 @@
         <div class="field">
             <label class="label">My discord ID, only the numbers (tip in discord this command \@user)</label>
             <div class="control">
-                <input class="input" name="discordID">
+                <input class="input" name="discordID" value={{auth()->user()->discord_id}}>
             </div>
         </div>
 
