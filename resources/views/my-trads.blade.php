@@ -96,7 +96,7 @@
     <br />
     <div class="CreateTrade">
         <p style="text-align:center"> 
-            <a class="button is-link" href="/new-trad" >Create a New Trad</a>
+            <a class="button is-link" href="/new-trad" >Go to create a new Trad</a>
         </p>
     </div>
     <br />
