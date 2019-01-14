@@ -25,10 +25,17 @@
         <img class="displayed" src="https://vignette.wikia.nocookie.net/clashroyale/images/b/b0/Trade_Tokens.png" />
         <br />
         <div class="content has-text-centered">
-                <p>
-                    <a style="color:#B0C4DE" href="https://www.youtube.com/playlist?list=PLi3nBQ72fw-Qxk9fjGADsMNWgFxzO3Zma">Discover the application in video, click here</a>
-                </p>
-            </div>
+            <p>
+                <a style="color:#B0C4DE" href="https://discord.gg/QUVK9N">Discord server, click here</a>
+            </p>
+        </div>
+        <br />
+     
+        <div class="content has-text-centered">
+            <p>
+                <a style="color:#B0C4DE" href="https://www.youtube.com/playlist?list=PLi3nBQ72fw-Qxk9fjGADsMNWgFxzO3Zma">Discover the application in video, click here</a>
+            </p>
+        </div>
         <br />
     </div>
 @endsection
