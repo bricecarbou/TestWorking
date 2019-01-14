@@ -75,6 +75,26 @@ class Trad extends Model
 		return $trads;
 	}
 
+	public static function allTradsGroup()
+    {
+        if (auth()->user()->role->name === 'admin') 
+        {
+            $trads = \App\Trader::all();
+        } 
+        else 
+        {
+            $trads = \App\Trad::whereHas('trader', function ($query) {
+				return $query->whereHas('clan', function($query_group){
+					return $query_group->where('group_id', auth()->user()->clan->group_id);
+				});
+			})
+			->get();
+        }
+
+
+        return $trads;
+	}
+	
 	public static function updateAll()
 	{
 
@@ -82,7 +102,7 @@ class Trad extends Model
 		\App\Trad::deleteOldTrads();
 				
 		/* update of the trads */
-		$trads = \App\Trad::all();
+		$trads = \App\Trad::allTradsGroup();
 
 		foreach ($trads as $trad) 
 		{
@@ -146,7 +166,7 @@ class Trad extends Model
 	{
 
 		/* update of the old trads */
-		$trads = \App\Trad::all();
+		$trads = \App\Trad::allTradsGroup();
 		$today = time();
 
 		//20 jours en seconde

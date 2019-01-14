@@ -213,7 +213,7 @@ class TradController extends Controller
          \App\Trad::updateAll();
         
         return view('trads',[
-            'trads' => \App\Trad::all(),
+            'trads' => \App\Trad::allTradsGroup(),
         ]);
     }
 
