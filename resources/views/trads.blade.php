@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('contain')
-<style>
+
+    <style>
         ul {
             list-style-type: none;
         }
@@ -46,7 +47,7 @@
             text-align: left; 
         }
 
-        .block {
+        .blockfilter {
             float:left;
             width:200px;
             margin:0;
@@ -111,7 +112,7 @@
         @endif
         <form class="section" action="/trads" method="post">
         {{ csrf_field() }}
-            <div class="block">
+            <div class="blockfilter">
                 <label class="control-label col-sm-4" for="text">Filter on Name:</label>
                 <select  class="question_type form-control" name="name" >
                     <option value="all"> All </option>
@@ -120,7 +121,7 @@
                     @endforeach
                 </select>
             </div>             
-            <div class="block">
+            <div class="blockfilter">
                 <label class="control-label col-sm-4" for="text">Filter on Clan:</label>
                 <select  class="question_type form-control" name="clan" >
                     <option value="all" > All </option>
@@ -129,7 +130,7 @@
                     @endforeach
                 </select>
             </div>     
-            <div class="block">
+            <div class="blockfilter">
                 <label class="control-label col-sm-4" for="text">(Filter) I give:</label>
                 <select  class="question_type form-control" name="searchcard" >
                     <option value="all" > All </option>
@@ -138,7 +139,7 @@
                     @endforeach
                  </select>
             </div>
-            <div class="block">
+            <div class="blockfilter">
                 <label class="control-label col-sm-4" for="text">(Filter) I want:</label>
                 <select  class="question_type form-control" name="wantcard" >
                     <option value="all" > All </option>
@@ -147,7 +148,7 @@
                     @endforeach
                  </select>
             </div>
-            <div class="block">
+            <div class="blockfilter">
                 <div class="control">
                     <button class="button is-link" type="submit">Filter</button>
                 </div>
