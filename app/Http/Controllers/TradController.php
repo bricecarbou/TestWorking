@@ -131,7 +131,7 @@ class TradController extends Controller
 
         \App\Trader::sendDiscordMsg (
             \App\Trader::find($traddest->trader_id),
-            auth()->user(),
+            \App\Trader::find($trad->trader_id),
             \App\Card::find($traddest->card_id)->CardName,
             $trad->card->CardName
         );

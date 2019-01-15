@@ -139,7 +139,7 @@ class Trader extends Model implements Authenticatable
         //=======================================================================
         // Create new webhook in your Discord channel settings and copy&paste URL
         //=======================================================================
-        $webhookurl = auth()->user()->clan->group->webhookurl;
+        $webhookurl = $dest->clan->group->webhookurl;
         
         //=======================================================================
         // Compose message. You can use Markdown
