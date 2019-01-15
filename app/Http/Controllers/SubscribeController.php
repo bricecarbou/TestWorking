@@ -14,6 +14,19 @@ class SubscribeController extends Controller
 
     public function processing()
     {
+        $traders = \App\Trader::all();
+        
+        foreach ($traders as $subscribe)
+        {
+            if ($subscribe->nick == request('nick'))
+            {
+                flash("This Login is already used")->error();
+
+                return back();
+            }
+        }
+        
+
         request()->validate([
             'nick'=>['required'],
             'cr_key'=>['required'],
@@ -22,7 +35,7 @@ class SubscribeController extends Controller
             'nick'=>'unique:traders'
         ]);
       
-      
+
         $trader = new \App\Trader;
         $trader->nick = request('nick');
         $trader->role_id = 4;
@@ -38,7 +51,7 @@ class SubscribeController extends Controller
         }
         else
         {
-        $trader->cr_key = $cr_key;
+            $trader->cr_key = $cr_key;
         }
 
         $trader->discord_id = "to be completed";
@@ -46,7 +59,33 @@ class SubscribeController extends Controller
         $password = request('password');
         $trader->password = bcrypt($password);
         $trader->save();
-    
+
+        //envoie une notification au leader
+        //=======================================================================
+        // Create new webhook in your Discord channel settings and copy&paste URL
+        //=======================================================================
+        $webhookurl = $clan->group->webhookurl;
+        
+        //=======================================================================
+        // Compose message. You can use Markdown
+        //=======================================================================
+        $leaders = \App\Trader::where('role_id', '2')->get();
+
+        foreach($leaders as $leader)
+        {
+            if ($leader->clan->group_id === $trader->clan->group_id)
+            {
+                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $trader->nick";
+
+                (new \AG\DiscordMsg(
+                    $msg, // message
+                    $webhookurl, // chanel webhook link
+                    "Trad Bot", // bot name
+                    '' // avatar url
+                ))->send();          
+            }
+        }
+
         Auth::login($trader);
 
         flash("Your are connected. Think to update your clan, your email (to mail recover) and your discord ID ==> on this Page")->success();
