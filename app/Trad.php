@@ -104,7 +104,7 @@ class Trad extends Model
     {
         if (auth()->user()->role->name === 'admin') 
         {
-            $trads = \App\Trader::all();
+            $trads = \App\Trad::all();
         } 
         else 
         {
