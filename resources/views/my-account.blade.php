@@ -19,6 +19,7 @@
 
         <a href="/disconnect" class="button">Disconnect</a>
     </div>
+
     <form class="section" action="/modify-clan" method="post">
         {{ csrf_field() }}
 
@@ -76,6 +77,24 @@
 
         <div class="control">
             <a class="button is-link" href="/help_discordid">Help</a>
+        </div>
+    </form>
+
+    <form class="section" action="/modify-group" method="post">
+        {{ csrf_field() }}
+
+        <div class="field">
+            <label class="control-label col-sm-4" for="text">Modify my Group: (Warning this option repass your role to new in a new group)</label>
+            <select  class="question_type form-control" name="group" >
+                @foreach (\App\ClanGroup::all()->forget(0)->sortBy('name') as $group)
+                    <option value="{{$group->id}}" > {{$group->name}} </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" onclick="return confirm('Are you sure?')" type="submit">Modify my Group</button>
+            </div>
         </div>
     </form>
 

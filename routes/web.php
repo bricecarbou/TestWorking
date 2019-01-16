@@ -35,6 +35,7 @@ Route::post('/modify-password', 'AccountController@modifypassword')->middleware(
 Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-discord_id', 'AccountController@modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-clan', 'AccountController@modifyclan')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-group', 'AccountController@modifygroup')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-cr_key/{trader}', 'AccountController@admin_modifycr_key')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-discord_id/{trader}', 'AccountController@admin_modifyDiscordID')->middleware('App\Http\Middleware\Auth');
 Route::post('/admin_modify-clan/{trader}', 'AccountController@admin_modifyclan')->middleware('App\Http\Middleware\Auth');

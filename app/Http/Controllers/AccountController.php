@@ -195,6 +195,51 @@ class AccountController extends Controller
         return redirect('/my-account');
     }
 
+    public function modifygroup()
+    {
+        request()->validate([
+            'group' => ['required'],
+        ]);
+
+        $group_id = request('group');
+
+        $clan = \App\Clan::where('group_id', $group_id)->first();
+        $user = auth()->user();
+        $user->clan_id = $clan->id;
+        $user->role_id = 4;
+
+        $user->save();
+
+        //envoie une notification au leader
+        //=======================================================================
+        // Create new webhook in your Discord channel settings and copy&paste URL
+        //=======================================================================
+        $webhookurl = $clan->group->webhookurl;
+        
+        //=======================================================================
+        // Compose message. You can use Markdown
+        //=======================================================================
+        $leaders = \App\Trader::where('role_id', '2')->get();
+
+        foreach($leaders as $leader)
+        {
+            if ($leader->clan->group_id === $trader->clan->group_id)
+            {
+                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $trader->nick";
+
+               (new \AG\DiscordMsg(
+                    $msg, // message
+                    $webhookurl, // chanel webhook link
+                    "Trad Bot", // bot name
+                    '' // avatar url
+                ))->send();         
+            }
+        }
+
+        flash("Your Group has been updated.")->success();
+
+        return redirect('/my-account');
+    }
 
     public function modifyDiscordID()
     {
