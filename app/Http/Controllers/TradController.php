@@ -129,13 +129,13 @@ class TradController extends Controller
     public function sendDiscordMsg (\App\Trad $traddest, \App\Trad $trad)
     {
 
-       /* \App\Trader::sendDiscordMsg (
+        \App\Trader::sendDiscordMsg (
             \App\Trader::find($traddest->trader_id),
             \App\Trader::find($trad->trader_id),
             \App\Card::find($traddest->card_id)->CardName,
             $trad->card->CardName
         );
-*/
+
         flash("A message to traders is sent")->success();
         return redirect(url()->previous().'#'.$trad->id);
         //return back();
