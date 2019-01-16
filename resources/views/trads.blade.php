@@ -191,7 +191,7 @@
                                 <b>Trader to contact</b>
                                 <ul>
                                     @foreach($trad->getMatchTrads() as $traddest)
-                                        <li><a href='/discord/{{$traddest->id}}/{{$trad->id}}'>
+                                        <li><a name= '{{$trad->id}}' href='/discord/{{$traddest->id}}/{{$trad->id}}'>
                                             {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan->name}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
                                         </a></li>
                                     @endforeach
