@@ -209,8 +209,9 @@ only screen and (max-width: 760px),
                                         @foreach($cardsToTrade as $card)
                                             @if(!($card == null))
                                                 @if($card->card_type_id == $card_type->id)
-                                                    <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
+                                                    <li>
                                                         <div class="container_image">
+                                                            <input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
                                                             @if ($card->CardName == "max")
                                                                 <label for="cb{{$card->id}}"><img style="background:url({{ asset('img/Background_img.png')}})" src="{{$card->CardImagePath}}"/></label> 
                                                             @else
@@ -218,7 +219,7 @@ only screen and (max-width: 760px),
                                                             @endif
                                                             <div class="bottom-right"><p style="font-size:50%;">{{$card->CardName}}</p></div>
                                                         </div>
-                                                        </li>
+                                                    </li>
                                                 @endif
                                             @endif
                                         @endforeach
