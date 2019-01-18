@@ -57,8 +57,8 @@
     }
 
     label img {
-    height: 45px;
-    width: 38px;
+    height: 65px;
+    width: 50px;
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
     }
@@ -101,7 +101,9 @@
     text-align: left; 
     }
 
-
+/*****************************************
+ *    number of cards over card image
+ *********************************************/
     /* Container holding the image and the text */
     .container_image {
     position: relative;
@@ -113,7 +115,7 @@
     .bottom-right {
     position: absolute;
     bottom: 8px;
-    right: 10px;
+    right: 2px;
     }
 
 
@@ -217,7 +219,7 @@ only screen and (max-width: 760px),
                                                             @else
                                                                 <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
                                                             @endif
-                                                            <div class="bottom-right"><p style="font-size:50%;">{{$card->CardName}}</p></div>
+                                                            <div class="bottom-right"><p style="font-size:70%;">{{$card->CardName}}</p></div>
                                                         </div>
                                                     </li>
                                                 @endif
