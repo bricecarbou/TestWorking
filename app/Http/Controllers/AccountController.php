@@ -57,7 +57,7 @@ class AccountController extends Controller
             try
             {
                 $hash = Hashids::encode($trader->id);
-                $url=env('APP_URL').'/update_password/'.$hash;
+                $url=env('APP_URL').'update_password/'.$hash;
                 $data = ['email'=> $user_email,'name'=> $user_name,'subject' => $title, 'content' => $content, 'url'=> $url];
                 Mail::send('email.recover_password', $data, function($message) use($data, $trader)
                 {
