@@ -57,7 +57,7 @@ class TradController extends Controller
                     end($cardsToTrade)->CardName = "max";
                 }
             }
-            elseif( ($cardTrader[3] === "Legendary") AND (!($cardTrader[2] === false)) AND (((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR ($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
+            elseif( ($cardTrader[3] === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
             {
                 $cardsToTrade[] = \App\Card::find($cardTrader[0]);
                 if ($cardTrader[4] > '4')
