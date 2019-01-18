@@ -186,18 +186,22 @@
                                 @endforeach
                             </ul>
                         </td>
-                        @if (auth()->check() AND ((auth()->user()->role->name== 'admin') OR (auth()->user()->role->name == 'leader')))
-                            <td> 
-                                <b>Trader to contact</b>
-                                <ul>
-                                    @foreach($trad->getMatchTrads() as $traddest)
-                                        <li><a name= '{{$trad->id}}' href='/discord/{{$traddest->id}}/{{$trad->id}}'>
+                        <td> 
+                            <b>Trader to contact</b>
+                            <ul>
+                                @foreach($trad->getMatchTrads() as $traddest)
+                                    <li>
+                                        @if ((auth()->user()->role->name== 'admin') OR (auth()->user()->role->name == 'leader'))
+                                            <a name= '{{$trad->id}}' href='/discord/{{$traddest->id}}/{{$trad->id}}'>
                                             {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan->name}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
-                                        </a></li>
-                                    @endforeach
-                                </ul>
-                            </td> 
-                        @endif
+                                            </a>
+                                        @else
+                                            {{\App\Trader::find($traddest->trader_id)->nick}} ({{\App\Trader::find($traddest->trader_id)->clan->name}}) -> <img src='{{\App\Card::find($traddest->card_id)->CardImagePath}}' width="45" height="45">
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </td> 
                      </tr>
                 @endforeach  
             </tbody>
