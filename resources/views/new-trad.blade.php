@@ -219,7 +219,7 @@ only screen and (max-width: 760px),
                                                             @else
                                                                 <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
                                                             @endif
-                                                            <div class="bottom-right"><p style="font-size:70%;">{{$card->CardName}}</p></div>
+                                                            <div class="bottom-right"><p style="font-size:80%;">{{$card->CardName}}</p></div>
                                                         </div>
                                                     </li>
                                                 @endif
