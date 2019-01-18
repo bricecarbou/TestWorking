@@ -40,6 +40,10 @@ class TradController extends Controller
                 {
                     end($cardsToTrade)->CardName = "max";
                 }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2];
+                }
             }
             elseif( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
             {
@@ -47,6 +51,10 @@ class TradController extends Controller
                 if ($cardTrader[4] > '10')
                 {
                     end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2];
                 }
             }
             elseif( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
@@ -56,6 +64,10 @@ class TradController extends Controller
                 {
                     end($cardsToTrade)->CardName = "max";
                 }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2];
+                }
             }
             elseif( ($cardTrader[3] === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
             {
@@ -63,6 +75,10 @@ class TradController extends Controller
                 if ($cardTrader[4] > '4')
                 {
                     end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2];
                 }
             } 
         }

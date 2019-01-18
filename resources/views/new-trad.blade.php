@@ -102,6 +102,21 @@
     }
 
 
+    /* Container holding the image and the text */
+    .container_image {
+    position: relative;
+    text-align: center;
+    color: white;
+    }
+
+    /* Bottom right text */
+    .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    }
+
+
 /* 
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
@@ -195,12 +210,15 @@ only screen and (max-width: 760px),
                                             @if(!($card == null))
                                                 @if($card->card_type_id == $card_type->id)
                                                     <li><input type="checkbox" value="{{$card->id}}" name="btn_cardtrad[]" id="cb{{$card->id}}"/>
-                                                        @if ($card->CardName == "max")
-                                                            <label for="cb{{$card->id}}"><img style="background:url({{ asset('img/Background_img.png')}})" src="{{$card->CardImagePath}}"/></label> 
-                                                        @else
-                                                            <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
-                                                        @endif
-                                                    </li>
+                                                        <div class="container_image">
+                                                            @if ($card->CardName == "max")
+                                                                <label for="cb{{$card->id}}"><img style="background:url({{ asset('img/Background_img.png')}})" src="{{$card->CardImagePath}}"/></label> 
+                                                            @else
+                                                                <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
+                                                            @endif
+                                                            <div class="bottom-right"><p style="font-size:50%;">{{$card->CardName}}</p></div>
+                                                        </div>
+                                                        </li>
                                                 @endif
                                             @endif
                                         @endforeach
