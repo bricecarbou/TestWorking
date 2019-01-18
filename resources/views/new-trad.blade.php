@@ -57,8 +57,8 @@
     }
 
     label img {
-    height: 65px;
-    width: 53px;
+    height: 100px;
+    width: 80px;
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
     }
@@ -114,8 +114,8 @@
     /* Bottom right text */
     .bottom-right {
     position: absolute;
-    bottom: 8px;
-    right: 2px;
+    bottom: 15px;
+    right: 4px;
     }
 
 
@@ -219,7 +219,7 @@ only screen and (max-width: 760px),
                                                             @else
                                                                 <label for="cb{{$card->id}}"><img src="{{$card->CardImagePath}}"/></label>
                                                             @endif
-                                                            <div class="bottom-right"><p style="font-size:80%;">{{$card->CardName}}</p></div>
+                                                            <div class="bottom-right"><p style="font-size:80%; background-color:black;">{{$card->CardName}}</p></div>
                                                         </div>
                                                     </li>
                                                 @endif

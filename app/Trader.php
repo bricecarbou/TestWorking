@@ -129,7 +129,8 @@ class Trader extends Model implements Authenticatable
             $card->getName(),
             $card->getCount(),
             $card->getRarity(),
-            $card->getLevel()];
+            $card->getLevel(),
+            $card->getRequiredForUpgrade()];
         }
         return ($cards_info);
     }
