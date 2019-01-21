@@ -30,6 +30,7 @@ Route::post('/update_password', 'AccountController@password_recovering_post');
 Route::get('/my-account', 'AccountController@home')->middleware('App\Http\Middleware\Auth');
 Route::get('/disconnect', 'AccountController@disconnect')->middleware('App\Http\Middleware\Auth');
 Route::get('/delete_my_account', 'AccountController@delete')->middleware('App\Http\Middleware\Auth');
+Route::post('/modify-mailling', 'AccountController@modifymailling')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-email', 'AccountController@modifyemail')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-password', 'AccountController@modifypassword')->middleware('App\Http\Middleware\Auth');
 Route::post('/modify-cr_key', 'AccountController@modifycr_key')->middleware('App\Http\Middleware\Auth');
@@ -69,7 +70,7 @@ Route::post('/admin_Webhookurl/{group}', 'AdminController@Webhookurl')->middlewa
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
 Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
-Route::get('/discord/{traddest}/{trad}', 'TradController@sendDiscordMsg')->middleware('App\Http\Middleware\Auth');
+Route::get('/message/{traddest}/{trad}', 'TradController@sendMsg')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');
 Route::get('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');
 Route::post('/trads','TradController@allTrads')->middleware('App\Http\Middleware\Auth');

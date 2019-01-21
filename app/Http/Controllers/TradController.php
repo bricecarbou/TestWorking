@@ -142,19 +142,50 @@ class TradController extends Controller
         ]);
     }
 
-    public function sendDiscordMsg (\App\Trad $traddest, \App\Trad $trad)
+    public function sendMsg (\App\Trad $traddest, \App\Trad $trad)
     {
 
+        $traderDest = \App\Trader::find($traddest->trader_id);
+        $trader = \App\Trader::find($trad->trader_id);
+        $cardNameDest = \App\Card::find($traddest->card_id)->CardName;
+
+        $msg="";
+
+
         \App\Trader::sendDiscordMsg (
-            \App\Trader::find($traddest->trader_id),
-            \App\Trader::find($trad->trader_id),
-            \App\Card::find($traddest->card_id)->CardName,
+            $traderDest,
+            $trader,
+            $cardNameDest,
             $trad->card->CardName
         );
 
-        flash("A message to traders is sent")->success();
+
+        if ($traderDest->discord_id !== "to be completed")
+        {
+            $msg = $msg . "User have discord id,";
+        }
+        else{
+            $msg = $msg . "User have no enter discord id, but";
+        }
+
+        $msg = $msg . "a message to Discord is sent";
+
+        if ($traderDest->mailling === "1")
+        {
+            \App\Trader::sendMail (
+                $traderDest,
+                $trader,
+                $cardNameDest,
+                $trad->card->CardName
+            );   
+            
+            $msg = $msg . " (and a mail)";
+
+        }
+        
+        flash($msg)->success();
+
         return redirect(url()->previous().'#'.$trad->id);
-        //return back();
     }
 
     public function delete(\App\Trad $trad)

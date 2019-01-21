@@ -257,6 +257,27 @@ class AccountController extends Controller
         return redirect('/my-account');
     }
 
+    
+    public function modifymailling()
+    {
+        $user = auth()->user();
+       
+        if (request('mailling') === "on")
+        {
+            $user->mailling = true;
+        }
+        else
+        {
+            $user->mailling = false;
+        }    
+
+        $user->save();
+
+        flash("Your mailling request has been updated.")->success();
+
+        return redirect('/my-account');
+    }
+
 
     public function admin_modifycr_key(\App\Trader $trader)
     {

@@ -15,6 +15,17 @@
         <b>Discord id: {{ auth()->user()->discord_id }}</b>
         <br />
         <b>Email: {{ auth()->user()->email }} </b>
+        <br />
+        <form class="section" action="/modify-mailling" method="post">
+        {{ csrf_field() }}
+            @if (auth()->user()->mailling === "1")
+                    <input type="checkbox" name="mailling" checked>Do you want receive mail when a trade is possible? 
+            @else
+                    <input type="checkbox" name="mailling">Do you want receive mail when a trade is possible? 
+            @endif
+            <button class="button is-link" type="submit">Modify</button>
+        </form>
+        <br />
         <p>You are connected.</p>
 
         <a href="/disconnect" class="button">Disconnect</a>

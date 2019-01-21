@@ -4,6 +4,7 @@ namespace App;
 
 ini_set('max_execution_time', 3000);
 
+use Mail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
@@ -160,4 +161,26 @@ class Trader extends Model implements Authenticatable
             '' // avatar url
         ))->send();
     }
+
+    public static function sendMail ($dest, $emit, $cardNameDest, $cardNameEmit)
+    {
+        $title = "A new Trad for you";
+        $content = "$dest->nick, I have $cardNameDest for you vs $cardNameEmit. Please contact me $emit->nick" ;
+
+
+        $dest_email = $dest->email;
+        $dest_name = $dest->nick;
+        $emit_email =  $emit->email;
+
+        try {
+            $data = ['email'=> $dest_email,'name'=> $dest_name,'subject' => $title, 'content' => $content];
+            Mail::send('email.trad', $data, function ($message) use ($data, $dest, $emit_email) {
+                $subject=$data['subject'];
+                $message->from($emit_email);
+                $message->to($data['email'], $dest->nick)->subject($subject);
+            });
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }   
 }
