@@ -19,9 +19,9 @@
         <form class="section" action="/modify-mailling" method="post">
         {{ csrf_field() }}
             @if (auth()->user()->mailling === 1)
-                    <input type="checkbox" name="mailling" checked>Do you want receive mail when a trade is possible? 
+                    <input type="checkbox" name="mailling" checked> When checked, I receive a mail for a new trad
             @else
-                    <input type="checkbox" name="mailling">Do you want receive mail when a trade is possible? 
+                    <input type="checkbox" name="mailling"> When unchecked, I don't receive a mail for a new trad
             @endif
             <button class="button is-link" type="submit">Modify</button>
         </form>
