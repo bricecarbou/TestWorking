@@ -273,6 +273,8 @@ class AccountController extends Controller
 
         $user->save();
 
+        dd($user);
+
         flash("Your mailling request has been updated.")->success();
 
         return redirect('/my-account');
