@@ -14,7 +14,7 @@ class AddMaillingToTraders extends Migration
     public function up()
     {
         Schema::table('traders', function (Blueprint $table) {
-            $table->boolean('mailling')->after('name')->nullable();
+            $table->boolean('mailling')->nullable();
         });
     }
 
