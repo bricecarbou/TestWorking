@@ -343,6 +343,43 @@ class AccountController extends Controller
 
         $trader->save();
 
+        $clan = \App\Clan::find($trader->clan_id);
+
+        $msg = "<@$trader->discord_id> ($trader->nick), Your role has been updated to: " . \App\Role::find($trader->role_id)->name . ", by a leader.";
+        
+        if ( $trader->role_id !== 1)
+        {
+            $msg = $msg . " Now, you can create trads";
+        }
+        (new \AG\DiscordMsg(
+                $msg, // message
+                $clan->group->webhookurl, // chanel webhook link
+                "Trad Bot", // bot name
+                '' // avatar url
+        ))->send(); 
+         
+        if ($trader->mailling === true)
+        {
+            $title = "A new Role for you";
+            $content = "$trader->nick, Your role has been updated to:" . \App\Role::find($trader->role_id)->name . ", by a leader." ;
+    
+            $dest_email = $trader->email;
+            $dest_name = $trader->nick;
+            $emit_email =  auth()->user()->email;
+    
+            try {
+                $data = ['email'=> $dest_email,'name'=> $dest_name,'subject' => $title, 'content' => $content];
+                Mail::send('email.trad', $data, function ($message) use ($data, $trader, $emit_email) {
+                    $subject=$data['subject'];
+                    $message->from($emit_email);
+                    $message->to($data['email'], $trader->nick)->subject($subject);
+                });
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+            }
+
+        }        
+
         flash("The role has been updated.")->success();
 
         return back();

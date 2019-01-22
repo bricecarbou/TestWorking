@@ -75,7 +75,7 @@ class SubscribeController extends Controller
         {
             if ($leader->clan->group_id === $trader->clan->group_id)
             {
-                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $trader->nick";
+                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application ( https://cr-trade.organit.fr/ ), please set me to trader role. My nick is $trader->nick";
 
                 (new \AG\DiscordMsg(
                     $msg, // message
