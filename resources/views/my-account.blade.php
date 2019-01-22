@@ -113,7 +113,7 @@
         {{ csrf_field() }}
 
         <div class="field">
-            <label class="label">Enter my email for password recovery</label>
+            <label class="label">Enter my email</label>
             <div class="control">
                 <input class="input" name="email">
             </div>
