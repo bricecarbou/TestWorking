@@ -2,7 +2,7 @@ Hello,
 <br />
 <br />
 
-{{ $content }}. 
+{{ $content }} 
 
 <br />
 <br />
