@@ -347,7 +347,7 @@ class AccountController extends Controller
 
         $msg = "<@$trader->discord_id> ($trader->nick), Your role has been updated to: " . \App\Role::find($trader->role_id)->name . ", by a leader.";
         
-        if ( $trader->role_id !== 1)
+        if ( $trader->role_id !== 4)
         {
             $msg = $msg . " Now, you can create trads";
         }
@@ -362,7 +362,12 @@ class AccountController extends Controller
         {
             $title = "A new Role for you";
             $content = "$trader->nick, Your role has been updated to:" . \App\Role::find($trader->role_id)->name . ", by a leader." ;
-    
+ 
+            if ( $trader->role_id !== 4)
+            {
+                $content = $content . " Now, you can create trads";
+            }
+
             $dest_email = $trader->email;
             $dest_name = $trader->nick;
             $emit_email =  auth()->user()->email;
