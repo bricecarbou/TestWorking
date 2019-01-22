@@ -351,8 +351,7 @@ class AccountController extends Controller
         {
             $msg = $msg . " Now, you can create trads";
         }
-        dd($trader->mailling);
-        
+
         (new \AG\DiscordMsg(
                 $msg, // message
                 $clan->group->webhookurl, // chanel webhook link
@@ -360,7 +359,7 @@ class AccountController extends Controller
                 '' // avatar url
         ))->send(); 
          
-        if ($trader->mailling === true)
+        if ($trader->mailling === 1)
         {
             $title = "A new Role for you";
             $content = "$trader->nick, Your role has been updated to:" . \App\Role::find($trader->role_id)->name . ", by a leader." ;

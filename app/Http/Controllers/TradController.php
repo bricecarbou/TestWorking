@@ -170,7 +170,7 @@ class TradController extends Controller
 
         $msg = $msg . "a message to Discord is sent";
 
-        if ($traderDest->mailling === true)
+        if ($traderDest->mailling === 1)
         {
             \App\Trader::sendMail (
                 $traderDest,
