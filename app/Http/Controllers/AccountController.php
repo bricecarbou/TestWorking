@@ -351,7 +351,8 @@ class AccountController extends Controller
         {
             $msg = $msg . " Now, you can create trads";
         }
-
+        dd($trader->mailling);
+        
         (new \AG\DiscordMsg(
                 $msg, // message
                 $clan->group->webhookurl, // chanel webhook link
