@@ -347,10 +347,11 @@ class AccountController extends Controller
 
         $msg = "<@$trader->discord_id> ($trader->nick), Your role has been updated to: " . \App\Role::find($trader->role_id)->name . ", by a leader.";
         
-        if ( $trader->role_id !== 4)
+        if ( $trader->role_id !== "4")
         {
             $msg = $msg . " Now, you can create trads";
         }
+
         (new \AG\DiscordMsg(
                 $msg, // message
                 $clan->group->webhookurl, // chanel webhook link
@@ -363,7 +364,7 @@ class AccountController extends Controller
             $title = "A new Role for you";
             $content = "$trader->nick, Your role has been updated to:" . \App\Role::find($trader->role_id)->name . ", by a leader." ;
  
-            if ( $trader->role_id !== 4)
+            if ( $trader->role_id !== "4")
             {
                 $content = $content . " Now, you can create trads";
             }
