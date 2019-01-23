@@ -223,9 +223,9 @@ class AccountController extends Controller
 
         foreach($leaders as $leader)
         {
-            if ($leader->clan->group_id === $trader->clan->group_id)
+            if ($leader->clan->group_id === $user->clan->group_id)
             {
-                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $trader->nick";
+                $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $user->nick";
 
                (new \AG\DiscordMsg(
                     $msg, // message

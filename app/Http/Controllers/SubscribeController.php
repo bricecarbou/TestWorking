@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -71,10 +72,8 @@ class SubscribeController extends Controller
         //=======================================================================
         $leaders = \App\Trader::where('role_id', '2')->get();
 
-        foreach($leaders as $leader)
-        {
-            if ($leader->clan->group_id === $trader->clan->group_id)
-            {
+        foreach ($leaders as $leader) {
+            if ($leader->clan->group_id === $trader->clan->group_id) {
                 $msg = "Leader <@$leader->discord_id> , I have suscribed to the application ( https://cr-trade.organit.fr/ ), please set me to trader role. My nick is $trader->nick";
 
                 (new \AG\DiscordMsg(
@@ -82,9 +81,29 @@ class SubscribeController extends Controller
                     $webhookurl, // chanel webhook link
                     "Trad Bot", // bot name
                     '' // avatar url
-                ))->send();          
+                ))->send();
+            }
+
+            
+            $title = "A new member";
+            $content = "You have a new member to your clan in CR Trads: $trader->nick, Could you change his role to trader" ;
+
+
+            $dest_email = $leader->email;
+            $dest_name = $leader->nick;
+
+            try {
+                $data = ['email'=> $dest_email,'name'=> $dest_name,'subject' => $title, 'content' => $content];
+                Mail::send('email.trad', $data, function ($message) use ($data, $trader, $dest_email) {
+                    $subject=$data['subject'];
+                    $message->from($dest_email);
+                    $message->to($data['email'], $trader->nick)->subject($subject);
+                });
+            } catch (\Exception $e) {
+                dd($e->getMessage());
             }
         }
+
 
         Auth::login($trader);
 

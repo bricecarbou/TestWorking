@@ -400,7 +400,6 @@ class TradController extends Controller
             );   
             
             $msg = $msg . " (and a mail)";
-
         }
         
         flash($msg)->success();
