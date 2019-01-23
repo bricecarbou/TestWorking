@@ -382,7 +382,7 @@ class TradController extends Controller
 
         if ($traderDest->discord_id !== "to be completed")
         {
-            $msg = $msg . "User have discord id,";
+            $msg = $msg . "User have discord id, ";
         }
         else{
             $msg = $msg . "User have no enter discord id, but";
