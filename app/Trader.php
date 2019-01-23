@@ -152,7 +152,7 @@ class Trader extends Model implements Authenticatable
 
         $id_dest = $discord_dest;
         $id_emit = $discord_emit;
-        $msg = "<@$id_dest> ($dest->nick), I have $cardNameDest for you vs $cardNameEmit. Please contact me <@$id_emit> ($emit->nick)";
+        $msg = "<@$id_dest> ($dest->nick), I have $cardNameDest for you vs $cardNameEmit. Please contact me, I'm <@$id_emit> ($emit->nick)";
 
         (new \AG\DiscordMsg(
             $msg, // message
@@ -165,7 +165,7 @@ class Trader extends Model implements Authenticatable
     public static function sendMail ($dest, $emit, $cardNameDest, $cardNameEmit)
     {
         $title = "A new Trad for you";
-        $content = "$dest->nick, I have $cardNameDest for you vs $cardNameEmit. Please contact me $emit->nick" ;
+        $content = "$dest->nick, I have $cardNameDest for you vs $cardNameEmit. Please contact me, I'm $emit->nick" ;
 
 
         $dest_email = $dest->email;
