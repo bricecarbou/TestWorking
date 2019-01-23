@@ -83,24 +83,25 @@ class SubscribeController extends Controller
                     '' // avatar url
                 ))->send();
             }
-
             
-            $title = "A new member";
-            $content = "You have a new member to your clan in CR Trads: $trader->nick, Could you change his role to trader" ;
+            if ($leader->mailling === 1) 
+            {
+                $title = "A new member";
+                $content = "You have a new member to your clan in CR Trads: $trader->nick, Could you change his role to trader" ;
 
+                $dest_email = $leader->email;
+                $dest_name = $leader->nick;
 
-            $dest_email = $leader->email;
-            $dest_name = $leader->nick;
-
-            try {
-                $data = ['email'=> $dest_email,'name'=> $dest_name,'subject' => $title, 'content' => $content];
-                Mail::send('email.trad', $data, function ($message) use ($data, $trader, $dest_email) {
-                    $subject=$data['subject'];
-                    $message->from($dest_email);
-                    $message->to($data['email'], $trader->nick)->subject($subject);
-                });
-            } catch (\Exception $e) {
-                dd($e->getMessage());
+                try {
+                    $data = ['email'=> $dest_email,'name'=> $dest_name,'subject' => $title, 'content' => $content];
+                    Mail::send('email.trad', $data, function ($message) use ($data, $trader, $dest_email) {
+                        $subject=$data['subject'];
+                        $message->from($dest_email);
+                        $message->to($data['email'], $trader->nick)->subject($subject);
+                    });
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
             }
         }
 

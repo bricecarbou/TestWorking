@@ -223,7 +223,7 @@ class AccountController extends Controller
 
         foreach($leaders as $leader)
         {
-            if ($leader->clan->group_id === $user->clan->group_id)
+            if (($leader->clan->group_id === $user->clan->group_id) AND ($leader->mailling === 1))
             {
                 $msg = "Leader <@$leader->discord_id> , I have suscribed to the application, please set me to trader role. My nick is $user->nick";
 
