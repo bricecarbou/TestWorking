@@ -67,8 +67,14 @@ Route::post('/admin_Webhookurl/{group}', 'AdminController@Webhookurl')->middlewa
 
 
 // trade
+//Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
+//Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
+
 Route::get('/new-trad', 'TradController@newtrad')->middleware('App\Http\Middleware\Auth');
-Route::post('/new-trad', 'TradController@createnewtrad')->middleware('App\Http\Middleware\Auth');
+Route::post('/new-trad-step1', 'TradController@createnewtrad_step1')->middleware('App\Http\Middleware\Auth');
+Route::post('/new-trad-step2', 'TradController@createnewtrad_step2')->middleware('App\Http\Middleware\Auth');
+
+
 Route::get('/my-trads', 'TradController@mytrads')->middleware('App\Http\Middleware\Auth');
 Route::get('/message/{traddest}/{trad}', 'TradController@sendMsg')->middleware('App\Http\Middleware\Auth');
 Route::get('/my-trads/{trad}', 'TradController@delete')->middleware('App\Http\Middleware\Auth');

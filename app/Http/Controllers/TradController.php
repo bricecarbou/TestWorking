@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 class TradController extends Controller
 {
 
-    public function newtrad()
+   /* public function newtrad()
     {
 
         if (auth()->user()->role->name === 'new') {
@@ -83,13 +83,112 @@ class TradController extends Controller
             } 
         }
 
-        return view('new-trad', [
+        return view('new-trad-step1', [
             'cards' => $cards,
             'cardsToTrade' => $cardsToTrade,
         ]);
     }
+*/
 
-    public function createnewtrad()
+    public function newtrad()
+    {
+
+        if (auth()->user()->role->name === 'new') {
+
+            flash("Your account shall be validated by your leader to access to trads")->error();
+
+            return back();
+        }
+        
+        $cards = \App\Card::all()->keyBy('id');
+
+
+        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
+
+        foreach($cardsTrader as $cardTrader)
+        { 
+            // Common
+            if ($cardTrader[3] === "Common") 
+            {
+                if ($cardTrader[4] > '12')
+                {
+                    $cards[$cardTrader[0]]->CardName = "max";
+                }
+                else
+                {
+                    if($cardTrader[2] === false)
+                    {
+                        $cards[$cardTrader[0]]->CardName  =  "0/" . $cardTrader[5];
+                    }
+                    else
+                    {
+                        $cards[$cardTrader[0]]->CardName  = $cardTrader[2] . "/" . $cardTrader[5];
+                    }
+                }
+            }
+           // Rare
+            elseif($cardTrader[3] === "Rare")
+            {
+                if ($cardTrader[4] > '10')
+                {
+                    $cards[$cardTrader[0]]->CardName  = "max";
+                }
+                else
+                {
+                    if($cardTrader[2] === false)
+                    {
+                        $cards[$cardTrader[0]]->CardName  =  "0/" . $cardTrader[5];
+                    }
+                    else
+                    {
+                        $cards[$cardTrader[0]]->CardName  = $cardTrader[2] . "/" . $cardTrader[5];
+                    }               }
+            }
+            // Epic
+            elseif($cardTrader[3] === "Epic")
+            {
+                if ($cardTrader[4] > '7')
+                {
+                    $cards[$cardTrader[0]]->CardName  = "max";
+                }
+                else
+                {
+                    if($cardTrader[2] === false)
+                    {
+                        $cards[$cardTrader[0]]->CardName  =  "0/" . $cardTrader[5];
+                    }
+                    else
+                    {
+                        $cards[$cardTrader[0]]->CardName  = $cardTrader[2] . "/" . $cardTrader[5];
+                    }                }
+            }
+            // Legendary
+            elseif($cardTrader[3] === "Legendary")
+            {
+                if ($cardTrader[4] > '4')
+                {
+                    $cards[$cardTrader[0]]->CardName  = "max";
+                }
+                else
+                {
+                    if($cardTrader[2] === false)
+                    {
+                        $cards[$cardTrader[0]]->CardName  =  "0/" . $cardTrader[5];
+                    }
+                    else
+                    {
+                        $cards[$cardTrader[0]]->CardName  = $cardTrader[2] . "/" . $cardTrader[5];
+                    }                
+                }
+            } 
+        }
+
+        return view('new-trad-step1', [
+            'cards' => $cards,
+        ]);
+    }
+
+    /*public function createnewtrad()
     {
 
         request()->validate([
@@ -133,6 +232,127 @@ class TradController extends Controller
         flash("The new Trad is created.")->success();
         
         return  back();
+    }
+*/
+    public function createnewtrad_step1()
+    {
+
+       
+        request()->validate([
+            'btn_cardwant'=>['required'],
+        ]);
+
+
+
+        $card = \App\Card::find(request('btn_cardwant'))->first();
+
+
+        $type = \App\CardType::find($card->card_type_id);
+
+        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
+
+        if ($cardsTrader === "error")
+        {
+            return view('error_CR_id');
+        }
+       
+
+        // lister les cartes à echanger
+
+        $cardsToTrade = array();
+    
+        foreach($cardsTrader as $cardTrader)
+        { 
+            // Common
+            if( ($cardTrader[3] === "Common") AND ($type->name === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
+            {
+
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+                if ($cardTrader[4] > '12')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }
+            }
+           // Rare
+            elseif( ($cardTrader[3] === "Rare") AND ($type->name === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+                if ($cardTrader[4] > '10')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }
+            }
+            // Epic
+            elseif( ($cardTrader[3] === "Epic") AND ($type->name === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+                if ($cardTrader[4] > '7')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }
+            }
+            // Legendary
+            elseif( ($cardTrader[3] === "Legendary") AND ($type->name === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
+            {
+                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
+                if ($cardTrader[4] > '4')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }
+            } 
+        }
+
+    
+        return view('new-trad-step2',[
+            'card' => $card,
+            'cardsToTrade' => $cardsToTrade,
+        ]);
+    }
+
+    public function createnewtrad_step2()
+    {
+
+        request()->validate([
+            'btn_cardwant'=>['required'],
+            'btn_cardtrad'=>['required']
+        ]);
+
+        $trad = new \App\Trad;
+    
+        $trad->card_id = request('btn_cardwant');
+
+
+        $trad->trader_id = auth()->user()->id;
+
+        // check that cards type  is similar and card id is different
+        $type_id = $trad->card->find($trad->card_id)->card_type_id;
+        $array_id=request('btn_cardtrad');
+
+        $trad->save();
+
+        $trad->cards()->sync(request('btn_cardtrad'));
+
+        flash("The new Trad is created.")->success();
+        
+        return view('my-trads',[
+            'trads' => auth()->user()->Trads()->get(),
+        ]);   
     }
 
     public function mytrads()
@@ -193,8 +413,9 @@ class TradController extends Controller
         $id = $trad->id;
         $trad->delete();
 
-        //return back();
-        return redirect(url()->previous().'#'.$id);
+        return view('my-trads',[
+            'trads' => auth()->user()->Trads()->get(),
+        ]);
     }
 
     public function allTrads()
