@@ -105,6 +105,12 @@ class TradController extends Controller
 
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
+        if ($cardsTrader === "error")
+        {
+            return view('error_CR_id');
+        }
+
+
         foreach($cardsTrader as $cardTrader)
         { 
             // Common
