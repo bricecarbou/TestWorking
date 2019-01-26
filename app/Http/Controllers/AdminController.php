@@ -333,7 +333,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function AddClan(\App\clanGroup $group)
+    public function AddClan(\App\ClanGroup $group)
     {
         // Vérification que la personne est bien connectée
         if (!(auth()->user()->role->name === 'admin')) {
