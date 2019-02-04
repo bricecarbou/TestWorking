@@ -410,9 +410,10 @@ class TradController extends Controller
         
         flash($msg)->success();
 
-        return view('my-trads',[
+        return back();
+        /*return view('my-trads',[
             'trads' => auth()->user()->Trads()->get(),
-        ]); 
+        ]); */
     }
 
     public function delete(\App\Trad $trad)
