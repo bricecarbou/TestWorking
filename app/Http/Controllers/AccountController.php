@@ -205,6 +205,8 @@ class AccountController extends Controller
 
         $clan = \App\Clan::where('group_id', $group_id)->first();
         $user = auth()->user();
+        
+   
         $user->clan_id = $clan->id;
         $user->role_id = 4;
 
