@@ -97,6 +97,7 @@
         <div class="field">
             <label class="control-label col-sm-4" for="text">Modify my Group: (Warning this option repass your role to new in a new group)</label>
             <select  class="question_type form-control" name="group" >
+                <option value="{{\App\ClanGroup::where('name', auth()->user()->clan->group->name)->first()->id}}}}" > {{auth()->user()->clan->group->name}} </option>
                 @foreach (\App\ClanGroup::all()->forget(0)->sortBy('name') as $group)
                     <option value="{{$group->id}}" > {{$group->name}} </option>
                 @endforeach
