@@ -26,14 +26,16 @@
         <br />
         <div class="content has-text-centered">
             <p>
-                <a style="color:#B0C4DE" href="https://discord.gg/QUVK9N">Discord server, click here</a>
+                If you need information, go to Discord server, 
+                <a style="color:#B0C4DE" href="https://discord.gg/QUVK9N">click here</a>
             </p>
         </div>
         <br />
      
         <div class="content has-text-centered">
             <p>
-                <a style="color:#B0C4DE" href="https://www.youtube.com/playlist?list=PLi3nBQ72fw-Qxk9fjGADsMNWgFxzO3Zma">Discover the application in video, click here</a>
+                To discover the application in video, 
+                <a style="color:#B0C4DE" href="https://www.youtube.com/playlist?list=PLi3nBQ72fw-Qxk9fjGADsMNWgFxzO3Zma">click here</a>
             </p>
         </div>
         <br />
