@@ -55,7 +55,7 @@ class SubscribeController extends Controller
             $trader->cr_key = $cr_key;
         }
 
-        $trader->discord_id = "to be completed";
+        $trader->discord_id = "tobecompleted";
 
         $password = request('password');
         $trader->password = bcrypt($password);
