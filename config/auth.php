@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
         ],
     ],
@@ -69,7 +69,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Trader::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

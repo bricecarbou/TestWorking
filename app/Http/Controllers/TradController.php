@@ -9,87 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 class TradController extends Controller
 {
 
-   /* public function newtrad()
-    {
-
-        if (auth()->user()->role->name === 'new') {
-
-            flash("Your account shall be validated by your leader to access to trads")->error();
-
-            return back();
-        }
-           
-
-        $cards = \App\Card::all();
-        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
-
-        if ($cardsTrader === "error")
-        {
-            return view('error_CR_id');
-        }
-        
-        $cardsToTrade = array();
-        $cardsMax = array();
-
-        foreach($cardsTrader as $cardTrader)
-        {
-            if( ($cardTrader[3] === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
-            {
-                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
-                if ($cardTrader[4] > '12')
-                {
-                    end($cardsToTrade)->CardName = "max";
-                }
-                else
-                {
-                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
-                }
-            }
-            elseif( ($cardTrader[3] === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
-            {
-                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
-                if ($cardTrader[4] > '10')
-                {
-                    end($cardsToTrade)->CardName = "max";
-                }
-                else
-                {
-                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
-                }
-            }
-            elseif( ($cardTrader[3] === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
-            {
-                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
-                if ($cardTrader[4] > '7')
-                {
-                    end($cardsToTrade)->CardName = "max";
-                }
-                else
-                {
-                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
-                }
-            }
-            elseif( ($cardTrader[3] === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
-            {
-                $cardsToTrade[] = \App\Card::find($cardTrader[0]);
-                if ($cardTrader[4] > '4')
-                {
-                    end($cardsToTrade)->CardName = "max";
-                }
-                else
-                {
-                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
-                }
-            } 
-        }
-
-        return view('new-trad-step1', [
-            'cards' => $cards,
-            'cardsToTrade' => $cardsToTrade,
-        ]);
-    }
-*/
-
     public function newtrad()
     {
 
@@ -194,52 +113,7 @@ class TradController extends Controller
         ]);
     }
 
-    /*public function createnewtrad()
-    {
 
-        request()->validate([
-            'btn_cardwant'=>['required'],
-            'btn_cardtrad'=>['required']
-        ]);
-
-
-        $trad = new \App\Trad;
-    
-        $trad->card_id = request('btn_cardwant');
-
-
-        $trad->trader_id = auth()->user()->id;
-
-        // check that cards type  is similar and card id is different
-        $type_id = $trad->card->find($trad->card_id)->card_type_id;
-        $array_id=request('btn_cardtrad');
-
-        foreach($array_id as $card_id)
-        {
-            if(!($trad->card->find($card_id)->card_type_id === $type_id))
-            {
-                flash("The  Trad is invalid (cards have no same type).")->error();
-                return  back();
-            }
-
-            if ($card_id === $trad->card_id)
-            {
-                flash("The  Trad is invalid (you have selected the same card).")->error();
-                return  back();
-            }
-        }
-
-        $trad->save();
-
-
-        $trad->cards()->sync(request('btn_cardtrad'));
-
-
-        flash("The new Trad is created.")->success();
-        
-        return  back();
-    }
-*/
     public function createnewtrad_step1()
     {
 

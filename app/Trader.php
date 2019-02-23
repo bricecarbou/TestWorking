@@ -5,6 +5,7 @@ namespace App;
 ini_set('max_execution_time', 3000);
 
 use Mail;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
@@ -18,7 +19,12 @@ class Trader extends Model implements Authenticatable
 {
     protected $fillable = ['nick', 'password', 'cr_key', 'discord_id', 'email'];
 
-    use BasicAuthenticatable;
+    use HasApiTokens, BasicAuthenticatable;
+
+    public function findForPassport($username)
+    {
+        return $this->where('nick', $username)->first();
+    }
 
     public function clan()
 	{
