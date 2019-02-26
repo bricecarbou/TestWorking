@@ -87,4 +87,4 @@ Route::view('/help_discordid','help_discordid')->middleware('App\Http\Middleware
 Route::view('/error_CR_id','error_CR_id')->middleware('App\Http\Middleware\Auth');
 
 
-Route::get('/{nick}', 'AccountController@home');
+Route::get('/{nick}', 'AccountController@home')->middleware('App\Http\Middleware\Auth');

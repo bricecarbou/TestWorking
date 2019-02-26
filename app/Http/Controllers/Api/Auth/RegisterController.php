@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 class RegisterController extends Controller
 {
+    use IssueTokenTrait;
+    
     private $client;
 
     public function __construct(){
@@ -22,7 +24,7 @@ class RegisterController extends Controller
             'nick'=>'required',
             'clan' => 'required',
             'cr_key'=>'required',
-            'password'=>'required','min:4','confirmed',
+            'password'=>'required','min:4',
             'nick'=>'unique:traders'
          ]);
 
@@ -100,7 +102,9 @@ class RegisterController extends Controller
 
 */
         
-        $params = [
+        return $this->IssueToken($request, 'password');
+
+        /*$params = [
             'grant_type' => 'password',
             'client_id' => $this->client->id,
             'client_secret' => $this->client->secret,
@@ -113,7 +117,7 @@ class RegisterController extends Controller
 
         $proxy = Request::create('oauth/token', 'POST');
 
-        return Route::dispatch($proxy);
+        return Route::dispatch($proxy);*/
 
 
    }

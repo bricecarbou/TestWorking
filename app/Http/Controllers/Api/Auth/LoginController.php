@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class LoginController extends Controller
 {
+    use IssueTokenTrait;
     private $client;
 
     public function __construct(){
@@ -23,7 +24,9 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $params = [
+        return $this->IssueToken($request, 'password');
+
+       /* $params = [
             'grant_type' => 'password',
             'client_id' => $this->client->id,
             'client_secret' => $this->client->secret,
@@ -43,13 +46,13 @@ class LoginController extends Controller
         $a= $user->createToken('toto');
         
         dd($a);*/
-        
+        /*
         $request->request->add($params);
 
         $proxy = Request::create('oauth/token', 'POST');
 
 
-        return Route::dispatch($proxy);
+        return Route::dispatch($proxy);*/
 
 
     }
@@ -60,7 +63,9 @@ class LoginController extends Controller
             'refresh_token' => 'required'
         ]);
 
-        $params = [
+        return $this->IssueToken($request, 'refresh_token');
+
+        /*$params = [
             'grant_type' => 'refresh_token',
             'client_id' => $this->client->id,
             'client_secret' => $this->client->secret,
@@ -72,7 +77,7 @@ class LoginController extends Controller
 
         $proxy = Request::create('oauth/token', 'POST');
 
-        return Route::dispatch($proxy);
+        return Route::dispatch($proxy);*/
     }
 
     public function logout(Request $request){
