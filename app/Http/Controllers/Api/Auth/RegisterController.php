@@ -19,8 +19,7 @@ class RegisterController extends Controller
     
     public function groupList (){
         
-        $group = App\ClanGroup::all();
-
+        $group = App\ClanGroup::get([name])->toArray();
 
         return response()->json($group);
     }
@@ -30,7 +29,6 @@ class RegisterController extends Controller
 
         $this->validate($request, [
             'nick'=>'required',
-            'clan' => 'required',
             'cr_key'=>'required',
             'password'=>'required','min:4',
             'nick'=>'unique:traders'

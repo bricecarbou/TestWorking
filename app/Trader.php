@@ -142,6 +142,30 @@ class Trader extends Model implements Authenticatable
         return ($cards_info);
     }
 
+    public static function RecoverTraderClan($cr_key)
+    {
+        /* https://docs.royaleapi.com/#/ */
+        /* https://packagist.org/packages/firegore2/clash-royale-php */ 
+
+
+        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA2MywiaWRlbiI6IjQzODY2MzgzODU2NTY2MjcyMSIsIm1kIjp7InVzZXJuYW1lIjoiQnJ5eXljZSIsImtleVZlcnNpb24iOjMsImRpc2NyaW1pbmF0b3IiOiI4NDcyIn0sInRzIjoxNTQ1MjE2NjU2NDE2fQ.OjyVcrLaVSXjHBMCys3FAesv_ZUH02ooTmqQVsM0AmU";
+        $api = new Api($token, 600);
+
+        try {
+            $player  = $api->getPlayer([$cr_key]);
+        } catch (CRResponseException $e) {
+            return "error";
+        }
+
+        $opts = [
+          "http" => [
+              "header" => "auth:" . $token
+          ]
+        ];
+        
+        return ($player->getClan()->getName());
+    }
+
     public static function sendDiscordMsg ($dest, $emit, $cardNameDest, $cardNameEmit)
     {
         //=======================================================================

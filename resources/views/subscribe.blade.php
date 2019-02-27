@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
 
-                                <div class="field">
+                                <!-- <div class="field">
                                     <label class="control-label col-sm-4" for="text">Select a Clan:</label>
                                     <select  class="question_type form-control" name="clan" >
                                         @if (\App\ClanGroup::where('name', 'CR Trad')->first() != null)
@@ -52,7 +52,7 @@
                                             <option value="{{$clan->id}}" > {{$clan->name}} </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div class="field">
                                     <div class="control">

@@ -40,10 +40,10 @@ class SubscribeController extends Controller
         $trader = new \App\Trader;
         $trader->nick = request('nick');
         $trader->role_id = 4;
-        $a = request('clan');
+        /*$a = request('clan');
         //trouver le premier clan du group
         $clan = \App\Clan::where('group_id', $a)->get()->first();
-        $trader->clan_id = $clan->id;
+        $trader->clan_id = $clan->id;*/
         $cr_key = request('cr_key');
         /* retirer le # sur le premier charactere */
         if (substr($cr_key, 0 , 1) == "#")
@@ -54,6 +54,35 @@ class SubscribeController extends Controller
         {
             $trader->cr_key = $cr_key;
         }
+
+        $a = \App\Trader::RecoverTraderClan($cr_key);
+
+        if($a == "error")
+        {
+            flash("Error in your CR key")->error();
+
+            return back();            
+        }
+
+        //trouver le clan
+        $clan = \App\Clan::where('name', $a)->get()->first();
+        
+        if($clan == null){
+            $crTrad = \App\Clan::where('name', 'CR Trad')->get()->first();
+            if ($crTrad == null)
+            {
+                flash("Error in your CR key")->error();
+
+                return back();   
+            }
+            flash("Your clan doesn't exist, you are automatically register to <CR Trad> group")->warning();
+            $trader->clan_id = $crTrad->id;
+        }
+        else{
+            $trader->clan_id = $clan->id;
+        }
+ 
+        dd($trader);
 
         $trader->discord_id = "tobecompleted";
 
