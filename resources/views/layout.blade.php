@@ -65,7 +65,7 @@
                     <br />
                     <a target="_blank" style="color:#B0C4DE" href="https://organit.fr/">
                     <img src="{{ asset('img/logo_organit.png') }}" href="https://organit.fr/" height="150" width="275"/>
-                    Développons Votre Application Métier</a>
+                    <br /> Développons Votre Application Métier</a>
                 </p>
             </div>
         </footer>
