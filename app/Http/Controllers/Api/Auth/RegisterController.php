@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
 
 class RegisterController extends Controller
 {

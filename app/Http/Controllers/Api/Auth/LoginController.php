@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class LoginController extends Controller
 {
@@ -24,8 +25,22 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        return $this->IssueToken($request, 'password');
+        //return $this->IssueToken($request, 'password');
 
+        $params = [
+            'grant_type' => 'password',
+            'client_id' => $this->client->id,
+            'client_secret' => $this->client->secret,
+            'username' => $request->username ?: $request->nick,
+            'scope' => "*"
+        ];
+     
+        
+        $request->request->add($params);
+
+        $proxy = Request::create('oauth/token', 'POST');
+
+        return Route::dispatch($proxy);
     }
 
     public function refresh(Request $request){
