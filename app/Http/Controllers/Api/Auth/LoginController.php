@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
 
 class LoginController extends Controller
 {
     use IssueTokenTrait;
+    
     private $client;
 
     public function __construct(){
@@ -26,35 +26,6 @@ class LoginController extends Controller
 
         return $this->IssueToken($request, 'password');
 
-       /* $params = [
-            'grant_type' => 'password',
-            'client_id' => $this->client->id,
-            'client_secret' => $this->client->secret,
-            'username' => request('nick'),
-            'password' => request('password'),
-            'scope' => '*'
-        ];
-
-  
-        /*$result = auth()->attempt([
-            'nick' => request('nick'),
-            'password' => request('password'),
-        ]);
-
-        $user = auth()->user();
-
-        $a= $user->createToken('toto');
-        
-        dd($a);*/
-        /*
-        $request->request->add($params);
-
-        $proxy = Request::create('oauth/token', 'POST');
-
-
-        return Route::dispatch($proxy);*/
-
-
     }
 
     public function refresh(Request $request){
@@ -65,19 +36,6 @@ class LoginController extends Controller
 
         return $this->IssueToken($request, 'refresh_token');
 
-        /*$params = [
-            'grant_type' => 'refresh_token',
-            'client_id' => $this->client->id,
-            'client_secret' => $this->client->secret,
-            'username' => request('nick'),
-            'password' => request('password'),
-        ];
-
-        $request->request->add($params);
-
-        $proxy = Request::create('oauth/token', 'POST');
-
-        return Route::dispatch($proxy);*/
     }
 
     public function logout(Request $request){

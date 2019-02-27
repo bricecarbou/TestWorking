@@ -54,11 +54,32 @@ class RegisterController extends Controller
             $trader->cr_key = $cr_key;
         }
 
+        $a = \App\Trader::RecoverTraderClan($cr_key);
+
+        if($a == "error")
+        {
+            return back();            
+        }
+
+        //trouver le clan
+        $clan = \App\Clan::where('name', $a)->get()->first();
+        
+        if($clan == null){
+            $crTrad = \App\Clan::where('name', 'CR Trad')->get()->first();
+            if ($crTrad == null)
+            {
+                return back();   
+            }
+            $trader->clan_id = $crTrad->id;
+        }
+        else{
+            $trader->clan_id = $clan->id;
+        }
+ 
         $trader->discord_id = "tobecompleted";
 
         $password = request('password');
         $trader->password = bcrypt($password);
-
         $trader->save();
 
         /*
@@ -109,22 +130,5 @@ class RegisterController extends Controller
 */
         
         return $this->IssueToken($request, 'password');
-
-        /*$params = [
-            'grant_type' => 'password',
-            'client_id' => $this->client->id,
-            'client_secret' => $this->client->secret,
-            'username' => request('nick'),
-            'password' => request('password'),
-            'scope' => '*'
-        ];
-
-        $request->request->add($params);
-
-        $proxy = Request::create('oauth/token', 'POST');
-
-        return Route::dispatch($proxy);*/
-
-
    }
 }
