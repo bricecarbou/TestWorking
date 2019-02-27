@@ -17,7 +17,7 @@ class RegisterController extends Controller
         $this->client = Client::find(2);
     }
     
-    public function groupList (Request $request){
+    public function groupList (){
         
         $group = App\ClanGroup::all();
 
