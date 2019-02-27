@@ -25,22 +25,7 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        //return $this->IssueToken($request, 'password');
-
-        $params = [
-            'grant_type' => 'password',
-            'client_id' => $this->client->id,
-            'client_secret' => $this->client->secret,
-            'username' => $request->username ?: $request->nick,
-            'scope' => "*"
-        ];
-     
-        
-        $request->request->add($params);
-
-        $proxy = Request::create('oauth/token', 'POST');
-
-        return Route::dispatch($proxy);
+        return $this->IssueToken($request, 'password');
     }
 
     public function refresh(Request $request){
