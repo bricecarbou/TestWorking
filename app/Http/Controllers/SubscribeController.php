@@ -82,8 +82,6 @@ class SubscribeController extends Controller
             $trader->clan_id = $clan->id;
         }
  
-        dd($trader);
-
         $trader->discord_id = "tobecompleted";
 
         $password = request('password');
