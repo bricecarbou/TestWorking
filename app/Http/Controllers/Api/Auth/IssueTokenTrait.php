@@ -17,6 +17,7 @@ trait IssueTokenTrait{
             'scope' => $scope
         ];
      
+        
         $request->request->add($params);
 
         $proxy = Request::create('oauth/token', 'POST');
