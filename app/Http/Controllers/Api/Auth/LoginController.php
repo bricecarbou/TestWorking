@@ -35,7 +35,6 @@ class LoginController extends Controller
         ]);
 
         return $this->IssueToken($request, 'refresh_token');
-
     }
 
     public function logout(Request $request){
