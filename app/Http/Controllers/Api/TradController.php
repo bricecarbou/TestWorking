@@ -8,6 +8,13 @@ use App\Http\Controllers\Controller;
 class TradController extends Controller
 {
 
+    public function groupList (){
+        
+        $group = App\ClanGroup::get([name])->toArray();
+
+        return response()->json($group);
+    }
+    
     public function mytrads()
     {
         $trads = auth()->user()->Trads()->get();

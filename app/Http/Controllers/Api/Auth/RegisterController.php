@@ -16,13 +16,6 @@ class RegisterController extends Controller
     public function __construct(){
         $this->client = Client::find(2);
     }
-    
-    public function groupList (){
-        
-        $group = App\ClanGroup::get([name])->toArray();
-
-        return response()->json($group);
-    }
 
     public function register(Request $request){
         
@@ -38,11 +31,7 @@ class RegisterController extends Controller
         $trader = new \App\Trader;
         $trader->nick = request('nick');
         $trader->role_id = 4;
-        $a = request('clan');
-          //trouver le premier clan du group
-        $clan = \App\Clan::where('group_id', $a)->get()->first();
 
-        $trader->clan_id = $clan->id;
         $cr_key = request('cr_key');
         // retirer le # sur le premier charactere 
         if (substr($cr_key, 0 , 1) == "#")
