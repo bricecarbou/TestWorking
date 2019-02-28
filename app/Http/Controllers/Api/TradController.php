@@ -15,7 +15,7 @@ class TradController extends Controller
         return response()->json($group);
     }
     
-    public function mytrades()
+    public function myTrades()
     {
         $trads = auth()->user()->Trads()->get();
 

@@ -20,5 +20,5 @@ Route::post('refresh' , 'Api\Auth\LoginController@refresh');
 Route::middleware('auth:api')->group(function(){
     Route::post('logout', 'Api\Auth\LoginController@logout');
 
-    Route::get('mytrades', 'Api\TradController@mytrades');
+    Route::get('myTrades', 'Api\TradController@myTrades');
 });
