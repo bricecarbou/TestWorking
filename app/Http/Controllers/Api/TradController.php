@@ -15,12 +15,19 @@ class TradController extends Controller
         return response()->json($group);
     }
     
-    public function mytrads()
+    public function mytrades()
     {
         $trads = auth()->user()->Trads()->get();
 
         //dd($trads);
-
         return response()->json(['data' => $trads], 200, [], JSON_NUMERIC_CHECK);
-    }
+   }
+
+   public function createTrade()
+   {
+       $trads = auth()->user()->Trads()->get();
+
+       //dd($trads);
+       return response()->json(['data' => $trads], 200, [], JSON_NUMERIC_CHECK);
+  }
 }
