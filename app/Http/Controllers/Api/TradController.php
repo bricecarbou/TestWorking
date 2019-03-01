@@ -19,7 +19,11 @@ class TradController extends Controller
     {
         $trads = auth()->user()->Trads()->get();
 
-         foreach ($trads as $trad)
+        $trads_android = [];
+        $cardsToDo = [];
+        $traders = [];
+
+        foreach ($trads as $trad)
         {
             foreach ($trad->cards as $card)
             {
