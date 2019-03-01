@@ -19,8 +19,30 @@ class TradController extends Controller
     {
         $trads = auth()->user()->Trads()->get();
 
+         foreach ($trads as $trad)
+        {
+            foreach ($trad->cards as $card)
+            {
+                $cardsToDo[] = $card->CardImagePath;
+            }
+           
+            foreach($trad->getMatchTrads() as $traddest)
+            {
+                $traders[] = [
+                    'trader_nick' => \App\Trader::find($traddest->trader_id)->nick,
+                    'trader_clan' => \App\Trader::find($traddest->trader_id)->clan->name
+                ];
+            }
+
+            $trads_android[] = [
+                'cardImagePath' => $trad->card->CardImagePath,
+                'cardsToDo' => $cardsToDo,
+                'traders' => $traders
+            ];
+        } 
+
         //dd($trads);
-        return response()->json(['data' => $trads], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['data' => $trads_android], 200, [], JSON_NUMERIC_CHECK);
    }
 
    public function createTrade()
