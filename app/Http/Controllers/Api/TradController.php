@@ -19,7 +19,7 @@ class TradController extends Controller
     {
         $trads = auth()->user()->Trads()->get();
 
-        $trads_android = [];
+        $trads_android = collect();
         $cardsToDo = [];
         $traders = [];
 
@@ -38,11 +38,14 @@ class TradController extends Controller
                 ];
             }
 
-            $trads_android[] = [
+            $trads_current = [
                 $trad->card->CardImagePath,
                 $cardsToDo,
                 $traders
             ];
+
+            $trads_android->push($trads_current);
+            
         } 
 
         //dd($trads);
