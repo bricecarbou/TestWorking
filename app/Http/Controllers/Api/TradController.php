@@ -45,6 +45,9 @@ class TradController extends Controller
                 'traders_name' => $traders
             ];
 
+            $cardsToDo = null;
+            $traders[] = null;
+
         } 
 
         //dd($trads);
