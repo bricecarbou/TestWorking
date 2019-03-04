@@ -46,7 +46,7 @@ class TradController extends Controller
             ];
 
             $cardsToDo = null;
-            $traders[] = null;
+            $traders = null;
 
         } 
 
