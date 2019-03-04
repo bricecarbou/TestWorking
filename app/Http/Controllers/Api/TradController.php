@@ -33,8 +33,8 @@ class TradController extends Controller
             foreach($trad->getMatchTrads() as $traddest)
             {
                 $traders[] = [
-                    'trader_nick' => \App\Trader::find($traddest->trader_id)->nick,
-                    'trader_clan' => \App\Trader::find($traddest->trader_id)->clan->name
+                    \App\Trader::find($traddest->trader_id)->nick,
+                    \App\Trader::find($traddest->trader_id)->clan->name
                 ];
             }
 
