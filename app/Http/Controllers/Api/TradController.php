@@ -39,9 +39,9 @@ class TradController extends Controller
             }
 
             $trads_android[] = [
-                'cardImagePath' => $trad->card->CardImagePath,
-                'cardsToDo' => $cardsToDo,
-                'traders' => $traders
+                $trad->card->CardImagePath,
+                $cardsToDo,
+                $traders
             ];
         } 
 
