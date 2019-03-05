@@ -292,7 +292,6 @@ class TradController extends Controller
 
     public function delete(\App\Trad $trad)
     {
-        $id = $trad->id;
         $trad->delete();
 
         return view('my-trads',[

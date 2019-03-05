@@ -8,13 +8,6 @@ use App\Http\Controllers\Controller;
 class TradController extends Controller
 {
 
-    public function groupList (){
-        
-        $group = App\ClanGroup::get([name])->toArray();
-
-        return response()->json($group);
-    }
-    
     public function myTrades()
     {
         $trads = auth()->user()->Trads()->get();
@@ -53,13 +46,19 @@ class TradController extends Controller
 
         //dd($trads);
         return response()->json(['data' => $trads_android], 200, [], JSON_NUMERIC_CHECK);
-   }
+    }
 
-   public function createTrade()
-   {
+    public function createTrade()
+    {
        $trads = auth()->user()->Trads()->get();
 
        //dd($trads);
        return response()->json(['data' => $trads], 200, [], JSON_NUMERIC_CHECK);
-  }
+    }
+
+    public function deleteTrade($tradeId)
+    {
+        $trad = \App\Trad::find($tradeId);
+        $trad->delete();
+    }
 }
