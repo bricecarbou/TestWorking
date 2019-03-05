@@ -46,8 +46,8 @@ class TradController extends Controller
                 'traders' => $traders
             ];
 
-            $cardsToDo = null;
-            $traders = null;
+            $cardsToDo = [];
+            $traders = [];
 
         } 
 
