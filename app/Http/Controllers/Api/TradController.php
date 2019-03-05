@@ -40,10 +40,10 @@ class TradController extends Controller
             }
 
             $trads_android[] = [
-                'trad_id' => $trad->id,
+                'trad_id' => $trad-,
                 'card_to_search_url' => $trad->card->CardImagePath,
                 'cards_to_do_url' => $cardsToDo,
-                'traders_name' => $traders
+                'traders' => $traders
             ];
 
             $cardsToDo = null;
