@@ -59,6 +59,8 @@ class TradController extends Controller
     public function deleteTrade($tradeId)
     {
         $trad = \App\Trad::find($tradeId);
-        $trad->delete();
+        $answer = $trad->delete();
+
+        return response()->json(['data' => $answer], 200, [], JSON_NUMERIC_CHECK);
     }
 }
