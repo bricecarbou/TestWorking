@@ -48,12 +48,23 @@ class TradController extends Controller
         return response()->json(['data' => $trads_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function createTrade()
+    public function recoverCards()
     {
-       $trads = auth()->user()->Trads()->get();
+        $cards_leg = \App\Card::where('card_type_id', 1);
+        $cards_epi = \App\Card::where('card_type_id', 2);
+        $cards_rar = \App\Card::where('card_type_id', 3);
+        $cards_com = \App\Card::where('card_type_id', 4);
+
+       $cards_android = [
+           'card_leg' => $cards_leg,
+           'card_epi' => $cards_epi,
+           'card_rar' => $cards_rar,
+           'card_com' => $cards_com,
+       ];
+
 
        //dd($trads);
-       return response()->json(['data' => $trads], 200, [], JSON_NUMERIC_CHECK);
+       return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function deleteTrade($tradeId)
