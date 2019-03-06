@@ -53,22 +53,42 @@ class TradController extends Controller
         $cards = \App\Card::where('card_type_id', 1)->get();
         foreach ($cards as $card)
         {
-            $cards_leg[] = $card;
+            $cards_leg[] = [
+                'id' => $card->id,
+                'name' => $card->CardName,
+                'type' => $card->card_type_id,
+                'url' => $card->CardImagePath
+            ];
         }
         $cards = \App\Card::where('card_type_id', 2)->get();
         foreach ($cards as $card)
         {
-            $cards_epi[] = $card;
+            $cards_epi[] = [
+                'id' => $card->id,
+                'name' => $card->CardName,
+                'type' => $card->card_type_id,
+                'url' => $card->CardImagePath
+            ];
         }
         $cards = \App\Card::where('card_type_id', 3)->get();
         foreach ($cards as $card)
         {
-            $cards_rar[] = $card;
+            $cards_rar[] = [
+                'id' => $card->id,
+                'name' => $card->CardName,
+                'type' => $card->card_type_id,
+                'url' => $card->CardImagePath
+            ];
         }
         $cards= \App\Card::where('card_type_id', 4)->get();
         foreach ($cards as $card)
         {
-            $cards_com[] = $card;
+            $cards_com[] = [
+                'id' => $card->id,
+                'name' => $card->CardName,
+                'type' => $card->card_type_id,
+                'url' => $card->CardImagePath
+            ];
         }
 
        $cards_android[] = [
