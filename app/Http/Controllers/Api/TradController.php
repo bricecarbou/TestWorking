@@ -91,14 +91,12 @@ class TradController extends Controller
             ];
         }
 
-       $cards_android[] = [
-           'cardLeg' => $cards_leg,
-           'cardEpi' => $cards_epi,
-           'cardRar' => $cards_rar,
-           'cardCom' => $cards_com,
-       ];
+        $cards_android[] =  $cards_leg;
+        $cards_android[] =  $cards_epi;
+        $cards_android[] =  $cards_rar;
+        $cards_android[] =  $cards_com;
 
-       return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function deleteTrade($tradeId)
