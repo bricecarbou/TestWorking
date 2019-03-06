@@ -44,26 +44,23 @@ class TradController extends Controller
 
         } 
 
-        //dd($trads);
         return response()->json(['data' => $trads_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function recoverCards()
     {
-        $cards_leg = \App\Card::where('card_type_id', 1)->get();
-        $cards_epi = \App\Card::where('card_type_id', 2)->get();
-        $cards_rar = \App\Card::where('card_type_id', 3)->get();
-        $cards_com = \App\Card::where('card_type_id', 4)->get();
+        $cards_leg = \App\Card::where('card_type_id', 1)->get()->toArray();
+        $cards_epi = \App\Card::where('card_type_id', 2)->get()->toArray();
+        $cards_rar = \App\Card::where('card_type_id', 3)->get()->toArray();
+        $cards_com = \App\Card::where('card_type_id', 4)->get()->toArray();
 
        $cards_android = [
-           'card_leg' => $cards_leg,
-           'card_epi' => $cards_epi,
-           'card_rar' => $cards_rar,
-           'card_com' => $cards_com,
+           'cardLeg' => $cards_leg,
+           'cardEpi' => $cards_epi,
+           'cardRar' => $cards_rar,
+           'cardCom' => $cards_com,
        ];
 
-
-       //dd($trads);
        return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
