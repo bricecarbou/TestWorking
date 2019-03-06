@@ -21,5 +21,6 @@ Route::middleware('auth:api')->group(function(){
     Route::post('logout', 'Api\Auth\LoginController@logout');
 
     Route::get('myTrades', 'Api\TradController@myTrades');
+    Route::get('recoverCards', 'Api\TradController@recoverCards');
     Route::post('deleteTrade/{tradeId}', 'Api\TradController@deleteTrade');
 });
