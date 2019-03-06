@@ -49,10 +49,26 @@ class TradController extends Controller
 
     public function recoverCards()
     {
-        $cards_leg = \App\Card::where('card_type_id', 1)->get();
-        $cards_epi = \App\Card::where('card_type_id', 2)->get();
-        $cards_rar = \App\Card::where('card_type_id', 3)->get();
-        $cards_com = \App\Card::where('card_type_id', 4)->get();
+        $cards = \App\Card::where('card_type_id', 1)->get();
+        foreach ($cards as $card)
+        {
+            $cards_leg[] = $card;
+        }
+        $cards = \App\Card::where('card_type_id', 2)->get();
+        foreach ($cards as $card)
+        {
+            $cards_epi[] = $card;
+        }
+        $cards = \App\Card::where('card_type_id', 3)->get();
+        foreach ($cards as $card)
+        {
+            $cards_rar[] = $card;
+        }
+        $cards= \App\Card::where('card_type_id', 4)->get();
+        foreach ($cards as $card)
+        {
+            $cards_com[] = $card;
+        }
 
        $cards_android = [
            'cardLeg' => $cards_leg,
