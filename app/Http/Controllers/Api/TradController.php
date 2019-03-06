@@ -54,33 +54,13 @@ class TradController extends Controller
         $cards_rar = [];
         $cards_com = [];
         
-        $cards = \App\Card::where('card_type_id', 1)->get();
-        foreach ($cards as $card)
-        {
-            $cards_leg[] = $card;
-        }
-        $cards = \App\Card::where('card_type_id', 2)->get();
-        foreach ($cards as $card)
-        {
-            $cards_epi[] = $card;
-        }
-        $cards = \App\Card::where('card_type_id', 3)->get();
-        foreach ($cards as $card)
-        {
-            $cards_rar[] = $card;
-        }
-        $cards= \App\Card::where('card_type_id', 4)->get();
-        foreach ($cards as $card)
-        {
-            $cards_com[] = $card;
-        }
+        $cards_android[0] = \App\Card::where('card_type_id', 1)->get();
 
-       $cards_android = [
-           'cardLeg' => $cards_leg,
-           'cardEpi' => $cards_epi,
-           'cardRar' => $cards_rar,
-           'cardCom' => $cards_com,
-       ];
+        $cards_android[1] = \App\Card::where('card_type_id', 2)->get();
+
+        $cards_android[2] = \App\Card::where('card_type_id', 3)->get();
+
+        $cards_android[3]= \App\Card::where('card_type_id', 4)->get();
 
        return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
