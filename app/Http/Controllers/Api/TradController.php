@@ -49,6 +49,11 @@ class TradController extends Controller
 
     public function recoverCards()
     {
+        $cards_leg = [];
+        $cards_epi = [];
+        $cards_rar = [];
+        $cards_com = [];
+        
         $cards = \App\Card::where('card_type_id', 1)->get();
         foreach ($cards as $card)
         {
