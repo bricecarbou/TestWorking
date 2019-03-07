@@ -91,12 +91,13 @@ class TradController extends Controller
             ];
         }
 
-        $cards_android[] =  [ 'cards' => $cards_leg] + [ 'cards' => $cards_epi] + [ 'cards' => $cards_rar] + [ 'cards' => $cards_com];
-        /*$cards_android[] =  [ 'cards' => $cards_epi];
+        $concat_cards = $cards_leg + $cards_epi + $cards_rar + $cards_com;
+        /*$cards_android[] =  [ 'cards' => $cards_leg];
+        $cards_android[] =  [ 'cards' => $cards_epi];
         $cards_android[] =  [ 'cards' => $cards_rar];
         $cards_android[] =  [ 'cards' => $cards_com];*/
 
-        return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['data' => $concat_cards], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function deleteTrade($tradeId)
