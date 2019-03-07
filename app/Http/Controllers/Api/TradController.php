@@ -91,10 +91,10 @@ class TradController extends Controller
             ];
         }
 
-        $cards_android[] =  [ 'cards' => $cards_leg];
-        $cards_android[] =  [ 'cards' => $cards_epi];
+        $cards_android[] =  [ 'cards' => $cards_leg] + [ 'cards' => $cards_epi] + [ 'cards' => $cards_rar] + [ 'cards' => $cards_com];
+        /*$cards_android[] =  [ 'cards' => $cards_epi];
         $cards_android[] =  [ 'cards' => $cards_rar];
-        $cards_android[] =  [ 'cards' => $cards_com];
+        $cards_android[] =  [ 'cards' => $cards_com];*/
 
         return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
