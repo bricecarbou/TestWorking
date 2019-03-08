@@ -60,6 +60,7 @@ class TradController extends Controller
                 'url' => $card->CardImagePath
             ];
         }
+
         $cards = \App\Card::where('card_type_id', 2)->get();
         foreach ($cards as $card)
         {
@@ -91,13 +92,12 @@ class TradController extends Controller
             ];
         }
 
-        $concat_cards = array_merge($cards_leg,  $cards_epi,  $cards_rar,  $cards_com);
+        //$concat_cards = array_merge($cards_leg,  $cards_epi,  $cards_rar,  $cards_com);
 
-        $cards_android[] =  [ 'cards' => $concat_cards];
-
-        /*$cards_android[] =  [ 'cards' => $cards_epi];
+        $cards_android[] =  [ 'cards' => $cards_leg];
+        $cards_android[] =  [ 'cards' => $cards_epi];
         $cards_android[] =  [ 'cards' => $cards_rar];
-        $cards_android[] =  [ 'cards' => $cards_com];*/
+        $cards_android[] =  [ 'cards' => $cards_com];
 
         return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
