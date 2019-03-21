@@ -102,15 +102,16 @@ class TradController extends Controller
         return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function recoverCardsToTrade()
+    public function recoverCardsToTrade($cardId)
     {
  
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
        
+        $cardToTrade = \App\Card::find($cardId);
+        $type = \App\CardType::find($cardToTrade->card_type_id);
 
         // lister les cartes à echanger
 
-        $cardsToTrade = array();
     
         foreach($cardsTrader as $cardTrader)
         { 
