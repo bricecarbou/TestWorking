@@ -156,7 +156,7 @@ class TradController extends Controller
                 else
                 {
                     end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
-                }*/88
+                }*/
             }
             // Epic
             elseif( ($cardTrader[3] === "Epic") AND ($type->name === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
