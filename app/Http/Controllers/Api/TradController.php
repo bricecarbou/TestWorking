@@ -112,7 +112,7 @@ class TradController extends Controller
 
         // lister les cartes à echanger
 
-    
+
         foreach($cardsTrader as $cardTrader)
         { 
             // Common
@@ -121,7 +121,7 @@ class TradController extends Controller
 
                 $card = \App\Card::find($cardTrader[0]);
 
-                $cards_com[] = [
+                $cards_totrade[] = [
                     'id' => $card->id,
                     'name' => $card->CardName,
                     'type' => $card->card_type_id,
@@ -142,7 +142,7 @@ class TradController extends Controller
             {
                 $card = \App\Card::find($cardTrader[0]);
 
-                $cards_rar[] = [
+                $cards_totrade[] = [
                     'id' => $card->id,
                     'name' => $card->CardName,
                     'type' => $card->card_type_id,
@@ -163,7 +163,7 @@ class TradController extends Controller
             {
                 $card = \App\Card::find($cardTrader[0]);
 
-                $cards_epi[] = [
+                $cards_totrade[] = [
                     'id' => $card->id,
                     'name' => $card->CardName,
                     'type' => $card->card_type_id,
@@ -182,7 +182,7 @@ class TradController extends Controller
             elseif( ($cardTrader[3] === "Legendary") AND ($type->name === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
             {
                 $card = \App\Card::find($cardTrader[0]);
-                $cards_leg[] = [
+                $cards_totrade[] = [
                     'id' => $card->id,
                     'name' => $card->CardName,
                     'type' => $card->card_type_id,
@@ -202,10 +202,7 @@ class TradController extends Controller
 
         //$concat_cards = array_merge($cards_leg,  $cards_epi,  $cards_rar,  $cards_com);
 
-        $cards_android[] =  [ 'cards' => $cards_leg];
-        $cards_android[] =  [ 'cards' => $cards_epi];
-        $cards_android[] =  [ 'cards' => $cards_rar];
-        $cards_android[] =  [ 'cards' => $cards_com];
+        $cards_android[] =  [ 'cards' => $cards_totrade];
 
         return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
