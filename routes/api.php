@@ -22,5 +22,6 @@ Route::middleware('auth:api')->group(function(){
 
     Route::get('myTrades', 'Api\TradController@myTrades');
     Route::get('recoverCards', 'Api\TradController@recoverCards');
+    Route::get('recoverCardsToTrade', 'Api\TradController@recoverCardsToTrade');
     Route::post('deleteTrade/{tradeId}', 'Api\TradController@deleteTrade');
 });

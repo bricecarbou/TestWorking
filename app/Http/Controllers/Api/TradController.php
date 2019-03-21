@@ -102,6 +102,113 @@ class TradController extends Controller
         return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
     }
 
+    public function recoverCardsToTrade()
+    {
+ 
+        $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
+       
+
+        // lister les cartes à echanger
+
+        $cardsToTrade = array();
+    
+        foreach($cardsTrader as $cardTrader)
+        { 
+            // Common
+            if( ($cardTrader[3] === "Common") AND ($type->name === "Common") AND (($cardTrader[2] >= '250') OR ($cardTrader[4] > '12')))
+            {
+
+                $card = \App\Card::find($cardTrader[0]);
+
+                $cards_com[] = [
+                    'id' => $card->id,
+                    'name' => $card->CardName,
+                    'type' => $card->card_type_id,
+                    'url' => $card->CardImagePath
+                ];
+
+                /*if ($cardTrader[4] > '12')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }*/
+            }
+           // Rare
+            elseif( ($cardTrader[3] === "Rare") AND ($type->name === "Rare") AND (($cardTrader[2] >= '50') OR ($cardTrader[4] > '10')))
+            {
+                $card = \App\Card::find($cardTrader[0]);
+
+                $cards_rar[] = [
+                    'id' => $card->id,
+                    'name' => $card->CardName,
+                    'type' => $card->card_type_id,
+                    'url' => $card->CardImagePath
+                ];
+
+                /*if ($cardTrader[4] > '10')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }*/88
+            }
+            // Epic
+            elseif( ($cardTrader[3] === "Epic") AND ($type->name === "Epic") AND (($cardTrader[2] >= '10' )OR ($cardTrader[4] > '7')))
+            {
+                $card = \App\Card::find($cardTrader[0]);
+
+                $cards_epi[] = [
+                    'id' => $card->id,
+                    'name' => $card->CardName,
+                    'type' => $card->card_type_id,
+                    'url' => $card->CardImagePath
+                ];
+                /*if ($cardTrader[4] > '7')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }*/
+            }
+            // Legendary
+            elseif( ($cardTrader[3] === "Legendary") AND ($type->name === "Legendary") AND ((($cardTrader[2] >= '1') AND ($cardTrader[4] > '1')) OR (($cardTrader[2] >= '2') AND ($cardTrader[4] > '0')) OR ($cardTrader[4] > '4')))
+            {
+                $card = \App\Card::find($cardTrader[0]);
+                $cards_leg[] = [
+                    'id' => $card->id,
+                    'name' => $card->CardName,
+                    'type' => $card->card_type_id,
+                    'url' => $card->CardImagePath
+                ];
+
+                /*if ($cardTrader[4] > '4')
+                {
+                    end($cardsToTrade)->CardName = "max";
+                }
+                else
+                {
+                    end($cardsToTrade)->CardName = $cardTrader[2] . "/" . $cardTrader[5];
+                }*/
+            } 
+        }
+
+        //$concat_cards = array_merge($cards_leg,  $cards_epi,  $cards_rar,  $cards_com);
+
+        $cards_android[] =  [ 'cards' => $cards_leg];
+        $cards_android[] =  [ 'cards' => $cards_epi];
+        $cards_android[] =  [ 'cards' => $cards_rar];
+        $cards_android[] =  [ 'cards' => $cards_com];
+
+        return response()->json(['data' => $cards_android], 200, [], JSON_NUMERIC_CHECK);
+    }
+
     public function deleteTrade($tradeId)
     {
         $trad = \App\Trad::find($tradeId);
