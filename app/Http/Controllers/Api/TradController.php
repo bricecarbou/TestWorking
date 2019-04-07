@@ -14,6 +14,7 @@ class TradController extends Controller
 
         $trads_android = [];
         $cardsToDo = [];
+        $cardsToDoId = [];
         $traders = [];
 
         foreach ($trads as $trad)
@@ -21,6 +22,7 @@ class TradController extends Controller
             foreach ($trad->cards as $card)
             {
                 $cardsToDo[] = $card->CardImagePath;
+                $cardsToDoId[] = $card->id;
             }
            
             foreach($trad->getMatchTrads() as $traddest)
@@ -36,10 +38,12 @@ class TradController extends Controller
                 'trad_id' => $trad->id,
                 'card_to_search_url' => $trad->card->CardImagePath,
                 'cards_to_do_url' => $cardsToDo,
-                'traders' => $traders
+                'traders' => $traders,
+                'cards_to_do_id' => $cardsToDoId
             ];
 
             $cardsToDo = [];
+            $cardsToDoId = [];
             $traders = [];
 
         } 
@@ -229,5 +233,49 @@ class TradController extends Controller
         $trad->cards()->sync($cards);
 
         return response()->json('Creation successfully.');
+    }
+
+    public function sendDiscordMsg ($traderId, $tradId, $CardIdToDo)
+    {
+
+        $traderDest = \App\Trader::find($traderId);
+        $trad = \App\Trad::find($tradId);
+        $trader = \App\Trader::find($trad->trader_id);
+        $cardNameDest = \App\Card::find($CardIdToDo)->CardName;;
+
+        $msg="";
+
+
+        \App\Trader::sendDiscordMsg (
+            $traderDest,
+            $trader,
+            $cardNameDest,
+            $trad->card->CardName
+        );
+
+
+        if ($traderDest->discord_id !== "to be completed")
+        {
+            $msg = $msg . "User have discord id, ";
+        }
+        else{
+            $msg = $msg . "User have no enter discord id, but";
+        }
+
+        $msg = $msg . "a message to Discord is sent";
+
+        if ($traderDest->mailling === 1)
+        {
+            \App\Trader::sendMail (
+                $traderDest,
+                $trader,
+                $cardNameDest,
+                $trad->card->CardName
+            );   
+            
+            $msg = $msg . " (and a mail)";
+        }
+
+        return response()->json($msg);
     }
 }
