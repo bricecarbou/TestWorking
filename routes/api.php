@@ -25,5 +25,5 @@ Route::middleware('auth:api')->group(function(){
     Route::get('recoverCardsToTrade/{cardId}', 'Api\TradController@recoverCardsToTrade');
     Route::post('deleteTrade/{tradeId}', 'Api\TradController@deleteTrade');
     Route::post('createTrade/{cardId}/{cardsToDo}', 'Api\TradController@createTrade');
-    Route::post('sendDiscordMsd/{traderId}/{tradId}/{CardIdToDo}', 'Api\TradController@sendDiscordMsg');
+    Route::post('sendDiscordMsg/{traderId}/{tradId}/{CardIdToDo}', 'Api\TradController@sendDiscordMsg');
 });
