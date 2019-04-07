@@ -225,7 +225,8 @@ class TradController extends Controller
     
         $trad->save();
 
-        $trad->cards()->sync($cardsToDoIds);
+        $cards = explode(',', $cardsToDoIds);
+        $trad->cards()->sync($cards);
 
         return response()->json('Creation successfully.');
     }
