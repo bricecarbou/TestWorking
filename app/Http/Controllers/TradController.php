@@ -22,13 +22,13 @@ class TradController extends Controller
         $cards = \App\Card::all()->keyBy('id');
 
 
+
         $cardsTrader = \App\Trader::RecoverTraderCards(auth()->user()->cr_key);
 
         if ($cardsTrader === "error")
         {
             return view('error_CR_id');
         }
-
 
         foreach($cardsTrader as $cardTrader)
         { 
@@ -85,7 +85,8 @@ class TradController extends Controller
                     else
                     {
                         $cards[$cardTrader[0]]->CardName  = $cardTrader[2] . "/" . $cardTrader[5];
-                    }                }
+                    }               
+                }
             }
             // Legendary
             elseif($cardTrader[3] === "Legendary")
@@ -121,7 +122,6 @@ class TradController extends Controller
         request()->validate([
             'btn_cardwant'=>['required'],
         ]);
-
 
 
         $card = \App\Card::find(request('btn_cardwant'))->first();
@@ -223,6 +223,8 @@ class TradController extends Controller
         // check that cards type  is similar and card id is different
         $type_id = $trad->card->find($trad->card_id)->card_type_id;
         $array_id=request('btn_cardtrad');
+
+        dd(request('btn_cardtrad'));
 
         $trad->save();
 

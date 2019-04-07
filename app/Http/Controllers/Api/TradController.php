@@ -214,4 +214,19 @@ class TradController extends Controller
 
         return response()->json('Removed successfully.');
     }
+
+    public function createTrade($cardId, $cardsToDoIds)
+    {
+        $trad = new \App\Trad;
+    
+        $trad->card_id = $cardId;
+
+        $trad->trader_id = auth()->user()->id;
+    
+        $trad->save();
+
+        $trad->cards()->sync($cardsToDoIds);
+
+        return response()->json('Creation successfully.');
+    }
 }
