@@ -17,6 +17,7 @@
         "laravel/passport": "^7.2",
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
+        "pusher/pusher-php-server": "^3.4",
         "vinkla/hashids": "^5.1"
     },
     "require-dev": {

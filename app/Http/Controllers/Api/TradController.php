@@ -278,4 +278,21 @@ class TradController extends Controller
 
         return response()->json($msg);
     }
+
+    public function sendNotification()
+    {
+        $options = array(
+            'cluster' => 'eu',
+            'useTLS' => true
+          );
+          $pusher = new Pusher\Pusher(
+            '45933448c92c75ae79c8',
+            '16dff5fa6e394d2cd4c5',
+            '754026',
+            $options
+          );
+        
+          $data['message'] = 'I have a trade to propose';
+          $pusher->trigger('my-channel', 'my-event', $data);
+    }
 }

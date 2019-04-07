@@ -224,8 +224,6 @@ class TradController extends Controller
         $type_id = $trad->card->find($trad->card_id)->card_type_id;
         $array_id=request('btn_cardtrad');
 
-        dd(request('btn_cardtrad'));
-
         $trad->save();
 
         $trad->cards()->sync(request('btn_cardtrad'));
