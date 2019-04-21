@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Trader;
 
-class TradersController extends Controller
+class TraderController extends Controller
 {
     public function myInfos()
     {
