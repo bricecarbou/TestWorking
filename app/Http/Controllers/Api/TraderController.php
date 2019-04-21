@@ -10,7 +10,7 @@ class TraderController extends Controller
     public function myInfos()
     {
 
-        $trader = auth()->user()->get();
+        $trader = auth()->user();
 
         $myInfos[] = [
             'nick' => $trader->nick,
