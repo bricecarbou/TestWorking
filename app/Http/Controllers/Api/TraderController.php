@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Trader;
 
 class TraderController extends Controller
 {
