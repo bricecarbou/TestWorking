@@ -18,7 +18,7 @@ class TraderController extends Controller
             'nick' => $trader->nick,
             'role' => $trader->role_id,
             'cr_id' => $trader->cr_key,
-            'discord_id' => (string) ($trader->discord_id),
+            'discord_id' => strval($trader->discord_id),
             'email' => $trader->email
         ];
 
