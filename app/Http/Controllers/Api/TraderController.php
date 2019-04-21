@@ -12,6 +12,8 @@ class TraderController extends Controller
 
         $trader = auth()->user();
 
+        $myInfos = [];
+
         $myInfos[] = [
             'nick' => $trader->nick,
             'role' => $trader->role_id,
