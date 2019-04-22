@@ -27,4 +27,6 @@ Route::middleware('auth:api')->group(function(){
     Route::post('deleteTrade/{tradeId}', 'Api\TradController@deleteTrade');
     Route::post('createTrade/{cardId}/{cardsToDo}', 'Api\TradController@createTrade');
     Route::post('sendDiscordMsg/{traderId}/{tradId}/{CardIdToDo}', 'Api\TradController@sendDiscordMsg');
+    Route::post('modifyAccount' , 'Api\TraderController@modifyAccount');
+
 });

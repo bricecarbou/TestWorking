@@ -25,4 +25,26 @@ class TraderController extends Controller
 
         return response()->json(['data' => $myInfos], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    public function modifyAccount(Request $request)
+    {
+
+        $trader = auth()->user();
+
+        $cr_key = request('cr_key');
+
+        if (substr($cr_key, 0 , 1) == "#")
+        {
+            $trader->cr_key = substr($cr_key, 1);
+        }
+        else
+        {
+          $trader->cr_key = $cr_key;
+        }
+
+        $trader->email = request('email');
+        $trader->discord_id = request('discord_id');
+
+        $trader->save();
+    }
 }
